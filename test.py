@@ -3,6 +3,7 @@ import numpy.linalg as linalg
 from sympy import *
 
 
+
 def Hamilton(e,J):
     H=np.diag(e)
     H[0,len(e)-1]=J
@@ -14,21 +15,23 @@ def Hamilton(e,J):
                 H[index+1,index]=H[0,len(e)-1]
                 H[index,index+1]=J
     return H
+#
+# def eigenwerte(M):
+#     eigenValues,eigenVectors = linalg.eig(M)
+#     idx = eigenValues.argsort()[::-1]
+#     print(idx)
+#     eigenValues = eigenValues[idx]
+#     eigenVectors = eigenVectors[:,idx]
+#     return eigenValues, eigenVectors
 
-def eigenwerte(M):
-    eigenValues,eigenVectors = linalg.eig(M)
-    idx = eigenValues.argsort()[::-1]
-    print(idx)
-    eigenValues = eigenValues[idx]
-    eigenVectors = eigenVectors[:,idx]
-    return eigenValues, eigenVectors
+J , a= symbols('J , a')
 
-Test_H=Hamilton([0.1,0.1,0.1,0.1],1)
+Test_H=Hamilton([a,a,a,a],J)
 Test_H_matrix=Matrix(Test_H)
 print(Test_H)
 
 
-print('eigenwerte und vektoren nach numpy',eigenwerte(Test_H))
+#print('eigenwerte und vektoren nach numpy',eigenwerte(Test_H))
 
 
 print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects())
