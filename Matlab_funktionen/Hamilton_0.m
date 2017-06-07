@@ -6,6 +6,7 @@ function H = Hamilton_0(J)
         H(i+1,i)=J;
         H(i,i+1)=J;
     end
+
 end
 
 %
