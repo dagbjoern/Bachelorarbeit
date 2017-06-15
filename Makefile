@@ -11,15 +11,14 @@ endif
 all: build/eigenwerte.pdf
 
 # hier Python-Skripte:
-build/eigenwerte.pdf: plot_eigenwerte.py| build
+build/eigenwerte.pdf: plot_eigenwerte.py | build
 	python plot_eigenwerte.py
 #	TEXINPUTS="$(call translate,$(pwd):)" python plot.py
 
-plot_eigenwerte.py: test.m
+plot_eigenwerte.py: test.m | build
 	octave test.m
 
-test.m: Matlab_funktionen/H_F.m  Matlab_funktionen/H_m_n.m
-				Matlab_funktionen/Hamilton_0.m
+test.m: Matlab_funktionen/H_F.m  Matlab_funktionen/H_m_n.m Matlab_funktionen/Hamilton_0.m
 
 #hier weitere Abhängigkeiten für build/main.pdf deklarieren:
 

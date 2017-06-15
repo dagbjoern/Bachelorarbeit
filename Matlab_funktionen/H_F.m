@@ -2,7 +2,7 @@ function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
   %[V,D]=eig(H_0);
   [zeilen,spalten]=size(H_0);
   H_f=zeros((Anzahl*2+1)*spalten,(Anzahl*2+1)*spalten);
-  size(H_f)
+  size(H_f);
   for n=(-Anzahl):Anzahl
     	n;
     for m=(-Anzahl):Anzahl

@@ -1,5 +1,5 @@
-function H = Hamilton_0(J)
-    H= zeros(4);
+function H = Hamilton_0(J,E )
+    H=diag(E);
     H(1,length(H))=J;
     H(length(H),1)=J;
     for i=1:length(H)-1
