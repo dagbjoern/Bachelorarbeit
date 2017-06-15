@@ -8,51 +8,67 @@ addpath('Matlab_funktionen')
 #Eigenzustande=transpose([[1,1,0,0];[1,0,1,0];[1,0,0,1];[0,1,1,0];[0,1,0,1];[0,0,1,1]])
 
 
-Energie_1=
-Energie_2=0
-Energie_3=0
-Energie_4=0
+
 Sprungterme=1
-H_0=Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4]) % 1 für Energien in diagonale
+
+
+Potential=[0.0,0.1,0.2,0.5,1.0]
+Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
+b = 'cool'
+Potential(1)
+Gitterkonstante=1
+Phasenverschiebung=0
+Anzahl=1         #Anzahl der Perioden
+Frequenz=[[1,1,2,1,2,4,10]
+         ,[3,2,3,1,1,1,1]];
+
+for i=1:length(Potential)
+#  ['sweet' num2str(Potential(i)) 'cool' ]
+
+  Energie_1=-Potential(i)
+  Energie_2=Potential(i)
+  Energie_3=-Potential(i)
+  Energie_4=Potential(i)
+  H_0=Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4]) % 1 für Energien in diagonale
 
 
 #function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
 #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
-Gitterkonstante=1
-Frequenz=5
-Anzahl=1         #Anzahl der Perioden
-Phasenverschiebung=0
-Energien=[]
-
-% Variation der Energien von 0-4
-maximale_E=5
-for k = 1:1:maximale_E
-  Energie=0+(k-1)/maximale_E;
-  Energien=[Energien;Energie]
-  Matrix=H_F(H_0,Energie,Phasenverschiebung,Gitterkonstante,Anzahl,Frequenz)
-  e=eig(Matrix);
-    assignin ('base',['eigenwerte_E' num2str(k)],e);
-  if k==1
-    eigenwerte=eval(['eigenwerte_E' num2str(k)]);
-  end
-  if k!=1
-  eigenwerte=[eigenwerte,eval(['eigenwerte_E' num2str(k)])];
-  end
+  for l = 1:length(Frequenz)
+    for k = 1:length(Energien)
+      Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl,(Frequenz(1,k)/Frequenz(2,k))*Potential(i));
+      e=eig(Matrix);
+      % assignin ('base',['eigenwerte_E' num2str(k)],e);
+      % if k==1
+      %   eigenwerte=eval(['eigenwerte_E' num2str(k)]);
+      % end
+      % if k!=1
+      %   eigenwerte=[eigenwerte,eval(['eigenwerte_E' num2str(k)])];
+      % end
+        save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,k)) '%' num2str(Frequenz(2,k)) 'a.txt'],'e')
+        Parameter=[Gitterkonstante,Frequenz(1,k),Frequenz(2,k),Anzahl,Phasenverschiebung]
+        save(['build/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,k)) '%' num2str(Frequenz(2,k)) 'a.txt'],'Parameter')
+      end
+    end
 end
-Parameter=[Gitterkonstante,Frequenz,Anzahl,Phasenverschiebung]
-
-save('build/Eigenwerte_Energien.txt','eigenwerte')
-save('build/Parameter.txt','Parameter')
-save('build/Energien.txt','Energien')
 
 
-[V,D]=eig(Matrix)
 
-abs(transpose(V(:,1))*V(:,1))^2
-abs(transpose(V(:,1))*V(:,2))^2
-abs(transpose(V(:,1))*V(:,3))^2
-abs(transpose(V(:,1))*V(:,4))^2
-abs(transpose(V(:,1))*V(:,5))^2
+Energien=transpose(Energien*100)
+Potential=transpose(Potential*100)
+Frequenz=transpose(Frequenz)
+save('build/Durchlaufende_Energien.txt','Energien')
+save('build/Durchlaufende_Potentiale.txt','Potential')
+save('build/Durchlaufende_Frequenzen.txt','Frequenz')
+
+
+% [V,D]=eig(Matrix)
+%
+% abs(transpose(V(:,1))*V(:,1))^2
+% abs(transpose(V(:,1))*V(:,2))^2
+% abs(transpose(V(:,1))*V(:,3))^2
+% abs(transpose(V(:,1))*V(:,4))^2
+% abs(transpose(V(:,1))*V(:,5))^2
 
 % Variation der Schritte
 % for k = 1:1:5
