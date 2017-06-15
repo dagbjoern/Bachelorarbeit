@@ -38,18 +38,22 @@ for i=1:length(Potential)
     for k = 1:length(Energien)
       Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl,(Frequenz(1,k)/Frequenz(2,k))*Potential(i));
       e=eig(Matrix);
-      % assignin ('base',['eigenwerte_E' num2str(k)],e);
+      Frequenz(1,k)/Frequenz(2,k)
       % if k==1
       %   eigenwerte=eval(['eigenwerte_E' num2str(k)]);
       % end
       % if k!=1
       %   eigenwerte=[eigenwerte,eval(['eigenwerte_E' num2str(k)])];
       % end
-        save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,k)) '%' num2str(Frequenz(2,k)) 'a.txt'],'e')
-        Parameter=[Gitterkonstante,Frequenz(1,k),Frequenz(2,k),Anzahl,Phasenverschiebung]
-        save(['build/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,k)) '%' num2str(Frequenz(2,k)) 'a.txt'],'Parameter')
-      end
+      save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'e')
+      Parameter=[Gitterkonstante,Anzahl,Phasenverschiebung];
+      save(['build/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'Parameter')
+      i
+      l
+      k
+      % assignin ('base',['eigenwerte_E' num2str(k)],e);
     end
+  end
 end
 
 
