@@ -11,8 +11,8 @@ endif
 all: build/eigenwerte.pdf
 
 # hier Python-Skripte:
-build/eigenwerte.pdf: plot_eigenwerte.py | build
-	python plot_eigenwerte.py
+build/eigenwerte.pdf: plot_eigenwerte_vergleich.py | build
+	python plot_eigenwerte_vergleich.py
 #	TEXINPUTS="$(call translate,$(pwd):)" python plot.py
 
 plot_eigenwerte.py: test.m | build

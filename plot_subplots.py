@@ -12,19 +12,11 @@ import uncertainties.unumpy as unp
 # from tabulate import tabulate
 
 
-# def function vergleichsplot(Energie_1,Energie_2,Potential_1,Potential_2,frequenzzahler_1,frequenznenner_1,frequenzzahler_2,frequenznenner_2)
-#     Eigenwerte_1=np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potenial_1))+'_E='+str(int(Energie_1))+'_w='+ str(int(frequenzzahler_1))+'%'+ str(int(frequenznenner_1))+'a.txt')
-#     Eigenwerte_2=np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potenial_2))+'_E='+str(int(Energie_2))+'_w='+ str(int(frequenzzahler_2))+'%'+ str(int(frequenznenner_2))+'a.txt')
-
-
-
 Energien=np.genfromtxt('build/Durchlaufende_Energien.txt')
 Potential=np.genfromtxt('build/Durchlaufende_Potentiale.txt')
 frequenzzahler , frequenznenner =np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 
 #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a=50_E=10_w=1%3a.txt')
-
-
 
 Eigenwerte_H_0=np.array([-2,0,0,2])
 
@@ -32,36 +24,36 @@ Figure_Zahler=1
 
 for index_Potential , value_Potenial in enumerate(Potential):
     for index_Energie , value_Energie in enumerate(Energien):
-        for f in range(np.size(frequenzzahler)):
-            print('index_Potential',index_Potential)
-            print('index_Energie',index_Energie)
-            print('Index_frequenz',f)
-            Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str(int(value_Potenial))+'_E='+str(int(value_Energie))+'_w='+ str(int(frequenzzahler[f]))+'%'+ str(int(frequenznenner[f]))+'a.txt')
-            Gitterkonstante,Anzahl,Phasenverschiebung=np.genfromtxt('build/Parameter_fur_a='+str(int(value_Potenial))+'_E='+str(int(value_Energie))+'_w='+ str(int(frequenzzahler[f]))+'%'+ str(int(frequenznenner[f]))+'a.txt',unpack=True)
-            Frequenz=(frequenzzahler[f]/frequenznenner[f])*(value_Potenial/100)
-            x=np.linspace(1,len(Eigenwerte),len(Eigenwerte))
-            plt.figure(Figure_Zahler)
+        #    plt.figure(Figure_Zahler)
             Figure_Zahler=Figure_Zahler+1
-            plt.plot(x,Eigenwerte,'xb',label=r'E='+str(value_Energie/100))
-            Erwartete_Eigenwerte=Eigenwerte_H_0
-            for i in range(1,int(Anzahl+1)):
-                Erwartete_Eigenwerte=np.append(Erwartete_Eigenwerte,Eigenwerte_H_0-Frequenz)
-                Erwartete_Eigenwerte=np.append(Erwartete_Eigenwerte,Eigenwerte_H_0+Frequenz)
-            print('Potential',value_Potenial/100)
-            print('value_Energie',value_Energie/100)
-            print('Frequenz=', Frequenz)
-            print('Erwartete_Eigenwerte',np.sort(Erwartete_Eigenwerte))
-            print('Berechnete Eigenwerte',Eigenwerte)
-            for index_Eigenwert , value_Eigenwert in enumerate(Erwartete_Eigenwerte):
-                plt.plot(x,value_Eigenwert+0*x,'--k')
-            plt.plot(x,Eigenwerte,'xr',label=r'E=Test')
-            plt.xlabel('Eigenwerte')
-            plt.ylabel('E/J')
-            print('',str(round(Frequenz,3)))
-        #    plt.savefig('Plots/Plotfur_a='+str(value_Potenial/100)+'_E='+str(value_Energie/100)+str(f)+'.pdf')
-            plt.savefig('Plots/Plot_fur'+'_a='+str(value_Potenial/100)+'_E='+str(value_Energie/100)+ '_w='+ str(frequenzzahler[f])+'%' + str(frequenznenner[f])+'.pdf')
-            plt.legend(loc='best')
-            plt.close()
+            fig, axs =plt.subplots(3,2)
+            axs = axs.ravel()
+
+            for f in range(np.size(frequenzzahler)):
+                Gitterkonstante,Anzahl,Phasenverschiebung=np.genfromtxt('build/Parameter_fur_a='+str(int(value_Potenial))+'_E='+str(int(value_Energie))+'_w='+ str(int(frequenzzahler[f]))+'%'+ str(int(frequenznenner[f]))+'a.txt',unpack=True)
+                Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str(int(value_Potenial))+'_E='+str(int(value_Energie))+'_w='+ str(int(frequenzzahler[f]))+'%'+ str(int(frequenznenner[f]))+'a.txt')
+                x=np.linspace(1,len(Eigenwerte),len(Eigenwerte))
+                Frequenz=(frequenzzahler[f]/frequenznenner[f])*(value_Potenial/100)
+                axs[f].plot(x,Eigenwerte,'xb',label=r'E='+str(value_Energie/100))
+                Erwartete_Eigenwerte=Eigenwerte_H_0
+                for i in range(1,int(Anzahl+1)):
+                    Erwartete_Eigenwerte=np.append(Erwartete_Eigenwerte,Eigenwerte_H_0-Frequenz)
+                    Erwartete_Eigenwerte=np.append(Erwartete_Eigenwerte,Eigenwerte_H_0+Frequenz)
+                print('Potential',value_Potenial/100)
+                print('value_Energie',value_Energie/100)
+                print('Frequenz=', Frequenz)
+                print('Erwartete_Eigenwerte',np.sort(Erwartete_Eigenwerte))
+                print('Berechnete Eigenwerte',Eigenwerte)
+                for index_Eigenwert , value_Eigenwert in enumerate(Erwartete_Eigenwerte):
+                    axs[f].plot(x,value_Eigenwert+0*x,'--k')
+                axs[f].set_xlabel('Eigenwerte für W='+ str(int(frequenzzahler[f]))+'/'+ str(int(frequenznenner[f])) +'*a')
+                axs[f].set_ylabel('E/J  für a='+ str(value_Potenial/100))
+                plt.savefig('Plots/Plotfur_a='+str(value_Potenial/100)+'_E='+str(value_Energie/100)+str(f)+'.pdf')
+                axs[f].legend(loc='best')
+                fig.tight_layout()
+                fig.savefig('subPlots/Plot_fur'+'_a='+str(value_Potenial/100)+'_E='+str(value_Energie/100)+'.pdf')
+                plt.close()
+                print(axs)
 
 
 #    Energien =np.genfromtxt('build/Energien.txt',unpack=True)

@@ -19,8 +19,8 @@ Potential(1)
 Gitterkonstante=1
 Phasenverschiebung=0
 Anzahl=1         #Anzahl der Perioden
-Frequenz=[[1,1,2,1,2,4,10]
-         ,[3,2,3,1,1,1,1]];
+Frequenz=[[0,1,1,2,1,2,3,4,5]
+         ,[1,3,2,3,1,1,1,1,1]];
 
 for i=1:length(Potential)
 #  ['sweet' num2str(Potential(i)) 'cool' ]
@@ -36,37 +36,36 @@ for i=1:length(Potential)
 #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
   for l = 1:length(Frequenz)
     for k = 1:length(Energien)
-      Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl,(Frequenz(1,k)/Frequenz(2,k))*Potential(i));
+      Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl,(Frequenz(1,l)/Frequenz(2,l))*Potential(i));
+      [V,D]=eig(Matrix)
       e=eig(Matrix);
-      Frequenz(1,k)/Frequenz(2,k)
       % if k==1
       %   eigenwerte=eval(['eigenwerte_E' num2str(k)]);
       % end
       % if k!=1
       %   eigenwerte=[eigenwerte,eval(['eigenwerte_E' num2str(k)])];
       % end
+      real_V=real(V)
+      imag_V=imag(V)
       save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'e')
+      save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'real_V')
+      save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'imag_V')
       Parameter=[Gitterkonstante,Anzahl,Phasenverschiebung];
       save(['build/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(1,l)) '%' num2str(Frequenz(2,l)) 'a.txt'],'Parameter')
-      i
-      l
-      k
+
       % assignin ('base',['eigenwerte_E' num2str(k)],e);
     end
   end
 end
 
 
-
-Energien=transpose(Energien*100)
-Potential=transpose(Potential*100)
-Frequenz=transpose(Frequenz)
+Energien=transpose(Energien*100);
+Potential=transpose(Potential*100);
+Frequenz=transpose(Frequenz);
 save('build/Durchlaufende_Energien.txt','Energien')
 save('build/Durchlaufende_Potentiale.txt','Potential')
 save('build/Durchlaufende_Frequenzen.txt','Frequenz')
 
-
-% [V,D]=eig(Matrix)
 %
 % abs(transpose(V(:,1))*V(:,1))^2
 % abs(transpose(V(:,1))*V(:,2))^2
