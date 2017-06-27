@@ -17,8 +17,8 @@ Potential=np.genfromtxt('build/Durchlaufende_Potentiale.txt')
 frequenzzahler , frequenznenner =np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 
 #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a=50_E=10_w=1%3a.txt')
-
 Eigenwerte_H_0=np.array([-2,0,0,2])
+
 
 Figure_Zahler=1
 
