@@ -15,15 +15,15 @@ Sprungterme=1
 
 Potential=[0.1]
 
-Energien=[0.1]
+Energien=[0.8]
 
 b = 'cool'
 Gitterkonstante=1
 Phasenverschiebung=0
-Anzahl=[24,25]      #Anzahl der Perioden
+Anzahl=[1,2,4,6,8,10,15,20,25,30]      #Anzahl der Perioden
 
 #Frequenz=linspace(0,4,1000)
-Frequenz=[2]
+Frequenz=[1]
 
 #Frequenz=round_nur_besser(Frequenz,3)
 
@@ -44,7 +44,7 @@ for i=1:length(Potential)
         for k = 1:length(Energien)
           for j = 1:length(Anzahl)
           #i,l,k,j
-          Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl(j),Frequenz(l));
+          Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl(j),Frequenz(l)*Potential(i));
           [V,D]=eig(Matrix);
           e=eig(Matrix);
           epsilon=e((size(e)/2-1):(size(e)/2+2));
@@ -55,7 +55,7 @@ for i=1:length(Potential)
               for s= 1:4
                 #q,r,s
                 (r-1)*4+s;
-                phi(s,q)=phi(s,q)+V_epsilon((r-1)*4+s,q);
+                phi(q,s)=phi(q,s)+V_epsilon((r-1)*4+s,q);
               end
             end
           end
