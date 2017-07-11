@@ -13,7 +13,7 @@ addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
 Sprungterme=1
 
 
-Potential=[0.1]
+Potential=[1]
 
 Energien=[0.8]
 

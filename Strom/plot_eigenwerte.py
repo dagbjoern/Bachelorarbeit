@@ -8,6 +8,11 @@ def norm(v):
     n=v/np.sqrt(np.dot(v,v))
     return n
 
+
+def  Strom(c):
+    J = np.matrix([[0, -c, 0, c, ], [c, 0, -c, 0], [0, c, 0, -c], [-c, 0, c, 0]])
+    return 1j/4*J
+
 def test(phi, a):
     vektor = np.zeros([4,1])+1j*0
     for i in range(np.size(phi[0,:])):
@@ -55,6 +60,17 @@ def betragsquadrad(messwerte,psi_t):
             werte=np.append(werte,np.abs(np.dot(messwerte,psi_t[:,index]))**2)
     return werte
 
+def Erwartungswert(Operator,psi_t):
+    for index , value_Zeit in enumerate(t):
+        if index==0:
+            werte=np.dot(np.dot(Operator,psi_t[:,index]),np.conjugate(psi_t[:,index]))+1j*0
+        else:
+            werte=np.append(werte,np.dot(np.dot(Operator,psi_t[:,index]),np.conjugate(psi_t[:,index])),axis=0)
+    return werte
+
+
+
+
 def phi_funktion(V,t,w):
     phi=np.zeros([4,4])
     phi=phi+1j*0
@@ -88,7 +104,7 @@ str_Energien = str_Energien.astype(str)
 str_Anzahl_N = Anzahl_N.astype(int)
 str_Anzahl_N = str_Anzahl_N.astype(str)
 
-Gitterkonstante, Anzahl, Phasenverschiebung = np.genfromtxt('Parameter/Parameter_fur_a='+str_Potential[0]+'_w='+ str_Frequenz_1000[0]+'_E='+str_Energien[0]+'_N='+str_Anzahl_N[0]+'.txt',unpack=True)
+#Gitterkonstante, Anzahl, Phasenverschiebung = np.genfromtxt('Parameter/Parameter_fur_a='+str_Potential[0]+'_w='+ str_Frequenz_1000[0]+'_E='+str_Energien[0]+'_N='+str_Anzahl_N[0]+'.txt',unpack=True)
 
 print('int',Anzahl_N )
 print('str', str_Anzahl_N)
@@ -119,20 +135,19 @@ for a in tqdm(range(np.size(Potential))):
                 #print('t=0',test)
                 test2=phi_funktion(V_phi,Periodendauer,Frequenz[f])
                 print('test',test1-test2)
-                t=np.linspace(0,20,100)
+                t=np.linspace(0,100,1000)
                 Startzustand=H_0_eigenvektoren[:,0]
                 psi_t=zeitentwicklung(Startzustand,V_phi,epsilon,Frequenz[f],t)
-                phi=np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
                 T = np.linspace(0, 1, 2)
-
+                print(Erwartungswert(Strom(1),psi_t))
                 plt.figure(Figure_Zahler)
                 Figure_Zahler=1+Figure_Zahler
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-                plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/100) + ' a=' +str(Potential[a]/100) )
-                plt.plot(t, betragsquadrad(phi[:, 0], psi_t), '-r', alpha=0.5, label=r'zustand 1')
-                plt.plot(t, betragsquadrad(phi[:, 1], psi_t), '-y', alpha=0.5, label=r'zustand 2')
-                plt.plot(t, betragsquadrad(phi[:, 2], psi_t), '-g', alpha=0.5, label=r'zustand 3')
-                plt.plot(t, betragsquadrad(phi[:, 3], psi_t), '-b', alpha=0.5, label=r'zustand 4')
+                plt.title('Erwartungswert des Stromes für den Startzustand ' + str(np.round(Startzustand,3))+'\n fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/100) + ' a=' +str(Potential[a]/100) )
+                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=1')
+                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=2')
+                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=3')
+                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=4')
                 for n in range(4):
                     plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5)
                 plt.legend(loc='best')

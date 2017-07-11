@@ -1,11 +1,103 @@
 \chapter{Theoretische Grundlagen}
 \label{theo}
+Dieses Kapitel beschäftigt sich mit den
+theoretischen Grundlagen die für diese Arbeit benötigt
+werden. Zu Beginn soll der Inverse Faraday Effekt
+kurz beschrieben  (ADD) und danach die Flouqet theorie
+um zum Ende wird ein Numerische Methode vorgestellt
+um die zuvor beschriebene Gleichung zu lösen. 
+
 \section{Inverser Faraday Effekt}
 
 \section{Floquet Theorie}
+(READ)
+Dieses Kapitel beschäftigt sich mit den Grundlagen der
+Flouquet Theorie die für diese Arbeit genutzt werden soll,
+um ein perodisches quantenmechanisches System zu beschreiben.
+
+Die Zeitlicheentwicklung solch eines System ist durch die zeitabhängige Schrödinger-Gleichung
+(REF)
+\begin{align}
+\mathrm{i}\hbar \ket{\dot{\Psi(x,t)}}=H(x,t) \  H(x,t) \ket{\Psi(x,t)} \label{eqn:schrodinger}
+\end{align}
+gegeben. Wobei der Hamiltionian die folgenden Bedingungen erfüllt.
+Der Hamiltionian ist periodisch in der Zeit
+\begin{align}
+  H(x,t)=H(x,t+T)
+\intertext{und lässt sich schreiben als}
+H(x,t)&=H_0(x)+V(x,t)  &\text{mit}&   &V(x,t)=V(x,t+T)
+\end{align}
+Der Hamiltonian besteht also aus einem ungestörten Anteil $H_0(x)$ und einer in der Zeit periodischen
+Störung $V(x,t)$.
+
+Das Floquet Theorem besagt nun, dass es Zustände
+ $\ket{\Psi_{\alpha}(x,t)}$ gibt, die Lösungen
+ von \eqref{eqn:schrodinger} sind.
+Diese Lösungen haben die Form
+\begin{align}
+\ket{\Psi(x,t)_\alpha}=\exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}.\label{eqn:psi_a}
+\intertext{Dabei ist $\ket{\Phi_\alpha(x,t)}$ eine sogenannte Flouqetmode und
+unterliegt der periodisch Bedingung}
+\ket{\Phi_\alpha(x,t)}=\ket{\Phi_\alpha(x,t+T)}.
+\end{align}
+Das $\epsilon_\alpha$ ist ein realer Parameter und wird auch charakteristischer Exponent oder Flouqet Exponent genannt.
+Mit Hilfe von \eqref{eqn:psi_a} lässt sich die Schrödinger-Gleichung \eqref{eqn:schrodinger}
+in die Form \eqref{eqn:flouqetgl.}
+\begin{align}
+\mathcal{H}(x,t)\ket{\Phi_\alpha(x,t)}=\epsilon_\alpha \ket{\Phi_\alpha(x,t)} \label{eqn:flouqetgl.}
+\intertext{bringen, wobei der Operator }
+  \mathcal{H}(x,t)=\left( H(x,t)-\mathrm{i}\hbar\frac{\partial}{\partial t} \right).
+\end{align}
+Durch die Ähnlichkeit von der Gleichung \eqref{eqn:flouqetgl.} zu der stationären Schrödinger
+werden $\epsilon_\alpha$ und $\phi_\alpha$ auch Quasieeigenenergie und Quasieigenzustand gennannt.
+
+Desweiteren ist
+\begin{align}
+  \ket{\Phi_{\alpha '}(x,t)}=\ket{\Phi_\alpha(x,t)}\exp(\mathrm{i}n\omega t) \equiv \ket{\Phi_{\alpha n}(x,t)}
+\end{align}
+ebenfalls eine Lösung von \eqref{eqn:flouqetgl.},  wobei $n$ einer ganzen Zahl $n=\pm1,\pm2,\pm3 \dots$
+und $\omega$ die Frequenz der Störung entspricht. Dies hat aber eine Änderung der Quasienergie in der Form
+\begin{align*}
+    \epsilon_\alpha \rightarrow \epsilon_{\alpha '}=\epsilon_\alpha+n\hbar \omega\equiv\epsilon_{\alpha n} \label{eqn:epsilon_n}
+\end{align*}
+zu Folge.
+Durch diese Feststellung ist es
+möglich alle Quasieeigenenergien für unterschiedliche $\alpha$
+in der ersten Brillouin darzustellen, da sich alle weiteren
+Quasieigenenergien sich über \eqref{eqn:epsilon_n} berechnen lässen.
+
+
+Die Quasizustände unterliegen der folgenden orthogornaliäts Bedingung
+\begin{align}
+  \braket{\braket{\Phi_{\alpha' }(t)|\phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t \int_{\infty}^{\infty} \mathrm{d}x
+   \braket{\braket{\Phi_{\alpha' }(t)|\phi_{\beta'}(t)}}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}.
+\end{align}
+(ADD)
+Nun soll sich mit die Zeitlichenentwicklung der Flouqetmoden
+beschäftigt werden.
+Zunächst kann ein Startzustand $\ket{\Psi(0)}$ durch eine
+Superposition \eqref{eqn:super} von den Flouqetmoden (READ) ausgedrückt werden, indem
+\begin{align}
+  \ket{\Psi(x_0,0)}=\sum_\alpha c_a\ket{\Phi_\alpha(x_0,0)},&   &c_\alpha=\braket{\Phi_\alpha|\Psi(0)}.  \label{eqn:super}.
+\end{align}
+Durch den Propagator\footnote{Eine genau Herleitung des Propagators $K$ ist in (REF) zufinden.}
+\begin{align}
+  K(x,t;x_0,0)=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}\bra{\Phi_\alpha(x_0,0)} \label{eqn:zeitoperator}
+\end{align}
+ist es möglich den Startzustand \eqref{eqn:super}
+in der Zeit zu propagieren.
+Durch Anwendung von \eqref{eqn:zeitoperator} auf \eqref{eqn:super}
+folgt
+\begin{align}
+  \Psi(x,t)=K(x,t;x_0,0) \ket{\Psi(x_0,0)}=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}.
+\end{align}
 
 \section{Numerische Methoden}
+
+Quasizustände $\Phi$ können als Fourierreihe  dargestellt werden.
 \begin{align}
-  \Phi_{\alpha}(x,t)=\sum_{n=-\infty}^{\infty} c_{\alpha}^n (x)
-  \exp(\mathrm{i}n\omega t).
+  \ket{\Phi_{\alpha}(x,t)}=\sum_{n=-\infty}^{\infty} c_{\alpha}^n (x)
+  \exp(\mathrm{i}n\omega t).\\
+\intertext{mit}
+ c_\alpha^n(x)=\sum_{k=1}^\infty c_{\alpha,k}^n \ket{\varphi_k(x)} %phi beliebiges orthonomrl set auf h_0
 \end{align}

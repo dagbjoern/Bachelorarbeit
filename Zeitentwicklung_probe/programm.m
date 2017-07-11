@@ -1,3 +1,5 @@
+
+#addpath('Matlab_funktionen')
 addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
 
 
@@ -11,61 +13,49 @@ addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
 Sprungterme=1
 
 
-#Potential=[0.0,0.1,0.2,0.5,1.0]
-Potential=[0.5,1.0]
+Potential=[1,2]
 
-#Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
-Energien=[1.0,2.0]
+Energien=[1,2]
 
 b = 'cool'
-Gitterkonstante=1
+global Gitterkonstante=1
 Phasenverschiebung=0
-Anzahl= 5        #Anzahl der Perioden
+Anzahl=[10,25]      #Anzahl der Perioden
 
-Frequenz=linspace(0,4,1000)
-Frequenz=round_nur_besser(Frequenz,3)
-
+#Frequenz=linspace(0,4,1000)
+Frequenz=[0.5,1,2]
+#[t,x]=rk4('test_rkt',[0,1],0.5)
+#figure(1)
+#plot(t,x)
+#print figure1.pdf
+#Frequenz=round_nur_besser(Frequenz,3)
+%test=0
 for i=1:length(Potential)
-#  ['sweet' num2str(Potential(i)) 'cool' ]
-
-H_0=Hamilton_0(Sprungterme,[0,0,0,0]) % 1 für Energien in diagonale
-e=eig(H_0)
-
-  Energie_1=-Potential(i);
-  Energie_2=Potential(i);
-  Energie_3=-Potential(i);
-  Energie_4=Potential(i);
-  H_0=Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4]); % 1 für Energien in diagonale
-
-  H_0_e=eig(H_0)
-  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*100) 'a.txt'],'H_0_e')
-#function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
-#function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
-    for k = 1:length(Energien)
-      for l = 1:length(Frequenz)
-      i,k,l
-      Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl,Frequenz(l));
-      [V,D]=eig(Matrix);
-      e=eig(Matrix);
-      assignin ('base',['eigenwerte_E' num2str(l)],e);
-      if l==1
-         eigenwerte=eval(['eigenwerte_E' num2str(l)]);
-      end
-      if l!=1
-         eigenwerte=[eigenwerte,eval(['eigenwerte_E' num2str(l)])];
-      end
-      real_V=real(V);
-      imag_V=imag(V);
-      #save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'real_V')
-      #save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'imag_V')
-      Parameter=[Gitterkonstante,Anzahl,Phasenverschiebung];
-      % assignin ('base',['eigenwerte_E' num2str(k)],e);
-    end
-    save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '.txt'],'eigenwerte')
-    save(['Parameter/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '.txt'],'Parameter')
-  end
-end
-
+   Energie_1=-Potential(i);
+   Energie_2=Potential(i);
+   Energie_3=-Potential(i);
+   Energie_4=Potential(i);
+  global H_0=Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4]); % 1 für Energien in diagonale
+  H_0_e=eig(H_0);
+  [H_0_V,D]=eig(H_0);
+  save(['Parameter/eigenvektoren_von_H_0_fur_a=' num2str(Potential(i)*100) '.txt'],'H_0_V')
+  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*100) '.txt'],'H_0_e')
+%   #function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
+%   #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
+  for l = 1:length(Frequenz)
+        global w=Frequenz(l)
+        for k = 1:length(Energien)
+          global E=Energien(k)
+          [t,x]=rk4('schrodinger',[0,20,200],H_0_V(:,1))
+          real_x=real(x)
+          imag_x=imag(x)
+          save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'real_x')
+          save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'imag_x')
+          save(['build/Zeit_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'t')
+        end
+   end
+ end
+%
 
 Energien=transpose(Energien*100);
 Potential=transpose(Potential*100);
@@ -73,6 +63,7 @@ Frequenz=transpose(Frequenz*1000);
 save('build/Durchlaufende_Energien.txt','Energien')
 save('build/Durchlaufende_Potentiale.txt','Potential')
 save('build/Durchlaufende_Frequenzen.txt','Frequenz')
+save('build/Durchlaufende_N.txt','Anzahl')
 
 %
 % abs(transpose(V(:,1))*V(:,1))^2
