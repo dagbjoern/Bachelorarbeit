@@ -1,4 +1,5 @@
 function H = Hamilton_0(J,E )
+    global hbar=1
     H=diag(E);
     H(1,length(H))=J;
     H(length(H),1)=J;

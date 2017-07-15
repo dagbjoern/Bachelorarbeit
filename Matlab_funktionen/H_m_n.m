@@ -1,4 +1,5 @@
 function H_mn=H_m_n(H_0,n,m,E,phi,a)
+global hbar
 H_mn=zeros(size(H_0));
   if(n==m)
     H_mn=+H_0;

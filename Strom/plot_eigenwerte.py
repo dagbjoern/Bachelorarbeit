@@ -134,24 +134,28 @@ for a in tqdm(range(np.size(Potential))):
                 test1=phi_funktion(V_phi,0,Frequenz[f])
                 #print('t=0',test)
                 test2=phi_funktion(V_phi,Periodendauer,Frequenz[f])
-                print('test',test1-test2)
-                t=np.linspace(0,100,1000)
+                #print('test',test1-test2)
+                t=np.linspace(0,20,100)
                 Startzustand=H_0_eigenvektoren[:,0]
                 psi_t=zeitentwicklung(Startzustand,V_phi,epsilon,Frequenz[f],t)
-                T = np.linspace(0, 1, 2)
                 print(Erwartungswert(Strom(1),psi_t))
                 plt.figure(Figure_Zahler)
                 Figure_Zahler=1+Figure_Zahler
+                y=Erwartungswert(Strom(1),psi_t)
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
                 plt.title('Erwartungswert des Stromes für den Startzustand ' + str(np.round(Startzustand,3))+'\n fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/100) + ' a=' +str(Potential[a]/100) )
-                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=1')
-                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=2')
-                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=3')
-                plt.plot(t, Erwartungswert(Strom(c),psi_t), '-r', alpha=0.5, label=r'c=4')
-                for n in range(4):
+                plt.plot(t,y, '-r', alpha=0.5, label=r'Strom')
+                # plt.plot(t, Erwartungswert(Strom(2),psi_t), '-y', alpha=0.5, label=r'c=2')
+                # plt.plot(t, Erwartungswert(Strom(3),psi_t), '-b', alpha=0.5, label=r'c=3')
+                # plt.plot(t, Erwartungswert(Strom(4),psi_t), '-g', alpha=0.5, label=r'c=4')
+                T = np.linspace(np.amin(y),np.amax(y) , 2)
+                for n in range(10):
                     plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5)
+                plt.xlabel(r'Zeit $t/ j^{-1}$')
+                plt.ylabel(r'Strom $I/c $')
+                plt.xlim(0,20)
                 plt.legend(loc='best')
-                plt.savefig('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/100) +'/Besetzungen(t)_N='+str(int(Anzahl_N[l]))+ 'w = ' + str(Frequenz[f]) + '.pdf')
+                plt.savefig('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/100) +'/Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ 'w = ' + str(Frequenz[f]) + '.pdf')
                 plt.close()
 
 #

@@ -42,10 +42,10 @@ y = y0(:);
 
 dt = abs(tfinal - t0);
 N = floor(dt/ssize) + 1;
+N
 if (N-1)*ssize < dt
   N = N + 1;
 end
-
 % Initialize the output.
 
 tout = zeros(N,1);
@@ -56,8 +56,8 @@ k = 1;
 
 % The main loop
 while (k < N)
-  if pm*(t + h - tfinal) > 0 
-    h = tfinal - t; 
+  if pm*(t + h - tfinal) > 0
+    h = tfinal - t;
     tout(k+1) = tfinal;
   else
     tout(k+1) = t0 +k*h;
@@ -73,4 +73,3 @@ while (k < N)
   t = tout(k);
   yout(k,:) = y.';
 end;
-

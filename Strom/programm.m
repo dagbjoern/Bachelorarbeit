@@ -11,7 +11,7 @@ addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
 
 
 Sprungterme=1
-
+global hbar=1
 
 Potential=[1,2]
 

@@ -47,7 +47,7 @@ def zeitentwicklung(Startzustand,V_phi,epsilon,frequenz,t):
 
 
 
-def betragsquadrad(messwerte,psi_t):
+def betragsquadrad(messwerte,psi_t,t):
     for index , value_Zeit in enumerate(t):
         if index==0:
             werte=np.abs(np.dot(messwerte,psi_t[:,index]))**2
@@ -94,6 +94,8 @@ str_Anzahl_N = str_Anzahl_N.astype(str)
 print('int',Anzahl_N )
 print('str', str_Anzahl_N)
 print('cool' + str_Anzahl_N[0] + 'cool')
+t_rk4=np.genfromtxt('build/Zeit_RK4.txt')
+t_lsode=np.genfromtxt('build/Zeit_lsode.txt')
 
 Frequenz = Frequenz_1000/1000
 Figure_Zahler = 1
@@ -103,16 +105,22 @@ for a in tqdm(range(np.size(Potential))):
     if not os.path.exists('Plots/Potenial='+ str(Potential[a]/100)):
         os.makedirs('Plots/Potenial='+ str(Potential[a]/100))
     for e in tqdm(range(np.size(Energien))):
-        if not os.path.exists('Plots/Potenial='+ str(Potential[a]/100) + '/Energie='+str(Energien[e]/100)):
-            os.makedirs('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/100))
+        if not os.path.exists('Plots/Potenial='+ str(Potential[a]/100) + '/Energie='+str(Energien[e]/10000)):
+            os.makedirs('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000))
         for f in tqdm(range(np.size(Frequenz))):
                 #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str_Potential[a]+'_w='+ str_Frequenz_1000[f]+'_E='+str_Energien[e]+'_N='+str_Anzahl_N[l]+'.txt',unpack=True)
-                t=np.genfromtxt('build/Zeit_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'.txt')
                 psi_real=np.genfromtxt('build/Realpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'.txt')
                 psi_imag=np.genfromtxt('build/Imagpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'.txt')
                 psi_imag=psi_imag*1j
+                psi_real_lsode=np.genfromtxt('build/Realpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'lsode.txt')
+                psi_imag_lsode=np.genfromtxt('build/Imagpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'lsode.txt')
+                psi_imag_lsode=psi_imag_lsode*1j
                 psi_t=psi_real+psi_imag
+                psi_t_lsode=psi_real_lsode+psi_imag_lsode
+                #print('zustande',psi_t-psi_t_lsode)
+            #    print('zeit',t_rk4-t_lsode)
                 psi_t=psi_t.T
+                psi_t_lsode=psi_t_lsode.T
                 Periodendauer = 2 * np.pi / Frequenz[f]
                 Startzustand=H_0_eigenvektoren[:,0]
                 phi=np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]])
@@ -120,15 +128,22 @@ for a in tqdm(range(np.size(Potential))):
                 plt.figure(Figure_Zahler)
                 Figure_Zahler=1+Figure_Zahler
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-                plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'\n für  w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/100) + ' a=' +str(Potential[a]/100) )
-                plt.plot(t, betragsquadrad(phi[:, 0], psi_t), '-r', alpha=0.5, label=r'zustand 1')
-                plt.plot(t, betragsquadrad(phi[:, 1], psi_t), '-y', alpha=0.5, label=r'zustand 2')
-                plt.plot(t, betragsquadrad(phi[:, 2], psi_t), '-g', alpha=0.5, label=r'zustand 3')
-                plt.plot(t, betragsquadrad(phi[:, 3], psi_t), '-b', alpha=0.5, label=r'zustand 4')
-                for n in range(4):
+                plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'\n für  w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+                plt.plot(t_rk4, betragsquadrad(phi[:, 0], psi_t,t_rk4), '-r', alpha=0.25, label=r'Position 1')
+                plt.plot(t_rk4, betragsquadrad(phi[:, 1], psi_t,t_rk4), '-y', alpha=0.25, label=r'Position 2')
+                plt.plot(t_rk4, betragsquadrad(phi[:, 2], psi_t,t_rk4), '-g', alpha=0.25, label=r'Position 3')
+                plt.plot(t_rk4, betragsquadrad(phi[:, 3], psi_t,t_rk4), '-b', alpha=0.25, label=r'Position 4')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 0], psi_t_lsode,t_lsode), '-r', alpha=0.75, label=r'Pos 1 lsode ')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 1], psi_t_lsode,t_lsode), '-y', alpha=0.75, label=r'Pos 2 lsode')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 2], psi_t_lsode,t_lsode), '-g', alpha=0.75, label=r'Pos 3 lsode')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 3], psi_t_lsode,t_lsode), '-b', alpha=0.75, label=r'Pos 4 lsode')
+                for n in range(10):
                     plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5)
+                plt.xlabel(r'Zeit $t / J^{-1}$')
+                plt.ylabel(r'$Aufenthaltswahrscheinlichkeit $')
+                plt.xlim(0,20)
                 plt.legend(loc='best')
-                plt.savefig('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/100) + '/w = ' + str(Frequenz[f]) + '.pdf')
+                plt.savefig('Plots/Potenial='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) + '/Mit_Rk4_w = ' + str(Frequenz[f]) + '.pdf')
                 plt.close()
 
 #

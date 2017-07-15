@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
+from tqdm import tqdm
+import os
 
 
 
@@ -25,90 +27,116 @@ def phi_funktion(V,t,w):
 
 
 
+
 Energien=np.genfromtxt('build/Durchlaufende_Energien.txt')
 Potential=np.genfromtxt('build/Durchlaufende_Potentiale.txt')
 Frequenz_1000=np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 Anzahl_N=np.genfromtxt('build/Durchlaufende_N.txt',unpack=True)
-Gitterkonstante,Anzahl,Phasenverschiebung=np.genfromtxt('Parameter/Parameter_fur_a='+str(int(Potential))+'_w='+ str(int(Frequenz_1000))+'_E='+str(int(Energien))+'_N='+str(int(Anzahl_N[0]))+'.txt',unpack=True)
 
 
-werte_1=np.zeros([4,np.size(Anzahl_N)])+1j*0
-werte_2=np.zeros([4,np.size(Anzahl_N)])+1j*0
-werte_3=np.zeros([4,np.size(Anzahl_N)])+1j*0
-werte_4=np.zeros([4,np.size(Anzahl_N)])+1j*0
+str_Potential = Potential.astype(int)
+str_Potential = str_Potential.astype(str)
 
-Figure_Zahler=1
+str_Frequenz_1000 = Frequenz_1000.astype(int)
+str_Frequenz_1000 = str_Frequenz_1000.astype(str)
 
-for l in range(np.size(Anzahl_N)):
-    Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potential))+'_w='+ str(int(Frequenz_1000))+'_E='+str(int(Energien))+'_N='+str(int(Anzahl_N[0]))+'.txt',unpack=True)
-    epsilon=np.genfromtxt('build/epsilon_fur_a='+str(int(Potential))+'_E='+str(int(Energien))+'_w=' + str(int(Frequenz_1000)) +'a_N=' + str(int(Anzahl_N[l])) +'.txt')
+str_Energien = Energien.astype(int)
+str_Energien = str_Energien.astype(str)
 
-    Frequenz=Frequenz_1000/1000*Potential/100
-    Eigenzustande_realteil=np.genfromtxt('build/Realpart_Eigenzustande_fur_a='+str(int(Potential))+'_E='+str(int(Energien))+'_w=' + str(int(Frequenz_1000)) +'a_N=' + str(int(Anzahl_N[l])) +'.txt')
-    Eigenzustande_imagteil=np.genfromtxt('build/Imagpart_Eigenzustande_fur_a='+str(int(Potential))+'_E='+str(int(Energien))+'_w=' + str(int(Frequenz_1000)) +'a_N=' + str(int(Anzahl_N[l])) +'.txt')
+str_Anzahl_N = Anzahl_N.astype(int)
+str_Anzahl_N = str_Anzahl_N.astype(str)
 
-    Eigenzustande_realteil=Eigenzustande_realteil+1j*0
-    Eigenzustande_imagteil=Eigenzustande_imagteil*1j
+Gitterkonstante, Anzahl, Phasenverschiebung = np.genfromtxt('Parameter/Parameter_fur_a='+str_Potential[0]+'_w='+ str_Frequenz_1000[0]+'_E='+str_Energien[0]+'_N='+str_Anzahl_N[0]+'.txt',unpack=True)
 
-    V_phi=Eigenzustande_realteil+Eigenzustande_imagteil
+Frequenz = Frequenz_1000/1000
 
-    phi=phi_funktion(V_phi,0,Frequenz)
+Figure_Zahler = 1
+for a in tqdm(range(int(np.size(Potential)))):
+    if not os.path.exists('Plots/Potential='+ str(Potential[a]/100)):
+        os.makedirs('Plots/Potential='+ str(Potential[a]/100))
+    for e in tqdm(range(int(np.size(Energien)))):
+        if not os.path.exists('Plots/Potential='+ str(Potential[a]/100) + '/Energie='+str(Energien[e]/10000)):
+            os.makedirs('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000))
+        for f in tqdm(range(int(np.size(Frequenz)))):
+            if not os.path.exists('Plots/Potential='+ str(Potential[a]/100) + '/Energie='+str(Energien[e]/10000)+'/Frequenz='+ str(Frequenz[f])):
+                os.makedirs('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000)+'/Frequenz='+ str(Frequenz[f]))
+            werte_1=np.zeros([4,np.size(Anzahl_N)])+1j*0
+            werte_2=np.zeros([4,np.size(Anzahl_N)])+1j*0
+            werte_3=np.zeros([4,np.size(Anzahl_N)])+1j*0
+            werte_4=np.zeros([4,np.size(Anzahl_N)])+1j*0
+            for l in tqdm(range(np.size(Anzahl_N))):
+                #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str_Potential[a]+'_w='+ str_Frequenz_1000[f]+'_E='+str_Energien[e]+'_N='+str_Anzahl_N[l]+'.txt',unpack=True)
+                epsilon=np.genfromtxt('build/epsilon_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'a_N=' + str_Anzahl_N[l] +'.txt')
+                Eigenzustande_realteil=np.genfromtxt('build/Realpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'a_N=' + str_Anzahl_N[l] +'.txt')
+                Eigenzustande_imagteil=np.genfromtxt('build/Imagpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'a_N=' + str_Anzahl_N[l] +'.txt')
+                Eigenzustande_realteil=Eigenzustande_realteil+1j*0
+                Eigenzustande_imagteil=Eigenzustande_imagteil*1j
+                V_phi=Eigenzustande_realteil+Eigenzustande_imagteil
+                #print(Potential[a]/100, Energien[e]/10000)
+                phi=phi_funktion(V_phi,0,Frequenz[f])
+                #print(phi)
+                for q in range(4):
+                    werte_1[q,l]=skalarprodukt(phi[:,0],phi[:,q])
+                    werte_2[q,l]=skalarprodukt(phi[:,1],phi[:,q])
+                    werte_3[q,l]=skalarprodukt(phi[:,2],phi[:,q])
+                    werte_4[q,l]=skalarprodukt(phi[:,3],phi[:,q])
+                #print(werte_4[0,:])
+            plt.figure(Figure_Zahler)
+            Figure_Zahler=1+Figure_Zahler
+            plt.title('Orthogonalität für n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+            plt.plot(Anzahl_N, werte_1[0,:].real,'-y',alpha=0.5,label=r'phi1*phi1' )
+            plt.plot(Anzahl_N, werte_1[1,:].real,'-r',alpha=0.5,label=r'phi1*phi2' )
+            plt.plot(Anzahl_N, werte_1[2,:].real,'-g',alpha=0.5,label=r'phi1*phi3' )
+            plt.plot(Anzahl_N, werte_1[3,:].real,'-b',alpha=0.5,label=r'phi1*phi4' )
+            # plt.ylim(-Frequenz/2,Frequenz/2)
+            plt.legend(loc='best')
+            plt.xlabel('N')
+            plt.ylabel(r'$phi*phi$')
+            plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_für_phi1_phi_i.pdf')
+            plt.close()
 
 
+            plt.figure(Figure_Zahler)
+            Figure_Zahler=1+Figure_Zahler
+            plt.title('Orthogonalität für n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+            plt.plot(Anzahl_N, werte_2[0,:].real,'-y',alpha=0.5,label=r'phi2*phi1' )
+            plt.plot(Anzahl_N, werte_2[1,:].real,'-r',alpha=0.5,label=r'phi2*phi2' )
+            plt.plot(Anzahl_N, werte_2[2,:].real,'-g',alpha=0.5,label=r'phi2*phi3' )
+            plt.plot(Anzahl_N, werte_2[3,:].real,'-b',alpha=0.5,label=r'phi2*phi4' )
+            # plt.ylim(-Frequenz/2,Frequenz/2)
+            plt.legend(loc='best')
+            plt.xlabel('N')
+            plt.ylabel(r'$phi*phi$')
+            plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_für_phi2_phi_i.pdf')
+            plt.close()
 
-    for q in range(4):
-        werte_1[q,l]=skalarprodukt(phi[:,0],phi[:,q])
-        werte_2[q,l]=skalarprodukt(phi[:,1],phi[:,q])
-        werte_3[q,l]=skalarprodukt(phi[:,2],phi[:,q])
-        werte_4[q,l]=skalarprodukt(phi[:,3],phi[:,q])
+            plt.figure(Figure_Zahler)
+            Figure_Zahler=1+Figure_Zahler
+            plt.title('Orthogonalität für n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+            plt.plot(Anzahl_N, werte_3[0,:].real,'-y',alpha=0.5,label=r'phi3*phi1' )
+            plt.plot(Anzahl_N, werte_3[1,:].real,'-r',alpha=0.5,label=r'phi3*phi2' )
+            plt.plot(Anzahl_N, werte_3[2,:].real,'-g',alpha=0.5,label=r'phi3*phi3' )
+            plt.plot(Anzahl_N, werte_3[3,:].real,'-b',alpha=0.5,label=r'phi3*phi4' )
+            # plt.ylim(-Frequenz/2,Frequenz/2)
+            plt.legend(loc='best')
+            plt.xlabel('N')
+            plt.ylabel(r'$phi*phi$')
+            plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_für_phi3_phi_i.pdf')
+            plt.close()
 
-plt.figure(Figure_Zahler)
-Figure_Zahler=1+Figure_Zahler
-plt.plot(Anzahl_N, werte_1[0,:].real,'-y',alpha=0.5,label=r'phi1*phi1' )
-plt.plot(Anzahl_N, werte_1[1,:].real,'-r',alpha=0.5,label=r'phi1*phi2' )
-plt.plot(Anzahl_N, werte_1[2,:].real,'-g',alpha=0.5,label=r'phi1*phi3' )
-plt.plot(Anzahl_N, werte_1[3,:].real,'-b',alpha=0.5,label=r'phi1*phi4' )
-# plt.ylim(-Frequenz/2,Frequenz/2)
-plt.legend(loc='best')
-plt.xlabel('N')
-plt.ylabel(r'$phi*phi$')
-plt.savefig('Plots/Plot_für_phi1_phi_i_a='+str(Potential/100) +'.pdf')
-
-plt.figure(Figure_Zahler)
-Figure_Zahler=1+Figure_Zahler
-plt.plot(Anzahl_N, werte_2[0,:].real,'-y',alpha=0.5,label=r'phi2*phi1' )
-plt.plot(Anzahl_N, werte_2[1,:].real,'-r',alpha=0.5,label=r'phi2*phi2' )
-plt.plot(Anzahl_N, werte_2[2,:].real,'-g',alpha=0.5,label=r'phi2*phi3' )
-plt.plot(Anzahl_N, werte_2[3,:].real,'-b',alpha=0.5,label=r'phi2*phi4' )
-# plt.ylim(-Frequenz/2,Frequenz/2)
-plt.legend(loc='best')
-plt.xlabel('N')
-plt.ylabel(r'$phi*phi$')
-plt.savefig('Plots/Plot_für_phi2_phi_i_a='+str(Potential/100) +'.pdf')
-
-plt.figure(Figure_Zahler)
-Figure_Zahler=1+Figure_Zahler
-plt.plot(Anzahl_N, werte_3[0,:].real,'-y',alpha=0.5,label=r'phi3*phi1' )
-plt.plot(Anzahl_N, werte_3[1,:].real,'-r',alpha=0.5,label=r'phi3*phi2' )
-plt.plot(Anzahl_N, werte_3[2,:].real,'-g',alpha=0.5,label=r'phi3*phi3' )
-plt.plot(Anzahl_N, werte_3[3,:].real,'-b',alpha=0.5,label=r'phi3*phi4' )
-# plt.ylim(-Frequenz/2,Frequenz/2)
-plt.legend(loc='best')
-plt.xlabel('N')
-plt.ylabel(r'$phi*phi$')
-plt.savefig('Plots/Plot_für_phi3_phi_i_a='+str(Potential/100) +'.pdf')
-
-plt.figure(Figure_Zahler)
-Figure_Zahler=1+Figure_Zahler
-plt.plot(Anzahl_N, werte_4[0,:].real,'-y',alpha=0.5,label=r'phi4*phi1' )
-plt.plot(Anzahl_N, werte_4[1,:].real,'-r',alpha=0.5,label=r'phi4*phi2' )
-plt.plot(Anzahl_N, werte_4[2,:].real,'-g',alpha=0.5,label=r'phi4*phi3' )
-plt.plot(Anzahl_N, werte_4[3,:].real,'-b',alpha=0.5,label=r'phi4*phi4' )
-# plt.ylim(-Frequenz/2,Frequenz/2)
-plt.legend(loc='best')
-plt.xlabel('N')
-plt.ylabel(r'$phi*phi$')
-plt.savefig('Plots/Plot_für_phi4_phi_i_a='+str(Potential/100) +'.pdf')
+            plt.figure(Figure_Zahler)
+            Figure_Zahler=1+Figure_Zahler
+            plt.title('Orthogonalität für n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+            plt.plot(Anzahl_N, werte_4[0,:].real,'-y',alpha=0.5,label=r'phi4*phi1' )
+            plt.plot(Anzahl_N, werte_4[1,:].real,'-r',alpha=0.5,label=r'phi4*phi2' )
+            plt.plot(Anzahl_N, werte_4[2,:].real,'-g',alpha=0.5,label=r'phi4*phi3' )
+            plt.plot(Anzahl_N, werte_4[3,:].real,'-b',alpha=0.5,label=r'phi4*phi4' )
+            # plt.ylim(-Frequenz/2,Frequenz/2)
+            plt.legend(loc='best')
+            plt.xlabel('N')
+            plt.ylabel(r'$phi*phi$')
+            plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_für_phi4_phi_i.pdf')
+            plt.close()
 
 
 #
