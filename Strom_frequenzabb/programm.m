@@ -32,18 +32,18 @@ Sprungterme=1
 
 
 Potential=[0.5,1.5,2]
-Energien=linspace(0.01,0.1,10)
-Frequenz=[1,3,5,6,7]
-
-
+Energien=[0.05,0.1]
+Frequenz=linspace(0,10,150)
+Frequenz=round(Frequenz*10000)/10000
+Frequenz*10000
 Anzahl=[5,10]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0
 %zeitentwicklung
-t_isode=linspace(0,200,600)
+t_isode=linspace(0,200,600);
 
-#Frequenz=linspace(0,4,1000)
+#Frequenz=linspace(0,4,10000)
 #[t,x]=rk4('test_rkt',[0,1],0.5)
 #figure(1)
 #plot(t,x)
@@ -58,30 +58,30 @@ for i=1:length(Potential)
   Ham(Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4])); % 1 für Energien in diagonale
   H_0_e=eig(H_0);
   [H_0_V,D]=eig(H_0);
-  save(['Parameter/eigenvektoren_von_H_0_fur_a=' num2str(Potential(i)*100) '.txt'],'H_0_V')
-  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*100) '.txt'],'H_0_e')
+  save(['Parameter/eigenvektoren_von_H_0_fur_a=' num2str(Potential(i)*10000) '.txt'],'H_0_V')
+  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*10000) '.txt'],'H_0_e')
   %
 %   #function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
 %   #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
   for l = 1:length(Frequenz)
-    	     Frequenz(l)
-         Fr(Frequenz(l))
+    	     Frequenz(l);
+         Fr(Frequenz(l));
         for k = 1:length(Energien)
-          En(Energien(k))
-          E
-          w
+          En(Energien(k));
+          E;
+          w;
           [t,x]=rk4('schrodinger',[0,20],H_0_V(:,1));
           x_lsode=lsode('schrodinger_Isode',[H_0_V(1,1),H_0_V(2,1),H_0_V(3,1),H_0_V(4,1),0,0,0,0],t_isode);
           real_x_lsode=x_lsode(:,1:4);
           imag_x_lsode=x_lsode(:,5:8);
           real_x=real(x);
           imag_x=imag(x);
-          save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) '.txt'],'real_x')
-          save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) '.txt'],'imag_x')
-          save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) 'lsode.txt'],'real_x_lsode')
-          save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) 'lsode.txt'],'imag_x_lsode')
+          save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '.txt'],'real_x')
+          save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '.txt'],'imag_x')
+          save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) 'lsode.txt'],'real_x_lsode')
+          save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) 'lsode.txt'],'imag_x_lsode')
           for j = 1:length(Anzahl)
-            test=test+1
+            test=test+1;
           %  i %/ length(Potential)
           %  l %/ length(Frequenz)
           %  k%/ length(Energien),
@@ -95,11 +95,11 @@ for i=1:length(Potential)
             V_epsilon=V(:,(size(e)/2-1):(size(e)/2+2));
             real_phi=real(V_epsilon);
             imag_phi=imag(V_epsilon);
-            save(['build/epsilon_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) '_N=' num2str(Anzahl(j) ) '.txt'],'epsilon')
-            save(['build/Realpart_Eigenzustande_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) '_N=' num2str(Anzahl(j) ) '.txt'],'real_phi')
-            save(['build/Imagpart_Eigenzustande_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) '_N=' num2str(Anzahl(j) ) '.txt'],'imag_phi')
+            save(['build/epsilon_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '_N=' num2str(Anzahl(j) ) '.txt'],'epsilon')
+            save(['build/Realpart_Eigenzustande_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '_N=' num2str(Anzahl(j) ) '.txt'],'real_phi')
+            save(['build/Imagpart_Eigenzustande_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '_N=' num2str(Anzahl(j) ) '.txt'],'imag_phi')
             Parameter=[Gitterkonstante,Anzahl(j),Phasenverschiebung];
-            save(['Parameter/Parameter_fur_a=' num2str(Potential(i)*100) '_w=' num2str(Frequenz(l)*1000) '_E=' num2str(Energien(k)*10000) '_N=' num2str(Anzahl(j)) '.txt'],'Parameter')
+            save(['Parameter/Parameter_fur_a=' num2str(Potential(i)*10000) '_w=' num2str(Frequenz(l)*10000) '_E=' num2str(Energien(k)*10000) '_N=' num2str(Anzahl(j)) '.txt'],'Parameter')
           end
         end
    end
@@ -109,9 +109,9 @@ for i=1:length(Potential)
  save(['build/Zeit_lsode.txt'],'t_isode')
 %
 
-Energien=transpose(Energien*10000);
-Potential=transpose(Potential*100);
-Frequenz=transpose(Frequenz*1000);
+Energien=round(transpose(Energien*10000));
+Potential=round(transpose(Potential*10000));
+Frequenz=round(transpose(Frequenz*10000));
 save('build/Durchlaufende_Energien.txt','Energien')
 save('build/Durchlaufende_Potentiale.txt','Potential')
 save('build/Durchlaufende_Frequenzen.txt','Frequenz')

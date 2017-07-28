@@ -31,12 +31,15 @@ global hbar=1
 Sprungterme=1
 
 
-Potential=[1,5,10]
-Energien=[1,5,10]
-Frequenz=[0.5,1,2,5,10]
+#Potential=[0.1,1,5,10]
+#Energien=[0.0001,1,5,10]
+#Frequenz=[0.1,0.5,1,5,10]
+Potential=[0.5,1.5,2]
+Energien=[0.05,0.01,0.1]
+Frequenz=[1,3,5,7]
 
 
-Anzahl=[2,5,10]      #Anzahl der Perioden
+Anzahl=[10,20]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0
@@ -49,8 +52,13 @@ t_isode=linspace(0,20,400)
 #plot(t,x)
 #print figure1.pdf
 #Frequenz=round_nur_besser(Frequenz,3)
-test=0
+test=0;
 for i=1:length(Potential)
+  'Potenial=', Potential(i)
+  '1.Resonanz ', sqrt(Potential(i)^2+4*Sprungterme^2)-Potential(i)
+  '2.Resonanz ', sqrt(Potential(i)^2+4*Sprungterme^2)+Potential(i)
+  '3.Resonanz ', 2*sqrt(Potential(i)^2+4*Sprungterme^2)
+
    Energie_1=-Potential(i);
    Energie_2=Potential(i);
    Energie_3=-Potential(i);
@@ -64,12 +72,12 @@ for i=1:length(Potential)
 %   #function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
 %   #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
   for l = 1:length(Frequenz)
-    	     Frequenz(l)
-         Fr(Frequenz(l))
+    	     Frequenz(l);
+         Fr(Frequenz(l));
         for k = 1:length(Energien)
-          En(Energien(k))
-          E
-          w
+          En(Energien(k));
+          E;
+          w;
           [t,x]=rk4('schrodinger',[0,20],H_0_V(:,1));
           x_lsode=lsode('schrodinger_Isode',[H_0_V(1,1),H_0_V(2,1),H_0_V(3,1),H_0_V(4,1),0,0,0,0],t_isode);
           real_x_lsode=x_lsode(:,1:4);
@@ -81,12 +89,11 @@ for i=1:length(Potential)
           save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) 'lsode.txt'],'real_x_lsode')
           save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*1000) 'lsode.txt'],'imag_x_lsode')
           for j = 1:length(Anzahl)
-            test=test+1
-            i %/ length(Potential)
-            l %/ length(Frequenz)
-            k%/ length(Energien),
-            j% /length(Anzahl)
-            'fortschritt'
+            test=test+1;
+      %      i %/ length(Potential)
+      %      k%/ length(Energien),
+      %      j% /length(Anzahl)
+            'fortschritt:'
             test/(length(Potential)*length(Frequenz)*length(Energien)*length(Anzahl))
             Matrix=H_F(H_0,Energien(k),Phasenverschiebung,Gitterkonstante,Anzahl(j),Frequenz(l));
             [V,D]=eig(Matrix);

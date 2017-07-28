@@ -26,7 +26,7 @@ def Hamilton(e,J):
 
 J , a= symbols('J , a')
 
-Test_H=Hamilton([a,a,a,a],J)
+Test_H=Hamilton([-a,a,-a,a],J)
 Test_H_matrix=Matrix(Test_H)
 print(Test_H)
 
@@ -34,4 +34,7 @@ print(Test_H)
 #print('eigenwerte und vektoren nach numpy',eigenwerte(Test_H))
 
 
-print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects())
+print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects()[0])
+print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects()[1])
+print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects()[2])
+print('eigenwerte und eigenvektoren nach sympy',Test_H_matrix.eigenvects()[3])

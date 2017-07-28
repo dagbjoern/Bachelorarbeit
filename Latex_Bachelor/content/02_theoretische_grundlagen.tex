@@ -8,9 +8,19 @@ um zum Ende wird ein Numerische Methode vorgestellt
 um die zuvor beschriebene Gleichung zu lösen.
 
 \section{Schrödingergleichung}
-
-
-\section{Inverser Faraday Effekt}
+Die  Zeeitlicheentwicklung eines Quantenmechnanischen ist durch die
+zeitanbhängige Schrödinger-Gleichung gegeben.
+Sie lautet wie folgt
+(REF)
+\begin{align}
+\mathrm{i}\hbar \ket{\dot{\Psi(x,t)}}=H(x,t) \  H(x,t) \ket{\Psi(x,t)}. \label{eqn:schrodinger}
+\end{align}
+Durch Trennung der variable kann die Stationäre Schrödingergleichung
+\begin{align}
+E\ket{\Psi}= \hat H \ket{\Psi}
+\end{align}
+hergleitet werden
+\section{Tight-Binding Modell?}
 
 \section{Floquet Theorie}
 (READ)
@@ -19,7 +29,6 @@ Flouquet Theorie die für diese Arbeit genutzt werden soll,
 um ein perodisches quantenmechanisches System zu beschreiben.
 
 Die Zeitlicheentwicklung solch eines System ist durch die zeitabhängige Schrödinger-Gleichung
-(REF)
 \begin{align}
 \mathrm{i}\hbar \ket{\dot{\Psi(x,t)}}=H(x,t) \  H(x,t) \ket{\Psi(x,t)} \label{eqn:schrodinger}
 \end{align}
@@ -72,8 +81,8 @@ Quasieigenenergien sich über \eqref{eqn:epsilon_n} berechnen lässen.
 
 Die Quasizustände unterliegen der folgenden orthogornaliäts Bedingung
 \begin{align}
-  \braket{\braket{\Phi_{\alpha' }(t)|\phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t \int_{\infty}^{\infty} \mathrm{d}x
-   \braket{\braket{\Phi_{\alpha' }(t)|\phi_{\beta'}(t)}}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}.
+  \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t \int_{\infty}^{\infty} \mathrm{d}x
+   \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}.
 \end{align}
 (ADD)
 Nun soll sich mit die Zeitlichenentwicklung der Floquetmoden
@@ -123,3 +132,11 @@ Durch lösen der Eigenwertgleichung
 \end{align}
 folgen die Quasieenergien $\epsilon_{\alpha,n}$ und die Eigenvektoren $\ket{\epsilon_{\alpha,n}}$.
 Die Quasieenergien gehörchen den Periodischenbedingungungen aus \eqref{eqn:epsilon_n}.
+
+
+\section{Inverser Faraday Effekt}
+Der Inverse Faraday Effekt beschreibt die Enstehung einer Magnetisierung in Materie bei Bestrahung mit zirkularpolariesiertem Licht.
+Der Inverse Faraday Effekt beschreibt die Enstehung einer Magnetisierung in Materie, die mit zirkularpolariesiertem Licht bestrahlt wird.
+Dabei wird davon ausgegangen, dass die Wechselwirkung primär zwischen dem E-felder der Welle und den Elektronen statt findet.
+Es kann durch mehrere Überlegungen gezeigt werden, dass der Strom, der durch das zirkularpolarisierte Licht erzeugt wird, eine quadratische Abhängigkeit
+zu der E-feld Amplitude besitzt.

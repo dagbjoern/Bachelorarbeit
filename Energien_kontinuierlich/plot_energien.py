@@ -8,11 +8,25 @@ Potential=np.genfromtxt('build/Durchlaufende_Potentiale.txt')
 Frequenz_1000=np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 Gitterkonstante,Anzahl,Phasenverschiebung=np.genfromtxt('Parameter/Parameter_fur_a='+str(int(Potential[0]))+'_w='+ str(int(Frequenz_1000[0]))+'.txt',unpack=True)
 
+
+
+
+
 # if [(np.size(Frequenz_1000)==1)and(np.size(Potential)==1)]:
 #     Gitterkonstante,Anzahl,Phasenverschiebung=np.genfromtxt('Parameter/Parameter_fur_a='+str(int(Potential))+'_w='+ str(int(Frequenz_1000))+'.txt',unpack=True)
 # else:
 
 Frequenz=Frequenz_1000/1000
+
+plt.figure(Figure_Zahler)
+Figure_Zahler=Figure_Zahler+1
+plt.title('Eigenwerte von a='+str(value_Potenial/100)+' w='+str(value_Frequenz*value_Potenial/100)+' N='+str(Anzahl))
+plt.plot(x,x*0+value_Frequenz* (value_Potenial/100)/2,'--k',alpha=0.5)
+plt.legend(loc='best')
+plt.xlabel('E')
+plt.ylabel(r'$\epsilon_\alpha $')
+plt.savefig('Plots/Plot_fur'+'_a='+str(value_Potenial/100)+'_w='+str(value_Frequenz*value_Potenial/100)+'N='+str(Anzahl) +'.pdf')
+
 
 #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a=50_E=10_w=1%3a.txt')
 
