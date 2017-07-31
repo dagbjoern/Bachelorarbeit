@@ -1,11 +1,12 @@
 \chapter{Modell}
 %\section{Hameltonien}
-Um den Inversen Farady-effekt mit Hilfe der Floquet Theorie in einem Bandisolator genauer zu untersuchen soll hier ein einfaches 2D-Moedell
-eines Festkörpers mit 4 Positionen (herangezogen)$/$verwendet werden.
+Um den Inversen Farady-Effekt mit Hilfe der Floquet-Theorie in
+einem Bandisolator genauer zu untersuchen soll hier ein einfaches 2D-Modell
+eines Festkörpers mit vier Positionen (herangezogen)$/$verwendet werden.
 Der Bandisolator wird durch
-genau wechselde Potential dargestellt (ADD).
+genau wechselnde lokale Energien dargestellt (ADD).
 In der Abbildung \ref{fig:sytem}
-ist das zu untersuchende System noch einmal Bildlich dargestellt.
+ist das zu untersuchende System noch einmal bildlich dargestellt.
 %
 % \begin{figure}
 %   \centering
@@ -15,12 +16,12 @@ ist das zu untersuchende System noch einmal Bildlich dargestellt.
 % \end{figure}
 \section{Zeitunabhängiges System}
 Solch ein System lässt sich durch
-ein Tight-Binding-Modell in zweiter Quantisierung beschreiben
-Aus dem Tight-Binding-Modell ergibt sich der folgende Hamiltonian für das Zeitunabhängige Systems % lautet
+ein Tight-Binding-Modell in zweiter Quantisierung beschreiben.
+Aus dem Tight-Binding-Modell ergibt sich der folgende Hamiltonian für das zeitunabhängige Systems % lautet
 \begin{align}
   H=J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\phantom{\dag}}   +a_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}}\right).
 \end{align}
-Druch die Wahl einer Basis, hier
+Durch die Wahl einer Basis, hier
 \begin{align}
  \ket{1}=\vec{e_1}&  &\ket{2}=\vec{e_2}&  &\ket{2}=\vec{e_2}& &\ket{3}=\vec{e_3}& &\ket{4}=\vec{e_4},
 \intertext{kann über}
@@ -36,17 +37,17 @@ H_ji=\braket{j|H|i}
 bestimmt werden.
 Durch die stationäre Schrödinger Gleichung
 können nun die Eigenwerte $E_i$ und Eigenvektoren $\ket{\phi_i}$  des Hamiltonian bestimmt werden.
-Die Eigenwerte des Zeitunabhängigen Systems sind:
+Die Eigenwerte des zeitunabhängigen Systems sind:
 \begin{align}
   E_1&=-\sqrt{a^2+4J^2}&  &E_2=-a\\
   E_2&=a& &E_4=\sqrt{a^2+4J^2}.
 \end{align}
-Es ergibt sich das in der Abbildung \ref{fig:bandstrucktur} dargestellt Niveauschema.
+So ergibt sich das in der Abbildung \ref{fig:bandstrucktur} dargestellte Niveauschema.
 %Ebenfalls kann die für ein Bandisolator charakteristische Bandlücke von $2a$
 Aus dem Niveauschema können die Resonanzfrequenzen des Systems im Grundzustand entnommen werden.
 (Abbildung)
 
-\section{Zeitabhängige System}
+\section{Zeitabhängiges System}
 Nun soll das System durch ein sich in der Mitte befindendes rotierendes E-Feld erweitert werden, welches
 das zirkular polarisierte Licht simulieren soll (Abbildung:\ref{fig:syst+E}).
 Der Hamiltonian wird dafür um den Term
@@ -58,12 +59,12 @@ erweitert. Dabei beschreibt $\vec E$ das E-Feld
   \vec E=E_0\begin{pmatrix}
 \cos\left(\omega t\right)\\
 \sin\left(\omega t\right)
- \end{pmatrix}
+ \end{pmatrix},
  \intertext{welches die Amplitude $E_0$ besitzt und mit der Frequenz $\omega$ rotiert.}
 \end{align}
-Der Ursprung des System wird einfachshalber in dem Mittelpunkt des Systems gesetzt
-Somit lässt sich $r_i$, der Vektor welcher (ADD) Position zeigt , in Abhänigigkeit von der Gitterkonstante $d$ schreiben.
-Der gesamte Hamiltionian des System nimmt somit die Form
+Der Ursprung des Systems wird einfachshalber in dem Mittelpunkt des Systems gesetzt
+somit lässt sich $r_i$, der Vektor welcher (ADD) Position zeigt, in Abhänigigkeit von der Gitterkonstante $d$ schreiben.
+Der gesamte Hamiltonian des Systems nimmt somit die Form
 \begin{align}
 H=J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\phantom{\dag}}   +a_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}} +\epsilon_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}}\right)\\
 H=J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\phantom{\dag}}   +a_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}} -\vec{E} \vec{r_i}  c_i^\dag c_i^{\phantom{\dag}}\right)\\
@@ -71,7 +72,7 @@ H=J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\p
 an.
 
 
-\section{Floquetmatrix des gestörten System}
+\section{Floquetmatrix des gestörten Systems}
 
 
 
