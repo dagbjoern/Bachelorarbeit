@@ -29,11 +29,13 @@ global hbar=1
 
 Sprungterme=1
 
-Potential=[0.5,2]
-Energien=[0.0001,0.1]
-Frequenz=[1,5,10]
 
-Anzahl=[2,4,5,7,10,15,20,30]      #Anzahl der Perioden
+Potential=[0.5,1,2]
+Energien=[0.05,0.01,0.1]
+Frequenz=[1,3,5,7]
+
+test=0
+Anzahl=[2,5,10,15,20,30]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0

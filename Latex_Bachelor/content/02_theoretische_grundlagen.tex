@@ -27,7 +27,7 @@ In diesem Kapitel werden die Grundlagen der
 Floquet-Theorie vorgestellt, die für diese Arbeit genutzt werden soll,
 um ein periodisches quantenmechanisches System zu beschreiben.
 
-Die zeitliche Entwicklung solch eines Systems ist durch die zeitabhängige Schrödinger-Gleichung  \eqnref{eqn:schrodinger}
+Die zeitliche Entwicklung solch eines Systems ist durch die zeitabhängige Schrödinger-Gleichung  \eqref{eqn:schrodinger}
 gegeben. Wobei der Hamiltonian die folgenden Bedingungen erfüllt.
 Der Hamiltonian ist periodisch in der Zeit
 \begin{align}
@@ -99,6 +99,13 @@ folgt
 \begin{align}
   \Psi(x,t)=K(x,t;x_0,0) \ket{\Psi(x_0,0)}=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}.
 \end{align}
+Mit Hilfe dieses Propagators ist es in dem Floquet-Formalismus einfach zeitlichgemittelte (read) Erwartungswerte von
+Operatoren $\hat O$ zu berechnen.
+Das zeitliche Mittel ist somit
+\begin{align}
+  \bar{\hat O}=...
+\end{align}
+Eine Herleitung dieser Formel ist im Anhang zu finden.
 
 \section{Numerische Methoden}
 Im Folgenden wird eine numerische Methode und zwar die methode der Floquet-Matrix vorgestellt, mit der es möglich ist,

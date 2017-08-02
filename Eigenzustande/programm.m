@@ -34,7 +34,7 @@ Sprungterme=1
 #Potential=[0.1,1,5,10]
 #Energien=[0.0001,1,5,10]
 #Frequenz=[0.1,0.5,1,5,10]
-Potential=[0.5,1.5,2]
+Potential=[0.5,1,2]
 Energien=[0.05,0.01,0.1]
 Frequenz=[1,3,5,7]
 

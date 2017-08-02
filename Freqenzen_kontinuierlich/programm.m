@@ -12,17 +12,17 @@ Sprungterme=1
 global hbar=1
 
 #Potential=[0.0,0.1,0.2,0.5,1.0]
-Potential=[0.5,1.0]
+Potential=[0.5,1,2]
 
 #Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
-Energien=[1.0,2.0]
+Energien=[0.05,0.1]
 
 b = 'cool'
 Gitterkonstante=1
 Phasenverschiebung=0
-Anzahl= 5        #Anzahl der Perioden
+Anzahl= 1        #Anzahl der Perioden
 
-Frequenz=linspace(0,4,1000)
+Frequenz=linspace(0,6,1000)
 Frequenz=round_nur_besser(Frequenz,3)
 
 for i=1:length(Potential)
