@@ -35,7 +35,7 @@ Energien=[0.05,0.01,0.1]
 Frequenz=[1,3,5,7]
 
 test=0
-Anzahl=[2,5,10,15,20,30]      #Anzahl der Perioden
+Anzahl=[1,2,3,4,5,6,7,8,9,10]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0

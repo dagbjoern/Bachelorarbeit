@@ -1,5 +1,5 @@
 # pgf-Backend benutzen
-#backend : pgf
+backend : pgf
 
 # Größe der Zeichenfläche in Zoll
 figure.figsize : 5.78, 4
@@ -19,4 +19,4 @@ pgf.rcfonts : False
 # TeX benutzen
 text.usetex : True
 pgf.texsystem : lualatex
-pgf.preamble : \input{header-matplotlib.tex}
+pgf.preamble : \input{C:/Users/daghe/Desktop/Uni/Bachelorarbeit/header-matplotlib.tex}

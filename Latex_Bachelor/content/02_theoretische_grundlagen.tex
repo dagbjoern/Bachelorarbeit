@@ -97,15 +97,18 @@ in der Zeit zu propagieren.
 Durch Anwendung von \eqref{eqn:zeitoperator} auf \eqref{eqn:super}
 folgt
 \begin{align}
-  \Psi(x,t)=K(x,t;x_0,0) \ket{\Psi(x_0,0)}=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}.
+  \Psi(x,t)=K(x,t;x_0,0) \ket{\Psi(x_0,0)}=\sum_\alpha c_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}. \label{eqn:psi_t}
 \end{align}
-Mit Hilfe dieses Propagators ist es in dem Floquet-Formalismus einfach zeitlichgemittelte (read) Erwartungswerte von
+!!!!! in die Ergebnisse !!!!! Mit Hilfe dieses Propagators ist es in dem Floquet-Formalismus einfach zeitlichgemittelte (read) Erwartungswerte von
 Operatoren $\hat O$ zu berechnen.
-Das zeitliche Mittel ist somit
+Das zeitliche Mittel ist gegeben durch
 \begin{align}
-  \bar{\hat O}=...
+  \bar{\hat O}= \frac{1}{T}\int_0^T \braket{\Psi(t)|O|\Psi(t)}
+\intertext{Durch Einsetzen von \eqref{eqn:psi_t} und \eqref{eqn:fourier} ergibt sich nach Ausführung der Integration}
+ \bar{\hat O}= \sum_\alpha \lvert c_\alpha \rvert^2  \sum_{-\infty}^{\infty} c_\alpha^n(x)^\dag \hat{O} c_\alpha^n (x)^{\phantom{\dag}}.
 \end{align}
-Eine Herleitung dieser Formel ist im Anhang zu finden.
+
+Eine Herleitung dieser Formel ist im Anhang zu finden.??
 
 \section{Numerische Methoden}
 Im Folgenden wird eine numerische Methode und zwar die methode der Floquet-Matrix vorgestellt, mit der es möglich ist,
@@ -127,7 +130,7 @@ Diese lautet:
 \end{align}
 mit
 \begin{align}
-H^{m-n}=\frac{1}{T}\int_0^T \mathrm{d}t H(T) \exp\left(-\mathrm{i}(m-n)\omega t\right).
+H^{m-n}=\frac{1}{T}\int_0^T \mathrm{d}t H(t) \exp\left(-\mathrm{i}(m-n)\omega t\right).
 \end{align}
 Durch Lösen der Eigenwertgleichung
 \begin{align}
@@ -135,6 +138,8 @@ Durch Lösen der Eigenwertgleichung
 \end{align}
 folgen die Quasieenergien $\epsilon_{\alpha,n}$ und die Eigenvektoren $\ket{\epsilon_{\alpha,n}}$.
 Diese Quasieenergien gehorchen den periodischen Bedingungungen aus \eqref{eqn:epsilon_n}.
+% Um aus den Eigenvektoren die Quasiezustände berechnen zu können,
+% werden die Komponenten der Eigenvektoren, mit
 
 
 \section{Inverser Faraday Effekt}
