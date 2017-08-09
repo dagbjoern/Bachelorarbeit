@@ -1,5 +1,7 @@
 #addpath('Matlab_funktionen')
 addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
+mkdir Parameter
+mkdir build
 
 
 function En(x)

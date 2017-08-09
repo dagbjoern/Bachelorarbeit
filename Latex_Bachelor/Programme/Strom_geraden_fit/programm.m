@@ -1,6 +1,8 @@
 
 #addpath('Matlab_funktionen')
 addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
+mkdir Parameter
+mkdir build
 
 
 function En(x)
@@ -31,12 +33,12 @@ global hbar=1
 Sprungterme=1
 
 
-Potential=[0.5,1.5,2]
+Potential=[0.5,1,2]
 Energien=[0.05,0.1]
-Frequenz=linspace(0,10,150)
+Frequenz=linspace(0,1,100)
 Frequenz=round(Frequenz*10000)/10000
 Frequenz*10000
-Anzahl=[5,5]      #Anzahl der Perioden
+Anzahl=[50]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0

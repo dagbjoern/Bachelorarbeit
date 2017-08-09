@@ -2,149 +2,317 @@
 \label{theo}
 Dieses Kapitel beschäftigt sich mit den
 theoretischen Grundlagen die für diese Arbeit benötigt
-werden. Zu Beginn soll der Inverse Faraday Effekt
-kurz beschrieben  (ADD) und danach die Floquet-Theorie
-am Ende wird ein numerische Methode vorgestellt,
-um die zuvor beschriebene Gleichung zu lösen.
+werden. Zunächst werden
+Quantenmechnaischen Postulate genannt,
+die hier Verwendung finden.
+Darauffolgend wird eine Mehtode dargellegt
+um den inverse Faraday Effekt in Metallen
+zu beschreiben. Schließlich wird versucht
+die gewonnene Erkenntisse über den
+IFE auf Isolatoren zu übertragen.
 
-\section{Schrödingergleichung}
-Die  zeitliche Entwicklung eines quantenmechanischen Systems ist durch die
-zeitabhängige Schrödinger-Gleichung
+Abschießend wird eine Einführung in
+die Floquet Theorie, mit der es möglich
+ist periodische Quantenmechanische Systeme
+zu beschreiben, gegeben
+und eine numerische Methode vorgestellt,
+um die, in der Floquet Theorie beschriebenen,
+Probleme(/Gleichungen)  zu lösen.
+
+\section{Postulate der Quantenmechanik}
+In der Quantenmechanik wird
+ein Zustand eines Systems durch seine Wellenfunktion $\ket{\Psi}$
+beschrieben. Die zeitliche Enwicklung solch
+eines quantenmechanischen Systems ist durch die
+zeitabhängige Schrödingergleichung
 \begin{align}
-\mathrm{i}\hbar \ket{\dot{\Psi(x,t)}}=  H(x,t) \ket{\Psi(x,t)}. \label{eqn:schrodinger}
+\mathrm{i}\hbar \ket{\dot{\Psi(\vec{x},t)}}=  H(\vec{x},t) \ket{\Psi(\vec{x},t)} \label{eqn:schrodinger}
+\end{align}
+mit der Hamiltonoperator $H(\vec{x},t)$
+gegeben.
+Für ein zeitunabhängigen Hamiltonoperator wird durch
+Seperation der Variablen
+\begin{align}
+  \Psi(x,t)=f(t)\Phi(x)
+\end{align}
+die stationäre Schrödingergleichung
+\begin{align}
+\hat H \ket{\Phi(x)}_n=E_n\ket{\Phi(x)}_n \label{eqn:stationSG}
+\end{align}
+mit den Eigenenergie $E_n$ und dem
+Eigenzuständen $\ket{\Phi(x)}_n$
+hergleitet.
+??Für den zeitabhängigen Teil
+\begin{align}
+\symup{i}\hbar\frac{\partial}{\partial t}f(t)=Ef(t)
+\end{align}
+??
+Die Wahrscheinlichkeit $P$ für eine
+Wellenfunktion $\ket{\Psi}$ in einem
+Zustand $\ket{\phi}$ ist
+durch
+\begin{align}
+  P=\lvert\braket{\phi\vert\Psi}\rvert^2
 \end{align}
 gegeben.
-Durch Trennung der Variable kann die Stationäre Schrödingergleichung
+?Die? Observablen des Systems werden durch hermitesche
+Operatoren dargestellt.
+Der Erwartungswert $\braket{O}$ solch einer Observablen zu
+dem Operator $O$
+ist durch
 \begin{align}
-\hat H \ket{\Phi}=E\ket{\Phi}
+\braket{O}=\braket{\Psi\lvert O\rvert\Psi}
 \end{align}
-hergleitet werden
-\section{Tight-Binding Modell?}
+definiert.
+\cite{schwabl}
 
-\section{Floquet-Theorie}
-(READ)
-In diesem Kapitel werden die Grundlagen der
-Floquet-Theorie vorgestellt, die für diese Arbeit genutzt werden soll,
-um ein periodisches quantenmechanisches System zu beschreiben.
 
-Die zeitliche Entwicklung solch eines Systems ist durch die zeitabhängige Schrödinger-Gleichung  \eqref{eqn:schrodinger}
-gegeben. Wobei der Hamiltonian die folgenden Bedingungen erfüllt.
-Der Hamiltonian ist periodisch in der Zeit
+\section{Inverser Faraday Effekt}
+Der Inverse Faraday Effekt beschreibt die Entstehung eines Kreisstromes
+in Materie durch Bestrahlung mit zirkularpolarisiertem Licht.
+Die dabei entstehende Magnetisierung der Materie kann gegebenenfalls
+auch nach Bestrahlung permanent erhalten bleiben.
+
+Hier wird zunächst eine Herleitung des inversen Faraday Effekt in Metallen
+dargelegt und im Anschluss versucht die Ergebnisse auf einen Isolators
+zu übertragen.
+
+Es wird davon ausgegangen, dass die Wechselwirkung primär zwischen dem
+oszillierenden elektrischen Feld der Welle
 \begin{align}
-  H(x,t)=H(x,t+T)
-\intertext{und lässt sich schreiben als}
-H(x,t)&=H_0(x)+V(x,t)  &\text{mit}&   &V(x,t)=V(x,t+T)
+  E(x,t)=\hat{E}\exp{\left(\symup{i}kr-\symup{i}\omega t\right)}
 \end{align}
-Der Hamiltonian besteht also aus einem ungestörten Anteil $H_0(x)$ und einer in der Zeit periodischen
-Störung $V(x,t)$.
-
-Das Floquet-Theorem besagt nun, dass es Zustände
- $\ket{\Psi_{\alpha}(x,t)}$ gibt, die Lösungen
- von \eqref{eqn:schrodinger} sind.
-Diese Lösungen haben die Form
+und den Elektronen stattfindet.
+Des weiteren wird ein wechselwirkungsfreies Elektronenplasma angenommen und quantenmechanische Effekte vernachlässigt.
+Für die Bestimmung der Stromdichte $j$,
+die durch zirkualarpolarisiertes Licht mit der Frequenz $\omega$ und
+der Amplitude $\hat{E}$ des elektrischen Feldes entsteht, dient die Kontinuitätsgleichung
 \begin{align}
-\ket{\Psi(x,t)_\alpha}=\exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}.\label{eqn:psi_a}
-\intertext{Dabei ist $\ket{\Phi_\alpha(x,t)}$ eine sogenannte Floquetmode und
-unterliegt der periodisch Bedingung}
-\ket{\Phi_\alpha(x,t)}=\ket{\Phi_\alpha(x,t+T)}.
+  \frac{\partial}{\partial t}n +\nabla(nv), \label{eqn:konti}
 \end{align}
-Das $\epsilon_\alpha$ ist ein realer Parameter und wird auch charakteristischer Exponent oder Floquet Exponent genannt.
-Mit Hilfe von \eqref{eqn:psi_a} lässt sich die Schrödinger-Gleichung \eqref{eqn:schrodinger}
-in die Form \eqref{eqn:floquetgl.}
+mit der Elektronendichte $n$ und der Geschwindigkeit $v$,
+der Ausgangspunkt.
+Wobei die Geschwindigkeit $v$ über den Zusammenhang
 \begin{align}
-\mathcal{H}(x,t)\ket{\Phi_\alpha(x,t)}=\epsilon_\alpha \ket{\Phi_\alpha(x,t)} \label{eqn:floquetgl.}
+  j=env=\sigma E
+\end{align}
+mit der Stromdichte $j$, dem elektrischen Feld $E$ und
+der Leitfähigkeit des bestrahlten Materials $\sigma$.\\
+verknüpft ist.
+Eine Größe $a$ lässt sich unter Betrachtung von zwei unterschiedlichen Zeitskalen darstellen als
+\begin{align}
+  a=\braket{a}+\delta a,
+\end{align}
+mit $\braket{a}$ dem zeitlichen Mittelwert der Größe und
+$\delta a$ dem oszillierenden Anteil in Zeitenheiten des elektrischen Feldes.
+
+Wird diese Annahme auf die Größen der Kontinuitätsgleichung \eqref{eqn:konti}
+angewendet, kann ein Ausdruck für die entstehende Magnetisierung $M$
+\begin{align}
+  M=-\frac{\symup{i}}{4 \symup{e}\braket{n}\omega }\left(\sigma^*\hat{E}^* \times \sigma\hat{E}\right).\label{eqn:magnet}
+\end{align}
+hergeleitet werden.
+Aus dem Zusammenhang
+\begin{align}
+\braket{j}=\nabla\times M
+\end{align}
+ergibt sich der mittlere Strom $\braket{j}$
+der für die Magnetisierung $M$ verantwortlich ist.
+Für den Fall einer zirkularpolarisierten Welle
+ mit der Ausbreitungsrichtung in $e_z$, gilt
+\begin{align}
+  \hat E \times \hat{E}^*=\pm\symup{i}\lvert E\rvert^2\cdot e_z.
+\end{align}
+Durch Einsetzen der Leitfähigkeit
+für ein wechselwirkungsfreies Elektronenplasma
+\begin{align}
+\sigma=\frac{\symup{i}\braket{n}\symup{e}^2}{m \omega}
+\end{align}
+in die Gleichung \eqref{eqn:magnet}
+ergibt sich die Magnetisierung in einem Metall,
+welches mit zirkular polarisiertem
+Licht in $e_z$-Richtung
+bestrahlt wird, zu
+\begin{align}
+  M=\pm\frac{\symup{i} \epsilon_0 \symup{e} \omega_\mathrm{p}^2}{4m\omega^3}\lvert\hat{E}\rvert^2 e_z
+\intertext{mit der Plasmafrequenz}
+\omega=\frac{\braket{n}\symup{e}^2}{m\epsilon_0}^{1/2}.
+\end{align}
+Es ist eine antiproportionalität
+zur dritten Potenz in \omega
+und eine quadratische Abhänigkeit in $\hat{E}$
+für die Magnetierung und somit auch den Strommittelwert
+zu erkennen.
+
+Um eine Vorraussage zu dem Abhängigkeiten, die
+bei dem IFE in einem Bandisolatoren auftreten,
+zu treffen, wird die Leitfähigkeit
+eines Isolators
+\begin{align}
+  \sigma=\omega
+\end{align}
+ebenfalls in die Gleichung \eqref{eqn:magnet}
+eingesetzt.
+Für die Magnetisierung in einem Bandisolator
+ergibt sich
+\begin{align}
+  M=.
+\end{align}
+Es zeigt sich,
+dass der Strommittelwert und die
+Magnetisierung, erzeugt durch IFE in einem Isolator, linear
+mit der Frequenz \omega und
+quadratische mi E-Feld-Amplitude besitzt.
+
+
+
+
+\section{Floquet Theorie}
+In diesem Abschnitt werden die Grundlagen der
+Floquet Theorie vorgestellt. Diese kann genutzt werden,
+um ein in der Zeit periodisches quantenmechanisches System zu beschreiben.
+
+Die zeitliche Entwicklung für so ein System
+ist durch die zeitabhängige
+Schrödingergleichung  \eqref{eqn:schrodinger}
+gegeben. Wobei der Hamiltonian die Bedingungen
+\begin{align}
+  &H(t)=H(t+T),
+\intertext{und}
+  H(t)&=H_0+V(t)  &\text{mit}&   &V(t)=V(t+T)
+\end{align}
+erfüllen muss.
+Der Hamiltonian ist also periodisch in der Zeit und
+und kann als Summe von einem
+ungestörten Anteil $H_0$
+ und einer in der Zeit periodischen
+Störung $V(t)$ geschrieben werden.
+
+Das Floquet-Theorem besagt, dass Zustände
+ $\ket{\Psi_{\alpha}(t)}$ exsitieren,
+welche Lösungen
+von \eqref{eqn:schrodinger} sind, die
+die Form
+\begin{align}
+\ket{\Psi(t)_\alpha}=\exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(t)}.\label{eqn:psi_a}
+\intertext{bestizen(haben). Dabei ist $\ket{\Phi_\alpha(x,t)}$ eine sogenannte Floquetmode und
+unterliegt der periodischen Bedingung}
+\ket{\Phi_\alpha(t)}=\ket{\Phi_\alpha(t+T)}.
+\end{align}
+Der Parameter $\epsilon_\alpha$ ist real und
+wird auch charakteristischer Exponent oder
+Floquet Exponent genannt.
+Mit Hilfe von \eqref{eqn:psi_a} lässt sich
+die Schrödingergleichung \eqref{eqn:schrodinger}
+in die Form
+\begin{align}
+\mathcal{H}(t)\ket{\Phi_\alpha(t)}=\epsilon_\alpha \ket{\Phi_\alpha(t)} \label{eqn:floquetgl.}
 \intertext{bringen, wobei der Operator }
-  \mathcal{H}(x,t)=\left( H(x,t)-\mathrm{i}\hbar\frac{\partial}{\partial t} \right).
+  \mathcal{H}(t)=\left( H(t)-\mathrm{i}\hbar\frac{\partial}{\partial t} \right).
 \end{align}
-ist. Durch die Ähnlichkeit von der Gleichung \eqref{eqn:floquetgl.} zu der stationären Schrödinger
-werden $\epsilon_\alpha$ und $\phi_\alpha$ auch Quasieeigenenergie und Quasieigenzustand genannt.
+ist. Durch die Ähnlichkeit der Gleichung
+\eqref{eqn:floquetgl.} zu der stationären
+Schrödingergleichung
+werden $\epsilon_\alpha$ und $\phi_\alpha$
+auch als Quasieigenenergien und Quasieigenzustände,
+im Folgendem Abgekürzt mit QEE und QEZ,
+bezeichnet.
 
-Des Weiteren ist
+Darüber hinaus ist
 \begin{align}
-  \ket{\Phi_{\alpha '}(x,t)}=\ket{\Phi_\alpha(x,t)}\exp(\mathrm{i}n\omega t) \equiv \ket{\Phi_{\alpha n}(x,t)}
+  \ket{\Phi_{\alpha '}(t)}=\ket{\Phi_\alpha(t)}\exp(\mathrm{i}n\omega t) \equiv \ket{\Phi_{\alpha n}(t)}
 \end{align}
-ebenfalls eine Lösung von \eqref{eqn:floquetgl.},  wobei $n$ einer ganzen Zahl $n=\pm1,\pm2,\pm3 \dots$
-und $\omega$ die Frequenz der Störung ist. Dies hat aber eine Änderung der Quasienergie in der Form
-\begin{align*}
+ebenfalls eine Lösung von \eqref{eqn:floquetgl.},
+wobei $n$ einer ganzen Zahl $n=\pm1,\pm2,\pm3 \dots$
+und $\omega$ der Frequenz der Störung entspricht.
+Dies hat eine Änderung der Quasienergie in der Form
+\begin{align}
     \epsilon_\alpha \rightarrow \epsilon_{\alpha '}=\epsilon_\alpha+n\hbar \omega\equiv\epsilon_{\alpha n} \label{eqn:epsilon_n}
-\end{align*}
+\end{align}
 zur Folge.
 Durch diese Feststellung ist es
-möglich alle Quasieeigenenergien für unterschiedliche $\alpha$
-in der ersten Brillouin darzustellen, da sich alle weiteren
-Quasieigenenergien über \eqref{eqn:epsilon_n} berechnen lassen.
+möglich, alle Quasieigenenergien
+für unterschiedliche $\alpha$
+in der ersten Brillouin darzustellen,
+da sich alle weiteren
+Quasieigenenergien über \eqref{eqn:epsilon_n}
+berechnen lassen.
 
 
 Die Quasizustände unterliegen der folgenden Orthogonaliätsbedingung
 \begin{align}
-  \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t \int_{\infty}^{\infty} \mathrm{d}x
-   \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}.
+  \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t
+  \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}. \label{eqn:orhto}
 \end{align}
-(ADD)
-Nun die zeitlichen Entwicklung der Floquetmoden
-dargestellt werden.
-Zunächst kann ein Startzustand $\ket{\Psi(0)}$ durch
-Superposition \eqref{eqn:super} von den Floquetmoden (READ) ausgedrückt werden, indem
+\\
+Es folgt die zeitliche Entwicklung
+eines Startzustandes $\ket{\Psi(0)}$
+durch die Floquet Theorie.
+Zunächst wird der Startzustand $\ket{\Psi(0)}$ durch
+die Superposition ??\eqref{eqn:super}?? der Floquetmoden
 \begin{align}
-  \ket{\Psi(x_0,0)}=\sum_\alpha c_a\ket{\Phi_\alpha(x_0,0)},&   &c_\alpha=\braket{\Phi_\alpha|\Psi(0)}.  \label{eqn:super}
+  \ket{\Psi(0)}=\sum_\alpha c_a\ket{\Phi_\alpha(0)}& &\text{mit}&  &c_\alpha=\braket{\Phi_\alpha|\Psi(0)}.  \label{eqn:super}
 \end{align}
+ausgedrückt.
 Durch den Zeitpropagator\footnote{Eine genau Herleitung des Propagators $K$ ist in (REF) zu finden.}
 \begin{align}
-  K(x,t;x_0,0)=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}\bra{\Phi_\alpha(x_0,0)} \label{eqn:zeitoperator}
+  K(t;0)=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(t)}\bra{\Phi_\alpha(0)} \label{eqn:zeitoperator}
 \end{align}
 ist es möglich, den Startzustand \eqref{eqn:super}
 in der Zeit zu propagieren.
 Durch Anwendung von \eqref{eqn:zeitoperator} auf \eqref{eqn:super}
 folgt
 \begin{align}
-  \Psi(x,t)=K(x,t;x_0,0) \ket{\Psi(x_0,0)}=\sum_\alpha c_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(x,t)}. \label{eqn:psi_t}
+  \Psi(t)=K(t;0) \ket{\Psi(0)}=\sum_\alpha c_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha/ \hbar \right)\ket{\Phi_\alpha(t)}. \label{eqn:psi_t}
 \end{align}
-!!!!! in die Ergebnisse !!!!! Mit Hilfe dieses Propagators ist es in dem Floquet-Formalismus einfach zeitlichgemittelte (read) Erwartungswerte von
-Operatoren $\hat O$ zu berechnen.
-Das zeitliche Mittel ist gegeben durch
-\begin{align}
-  \bar{\hat O}= \frac{1}{T}\int_0^T \braket{\Psi(t)|O|\Psi(t)}
-\intertext{Durch Einsetzen von \eqref{eqn:psi_t} und \eqref{eqn:fourier} ergibt sich nach Ausführung der Integration}
- \bar{\hat O}= \sum_\alpha \lvert c_\alpha \rvert^2  \sum_{-\infty}^{\infty} c_\alpha^n(x)^\dag \hat{O} c_\alpha^n (x)^{\phantom{\dag}}.
-\end{align}
-
-Eine Herleitung dieser Formel ist im Anhang zu finden.??
+% !!!!! in die Ergebnisse !!!!! Mit Hilfe dieses Propagators ist es unkomplizit in dem Floquet-Formalismus, zeitlichgemittelte (read) Erwartungswerte von
+% Operatoren $\hat O$ zu berechnen.
+% Das zeitliche Mittel ist gegeben durch
+% \begin{align}
+%   \bar{\hat O}= \frac{1}{T}\int_0^T \braket{\Psi(t)|O|\Psi(t)}
+% \intertext{Durch Einsetzen von \eqref{eqn:psi_t} und \eqref{eqn:fourier} ergibt sich nach Ausführung der Integration}
+%  \bar{\hat O}= \sum_\alpha \lvert c_\alpha \rvert^2  \sum_{-\infty}^{\infty} c_\alpha^n(x)^\dag \hat{O} c_\alpha^n (x)^{\phantom{\dag}}.
+% \end{align}
+%
+% Eine Herleitung dieser Formel ist im Anhang zu finden.??
 
 \section{Numerische Methoden}
-Im Folgenden wird eine numerische Methode und zwar die methode der Floquet-Matrix vorgestellt, mit der es möglich ist,
+Im Folgenden wird eine numerische Methode,
+die Methode der Floquet Matrix, vorgestellt, die es ermöglicht
 die Quasizustände $\Phi_\alpha$ zu berechnen.
 Die Quasizustände $\Phi_\alpha$ können, da es sich um in der Zeit periodische Zustände handelt,
-als Fourierreihe dargestellt werden.
+als Fourierreihe
 \begin{align}
-  \ket{\Phi_{\alpha}(x,t)}=\sum_{n=-\infty}^{\infty} c_{\alpha}^n (x) \label{eqn:fourier}
-  \exp(\mathrm{i}n\omega t).\\
+  \ket{\Phi_{\alpha}(t)}=\sum_{n=-\infty}^{\infty} \exp(\mathrm{i}n\omega t) \ket{c_{\alpha}^n} \label{eqn:fourier}
 \intertext{mit}
- c_\alpha^n(x)=\sum_{k=1}^\infty c_{\alpha,k}^n \ket{\varphi_k(x)} %phi beliebiges orthonomal set auf h_0
+ \ket{c_\alpha^n}=\sum_{k=1}^\infty c_{\alpha,k}^n \ket{\varphi_k} %phi beliebiges orthonomal set auf h_0
 \end{align}
-Dabei ist $\ket{\varphi_k(x)}$ ein beliebiges orthonormales Set auf $H_0$.
+dargestellt werden.
+Hierbei ist $\ket{\varphi_k}$ ein beliebiges
+orthonormales Set auf $H_0$.
 Durch Einsetzen von \eqref{eqn:fourier} in \eqref{eqn:floquetgl.}
-und weiteren Umformungen(ADD) ergibt sich eine Definition für die Floquet-Matrix $\mathcal{H}_\mathrm{F}$.
-Diese lautet:
+und weiteren Umformungen, siehe \cite{haggi},
+ergibt sich eine Definition der Matrixelemente
 \begin{align}
-  \braket{\bra{\varphi_j m}\mathcal{H}_\mathrm{F}\ket{\varphi_k n}}\equiv \braket{\varphi_j|H^{m-n}|\varphi_k} + n\hbar \omega \delta_{n,m}\delta_{j,k}
+  \braket{\bra{\varphi_j m}\mathcal{H}_\mathrm{F}\ket{\varphi_k n}}\equiv \braket{\varphi_j|H^{m-n}|\varphi_k} + n\hbar \omega \delta_{n,m}\delta_{j,k} \label{eqn:H_f}
+\intertext{mit}
+H^{m-n}=\frac{1}{T}\int_0^T \mathrm{d}t H(t) \exp\left(-\mathrm{i}(m-n)\omega t\right) \label{eqn:H_n_m}
 \end{align}
-mit
-\begin{align}
-H^{m-n}=\frac{1}{T}\int_0^T \mathrm{d}t H(t) \exp\left(-\mathrm{i}(m-n)\omega t\right).
-\end{align}
-Durch Lösen der Eigenwertgleichung
+mittels denen sich die Floquet Matrix $\mathcal{H}_\mathrm{F}$ aufstellen lässt.
+Aus der Lösung der Eigenwertgleichung
 \begin{align}
   \mathrm{det}|\mathcal{H}_\mathrm{F}-\epsilon\mathcal{1}|=0
 \end{align}
-folgen die Quasieenergien $\epsilon_{\alpha,n}$ und die Eigenvektoren $\ket{\epsilon_{\alpha,n}}$.
-Diese Quasieenergien gehorchen den periodischen Bedingungungen aus \eqref{eqn:epsilon_n}.
-% Um aus den Eigenvektoren die Quasiezustände berechnen zu können,
-% werden die Komponenten der Eigenvektoren, mit
-
-
-\section{Inverser Faraday Effekt}
-Der Inverse Faraday Effekt beschreibt die Entstehung einer Magnetisierung in Materie bei Bestrahung mit zirkularpolariesiertem Licht.
-Der Inverse Faraday Effekt beschreibt die Enstehung einer Magnetisierung in Materie, die mit zirkularpolariesiertem Licht bestrahlt wird.
-Dabei wird davon ausgegangen, dass die Wechselwirkung primär zwischen dem E-Feld der Welle und den Elektronen stattfindet.
-Es kann durch mehrere Überlegungen gezeigt werden, dass der Strom, der durch das zirkularpolarisierte Licht erzeugt wird, eine quadratische Abhängigkeit
-zu der E-Feld Amplitude besitzt.
+folgen die Quasienergien $\epsilon_{\alpha,n}$ und die Eigenvektoren $\ket{\epsilon_{\alpha,n}}$.
+Diese Quasienergien gehorchen den periodischen Bedingungen aus \eqref{eqn:epsilon_n}.
+Um aus den Eigenvektoren $\ket{\epsilon_{\alpha,n}}$
+die Quasiezustände  $\ket{\Phi_{\alpha}(t)}$
+zu bestimmen, wird die Gleichung \label{eqn:fourier}
+verwendet.
+Die vektorartigen Entwicklungskoeffizienten $\ket{c_\alpha^n}$ können den
+Eigenvektoren der QEE, die sich in der 1. Brillouin
+befinden, entnommen werden.
+Dabei entsprechen die Komponenten
+der Eigenvektor, welche zu der
+$n$-ten Fouiermode gehören,
+den Komponeten $c_{\alpha,k}^n$.

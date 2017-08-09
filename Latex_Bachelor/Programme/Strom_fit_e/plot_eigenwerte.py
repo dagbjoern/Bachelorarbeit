@@ -147,7 +147,7 @@ plt.plot(a,np.sqrt(a**2+4*1**2)+a , '-r', alpha=0.75, label=r'zweite Resonanz')
 plt.plot(a,2*np.sqrt(a**2+4*1**2) , '-r', alpha=0.75, label=r'dritte Resonanz')
 for i in range(np.size(Frequenz)):
     plt.plot(a,a*0+Frequenz[i],'--b')
-plt.xlabel(r'Potenial a')
+plt.xlabel(r'Potential a')
 plt.ylabel(r'Frequenz w')
 plt.ylim(0,6)
 plt.legend(loc='best')
@@ -191,7 +191,7 @@ for a in tqdm(range(np.size(Potential))):
                 Eigenzustande_imagteil=Eigenzustande_imagteil*1j
                 Startzustand=H_0_eigenvektoren[:,0]
                 V_phi=Eigenzustande_realteil+Eigenzustande_imagteil
-                #print('Strommittelwert für Potenial='+ str(Potential[a]/100)+'\nEnergie='+str(Energien[e]/10000)+'\nw = ' + str(Frequenz[f])  ,'Strommittel=',Stromittelwert_Foquet(Startzustand, 1, V_phi))
+                #print('Strommittelwert für Potential='+ str(Potential[a]/100)+'\nEnergie='+str(Energien[e]/10000)+'\nw = ' + str(Frequenz[f])  ,'Strommittel=',Stromittelwert_Foquet(Startzustand, 1, V_phi))
                 I_bar[e]=Stromittelwert_Foquet(Startzustand, 1, V_phi)
                 y_lsode=Erwartungswert(Strom(1),psi_t_lsode,t_lsode)
                 #print('numerischer Wert:', np.sum(y_lsode)/np.size(t_lsode))
@@ -207,14 +207,14 @@ for a in tqdm(range(np.size(Potential))):
                 #print(Erwartungswert(Strom(1),psi_t))
         plt.figure(Figure_Zahler)
         params , cov = curve_fit(quadrat,Energien/10000,np.real(I_bar))
-        plt.plot(Energien/10000,I_bar, '-'+farbe[f] ,alpha=0.25, label=r'$\bar{I}$ für $\omega$='+str(Frequenz[f]))
-        plt.plot(Energien/10000,quadrat(Energien/10000,*params),':'+farbe[f],label=r'Fit $\omega$='+str(Frequenz[f]) )
+        plt.plot(Energien/10000,I_bar, '-'+farbe[f] ,alpha=0.25, label=r'$\langle I \rangle $ für $\omega=$'+str(Frequenz[f]))
+        plt.plot(Energien/10000,quadrat(Energien/10000,*params),':'+farbe[f],label=r'Fit für $\omega=$'+str(Frequenz[f]) )
         #plt.plot(Energien/10000,I_bar_lsode,  alpha=0.25, label=r'Strommittelwert lsode w='+str(Frequenz[f]))
         plt.xlim(np.amin(Energien/10000),np.amax(Energien/10000))
         plt.xlabel(r'Energie $t/ j^{-1}$')
         plt.ylabel(r'Strom $I/c $')
         plt.legend(loc='best')
-    plt.savefig('Plots_mittelwerte/Potenial='+ str(Potential[a]/100)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
+    plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/100)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 
 #         #print(Eigenwerte)
@@ -351,14 +351,14 @@ for a in tqdm(range(np.size(Potential))):
 
 
 
-        #     Erwartete_Eigenwerte=eig_war(Eigenwerte_H_0,Anzahl,Frequenz,value_Potenial)
+        #     Erwartete_Eigenwerte=eig_war(Eigenwerte_H_0,Anzahl,Frequenz,value_Potential)
         #     n=np.size(Eigenwerte)
         #     for i in range(n-1):
         #         plt.plot(Frequenz,Eigenwerte[i],'xb')
         #         plt.plot(Frequenz,Erwartete_Eigenwerte[i],'+r')
         #     plt.plot(Frequenz,Eigenwerte[n-1],'xb',label=r'E='+str(value_Energie/100))
         #     plt.plot(Frequenz,Erwartete_Eigenwerte[n-1],'+r',label=r'Erwartete_Eigenwerte')
-        #     print('Potential',value_Potenial/100)
+        #     print('Potential',value_Potential/100)
         #     print('value_Energie',value_Energie/100)
         #     print('Frequenz=', Frequenz)
         #     print('Erwartete_Eigenwerte',np.sort(Erwartete_Eigenwerte))

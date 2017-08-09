@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\usepackage{tikz}
+\usepackage{mathpazo}
+
+%------------------------------------------------------------------------------
+%------------------------------ Sprache und Schrift: --------------------------
+%------------------------------------------------------------------------------
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}  % -- becomes en-dash etc.
+
+% german language
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+
+% for english abstract and english titles in the toc
+\setotherlanguages{english}
+
+% intelligent quotation marks, language and nesting sensitive
+\usepackage[autostyle]{csquotes}
+
+% microtypographical features, makes the text look nicer on the small scale
+\usepackage{microtype}
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+
+% nice, small fracs for the text with \sfrac{}{}
+\usepackage{xfrac}
+% Enable Unicode-Math and follow the ISO-Standards for typesetting math
+\usepackage[
+  math-style=ISO,
+  bold-style=ISO,
+  sans-style=italic,
+  nabla=upright,
+  partial=upright,
+]{unicode-math}
+\setmathfont{Latin Modern Math}
+\usetikzlibrary{decorations.pathreplacing}
+
+
+\usepackage[
+  locale=DE,
+  separate-uncertainty=true,
+  per-mode=symbol-or-fraction,
+]{siunitx}
+\sisetup{math-micro=\text{µ},text-micro=µ}
+
+\PreviewEnvironment{tikzpicture}
+% \newcounter{row}
+% \newcounter{col}
+
+
+\begin{document}
+\begin{tikzpicture}
+\draw (1,2) -- (-1,2)   node[left] {$\sqrt{a^2+4J^2}$};
+\draw (1,1.2) -- (-1,1.2)   node[left] {$a$};
+\draw (1,-1.2) -- (-1,-1.2) node[left] {$-a$};
+\draw (1,-2) -- (-1,-2) node[left] {$-\sqrt{a^2+4J^2}$};
+\draw [dashed] (1,0) -- (-1,0) node[left] {$0$};
+\draw[decorate, decoration={brace},xshift=2ex]  (1,-1.2) -- node[right] {$\omega_{\mathrm{res}_1}$}  (1,-2);
+\draw[decorate, decoration={brace},xshift=2ex]  (2,1.2) -- node[right] {$\omega_{\mathrm{res}_2}$}  (2,-2);
+\draw[decorate, decoration={brace},xshift=2ex]  (3,2) -- node[right] {$\omega_{\mathrm{res}_3}$}  (3,-2);
+%\node[below = 0.25cm] at (3,3) {$\vec{E}$};
+\end{tikzpicture}
+\end{document}
