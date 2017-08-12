@@ -31,12 +31,14 @@ global hbar=1
 
 Sprungterme=1
 
-Potential=[0.5,1]
-Energien=[0.05,0.1]
+
+Potential=[1,2]
+Energien=[0.01,0.028]
+
 Frequenz=linspace(0,1,50)
 Frequenz=round(Frequenz*10000)/10000
 
-Anzahl=[5,10,20,50]      #Anzahl der Perioden
+Anzahl=[3,10,20,50]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0

@@ -271,6 +271,7 @@ for a in tqdm(range(np.size(Potential))):
 #    plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2),hilfe,'k-')
     plt.legend(loc='best')
     plt.xlim(0,grenze[a])
+    plt.tight_layout()
     plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/10000)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 

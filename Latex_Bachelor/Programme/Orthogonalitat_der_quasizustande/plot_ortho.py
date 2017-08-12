@@ -89,9 +89,11 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.plot(Anzahl_N, werte_1[2,:].real,'x-g',alpha=0.5,label=r'$\langle\Phi_1|\Phi_3\rangle$' )
             plt.plot(Anzahl_N, werte_1[3,:].real,'x-b',alpha=0.5,label=r'$\langle\Phi_1|\Phi_4\rangle$' )
             plt.ylim(-1.5,1.5)
+            plt.xlim(1,7)
             plt.legend(loc='best')
             plt.xlabel('N')
             plt.ylabel(r'$\langle\Phi_1|\Phi_i\rangle$')
+            plt.tight_layout()
             plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_fur_phi1_phi_i.pdf')
             #plt.savefig('test.pdf')
             plt.close()
@@ -109,6 +111,8 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.legend(loc='best')
             plt.xlabel('N')
             plt.ylabel(r'$\langle\Phi_2|\Phi_i\rangle$')
+            plt.xlim(1,7)
+            plt.tight_layout()
             plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_fur_phi2_phi_i.pdf')
             plt.close()
 
@@ -124,6 +128,8 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.xlabel('N')
             plt.legend(loc='best')
             plt.ylabel(r'$\langle\Phi_3|\Phi_i\rangle$')
+            plt.xlim(1,7)
+            plt.tight_layout()
             plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_fur_phi3_phi_i.pdf')
             plt.close()
 
@@ -138,8 +144,10 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.ylim(-1.5,1.5)
             plt.legend(loc='best')
             plt.xlabel('N')
+            plt.xlim(1,7)
             plt.ylabel(r'$\langle\Phi_4|\Phi_i\rangle$')
             plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Frequenz='+ str(Frequenz[f])+'/Plot_fur_phi4_phi_i.pdf')
+            plt.tight_layout()
             plt.close()
 
 

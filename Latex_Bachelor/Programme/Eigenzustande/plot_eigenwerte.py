@@ -99,8 +99,11 @@ t_lsode=np.genfromtxt('build/Zeit_lsode.txt')
 Frequenz = Frequenz_1000/1000
 Figure_Zahler = 1
 
+if not os.path.exists('Plots/'):
+    os.makedirs('Plots/')
 
-a=np.linspace(0,np.amax(Potential)/100,100)
+
+a=np.linspace(0,2,100)
 plt.figure(Figure_Zahler)
 Figure_Zahler=Figure_Zahler+1
 #plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
@@ -178,21 +181,24 @@ for a in tqdm(range(np.size(Potential))):
                 plt.figure(Figure_Zahler)
                 Figure_Zahler=1+Figure_Zahler
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-                plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
-                plt.plot(t, betragsquadrad(phi[:, 0], psi_t,t), '-r', alpha=0.25, label=r'Position 1')
-                plt.plot(t, betragsquadrad(phi[:, 1], psi_t,t), '-y', alpha=0.25, label=r'Position 2')
-                plt.plot(t, betragsquadrad(phi[:, 2], psi_t,t), '-g', alpha=0.25, label=r'Position 3')
-                plt.plot(t, betragsquadrad(phi[:, 3], psi_t,t), '-b', alpha=0.25, label=r'Position 4')
-                plt.plot(t_lsode, betragsquadrad(phi[:, 0], psi_t_lsode,t_lsode), ':r', alpha=0.75, label=r'Pos 1 lsode ')
-                plt.plot(t_lsode, betragsquadrad(phi[:, 1], psi_t_lsode,t_lsode), ':y', alpha=0.75, label=r'Pos 2 lsode')
-                plt.plot(t_lsode, betragsquadrad(phi[:, 2], psi_t_lsode,t_lsode), ':g', alpha=0.75, label=r'Pos 3 lsode')
-                plt.plot(t_lsode, betragsquadrad(phi[:, 3], psi_t_lsode,t_lsode), ':b', alpha=0.75, label=r'Pos 4 lsode')
+                #plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
+                plt.plot(t, betragsquadrad(phi[:, 0], psi_t,t), '-',color=[1.0, 0.5, 0.25], alpha=0.3, label=r'$\langle 1 \vert \Psi \rangle$')
+                plt.plot(t, betragsquadrad(phi[:, 1], psi_t,t), '-g', alpha=0.3, label=r'$\langle 2 \vert \Psi\rangle$')
+                plt.plot(t, betragsquadrad(phi[:, 2], psi_t,t), '-b', alpha=0.3, label=r'$\langle 3 \vert \Psi \rangle')
+                plt.plot(t, betragsquadrad(phi[:, 3], psi_t,t), '-r', alpha=0.3, label=r'$\langle 4 \vert \Psi \rangle$')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 0], psi_t_lsode,t_lsode), ':', color=[1.0, 0.5, 0.25] , alpha=1, label=r'$\langle 1 \vert \Psi\rangle_{l}$')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 1], psi_t_lsode,t_lsode), ':g', alpha=1, label=r'$\langle 2 \vert \Psi \rangle_{l}$ ')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 2], psi_t_lsode,t_lsode), ':b', alpha=1, label=r'$\langle 3 \vert \Psi \rangle_{l}$')
+                plt.plot(t_lsode, betragsquadrad(phi[:, 3], psi_t_lsode,t_lsode), ':r', alpha=1, label=r'$\langle 4 \vert \Psi \rangle_{l}$')
                 for n in range(int(np.amax(t)/Periodendauer)+1):
-                    plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5)
-                plt.xlabel(r'Zeit $t / J^{-1}$')
-                plt.ylabel(r'$\lvert\langle e_i \vert \Psi (t) \rangle\rvert $')
+                    plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5,alpha=0.25)
+                plt.plot(T*0+76,T,'-k',linewidth=2)
+                plt.xlabel(r'Zeit $t  /  \frac{\hbar}{J}$')
+                plt.ylabel(r'$P(t)$')
                 plt.xlim(np.amin(t),np.amax(t))
-                plt.legend(loc='best')
+                plt.ylim(0,0.5)
+                plt.legend(loc='lower right')
+                plt.tight_layout()
                 plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Besetzungen(t)_mit_Floquet_N='+str(int(Anzahl_N[l]))+ 'w=' + str(Frequenz[f]) + '.pdf')
                 plt.close()
 

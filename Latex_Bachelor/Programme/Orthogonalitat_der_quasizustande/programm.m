@@ -32,9 +32,9 @@ global hbar=1
 Sprungterme=1
 
 
-Potential=[0.5,1,2]
-Energien=[0.05,0.01,0.1]
-Frequenz=[1,3,5,7]
+Potential=[1,2]
+Energien=[0.028,0.03]
+Frequenz=[1,1.549,3]
 
 test=0
 Anzahl=[1,2,3,4,5,6,7,8,9,10]      #Anzahl der Perioden

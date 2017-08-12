@@ -17,18 +17,17 @@ global hbar=1
 
 
 #Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
-Potential=[0.5,1.0,2.0]
-Energien=linspace(0,6,150)
+Potential=[1.0,2.0]
+Energien=linspace(0,5,100)
 Energien=round(Energien*10000)/10000
-Anzahl=[1,3,6,10]       #Anzahl der Perioden
+Anzahl=[1,3,4,5,6]       #Anzahl der Perioden
 
 
 b = 'cool'
-Gitterkonstante=1
+global Gitterkonstante=1
 Phasenverschiebung=0
-
 #Frequenz=linspace(0,4,1000)
-Frequenz=[1.0,2.0]
+Frequenz=[1.0,1.5]
 
 #Frequenz=round_nur_besser(Frequenz,3)
 fortschritt=0

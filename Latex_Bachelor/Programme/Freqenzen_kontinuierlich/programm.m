@@ -17,14 +17,15 @@ global hbar=1
 Potential=[0.5,1]
 
 #Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
-Energien=[0.1,1]
+Energien=[1,0.028]
 
 b = 'cool'
-Gitterkonstante=1
+global Gitterkonstante=1
+
 Phasenverschiebung=0
 Anzahl= 1        #Anzahl der Perioden
 test=0
-Frequenz=linspace(0,6,1000)
+Frequenz=linspace(0,6,100)
 Frequenz=round_nur_besser(Frequenz,3)
 
 for i=1:length(Potential)
@@ -40,7 +41,7 @@ e=eig(H_0)
   H_0=Hamilton_0(Sprungterme,[Energie_1,Energie_2,Energie_3,Energie_4]); % 1 für Energien in diagonale
 
   H_0_e=eig(H_0)
-  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*100) 'a.txt'],'H_0_e')
+  save(['Parameter/eigenwerte_von_H_0_fur_a=' num2str(Potential(i)*10000) 'a.txt'],'H_0_e')
 #function H_f=H_F(H_0,E,phi,a,Anzahl,frequenz)
 #function H_f=H_F(H_0,E,phi,r1,r2,Anzahl)
     for k = 1:length(Energien)
@@ -64,20 +65,20 @@ e=eig(H_0)
       end
       real_V=real(V);
       imag_V=imag(V);
-      #save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'real_V')
-      #save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '_w=' num2str(Frequenz(l)*1000) '.txt'],'imag_V')
+      #save(['build/Realpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '.txt'],'real_V')
+      #save(['build/Imagpart_Eigenvektoren_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '_w=' num2str(Frequenz(l)*10000) '.txt'],'imag_V')
       Parameter=[Gitterkonstante,Anzahl,Phasenverschiebung];
       % assignin ('base',['eigenwerte_E' num2str(k)],e);
     end
-    save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '.txt'],'eigenwerte')
-    save(['Parameter/Parameter_fur_a=' num2str(Potential(i)*100) '_E=' num2str(Energien(k)*100) '.txt'],'Parameter')
+    save(['build/Eigenwerte_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '.txt'],'eigenwerte')
+    save(['Parameter/Parameter_fur_a=' num2str(Potential(i)*10000) '_E=' num2str(Energien(k)*10000) '.txt'],'Parameter')
   end
 end
 
 
-Energien=transpose(Energien*100);
-Potential=transpose(Potential*100);
-Frequenz=transpose(Frequenz*1000);
+Energien=transpose(Energien*10000);
+Potential=transpose(Potential*10000);
+Frequenz=transpose(Frequenz*10000);
 save('build/Durchlaufende_Energien.txt','Energien')
 save('build/Durchlaufende_Potentiale.txt','Potential')
 save('build/Durchlaufende_Frequenzen.txt','Frequenz')

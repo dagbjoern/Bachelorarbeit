@@ -169,6 +169,10 @@ I_bar=Energien*0 #array der länge von E erschaffen
 farbe=np.array(['r','b','g','m'])
 
 
+
+
+
+
 for a in tqdm(range(np.size(Potential))):
     H_0_eigenvektoren=np.genfromtxt('Parameter/eigenvektoren_von_H_0_fur_a='+str_Potential[a]+'.txt')
     H_0_Eigenwerte=np.genfromtxt('Parameter/eigenwerte_von_H_0_fur_a='+str_Potential[a] +'.txt')
@@ -207,13 +211,14 @@ for a in tqdm(range(np.size(Potential))):
                 #print(Erwartungswert(Strom(1),psi_t))
         plt.figure(Figure_Zahler)
         params , cov = curve_fit(quadrat,Energien/10000,np.real(I_bar))
-        plt.plot(Energien/10000,I_bar, '-'+farbe[f] ,alpha=0.25, label=r'$\langle I \rangle $ für $\omega=$'+str(Frequenz[f]))
-        plt.plot(Energien/10000,quadrat(Energien/10000,*params),':'+farbe[f],label=r'Fit für $\omega=$'+str(Frequenz[f]) )
+        plt.plot(Energien/10000,I_bar, '-'+farbe[f] ,alpha=0.25, label=r'$\omega=$'+str(Frequenz[f]))
+        plt.plot(Energien/10000,quadrat(Energien/10000,*params),':'+farbe[f],label=r'$\omega=$'+str(Frequenz[f]) + ' fit')
         #plt.plot(Energien/10000,I_bar_lsode,  alpha=0.25, label=r'Strommittelwert lsode w='+str(Frequenz[f]))
         plt.xlim(np.amin(Energien/10000),np.amax(Energien/10000))
-        plt.xlabel(r'Energie $t/ j^{-1}$')
-        plt.ylabel(r'Strom $I/c $')
+        plt.xlabel(r'$E_0/ \frac{J}{d\symup{e}}$')
+        plt.ylabel(r'$\bar{\langle I \rangle} / \frac{J\symup{e}}{\hbar} $')
         plt.legend(loc='best')
+    plt.tight_layout()
     plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/100)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 

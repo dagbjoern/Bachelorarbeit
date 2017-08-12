@@ -90,8 +90,9 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.plot(Frequenz, werte_1[3,:].real,'-b',alpha=0.5,label=r'$\langle\Phi_1|\Phi_4\rangle$' )
             plt.ylim(-1.5,1.5)
             plt.legend(loc='best')
-            plt.xlabel(r'Frequenz')
+            plt.xlabel(r'$\omega/ \frac{J}{\hbar}$')
             plt.ylabel(r'$\langle\Phi_1|\Phi_i\rangle$')
+            plt.tight_layout()
             plt.savefig('Plots/Potential=' + str(Potential[a]/10000) + '/Energie='+str(Energien[e]/10000) +'/Anzahl='+ str_Anzahl_N[l]+'/Plot_fur_phi1_phi_i.pdf')
             plt.close()
 

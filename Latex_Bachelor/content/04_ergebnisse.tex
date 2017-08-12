@@ -1,4 +1,5 @@
 \chapter{Ergebnisse}
+\label{sec:ergebnisse}
 In diesem Kapitel werden zu Beginn
 Eigenschaften der Floquet Theorie an dem Modell überprüft.
 Weiterhin wird die zeitliche Entwicklung
@@ -7,51 +8,70 @@ Floquet Formalismus mit der einer numerischen Lösung der
 Schrödingergleichung verglichen.
 Auf zwei unterschiedliche Weisen wird jeweils ein in der Zeit
 gemittelter Strom berechnet und miteinander verglichen.
-Anschließend soll das System auf zwei Elektronen erweitert und ein Strom berechnet werden.
-In den folgenden Rechnungen wird der Sprungterm $J=1$
-gesetzt und  alle Ergebnisse in Einheiten von $J$ angegeben.
-Zusätzlich wird in atomaren Einheiten gerechnet, folglich gilt:
+IFE abhänigkeiten überprüfen
+Anschließend wird das Zwei-Elektronen-System betrachtet und ebenfalls ein gemittelter Strom berechnet.
+
+In den folgenden Rechnungen wird der Sprungterm J auf $1\si{\electronvolt}$ gesetzt und
+für den Gitterabstand wird eine typischen Wert von $d=\SI{4}{\angstrom}$ fest gewählt.
+Alle anderen Größen werden im Folgenden in Einheiten von $J$ und $d$ angegeben.
+Die Bandlücke $2a$ sollte in den Größenordnung des Sprungtermes $J$ liegen und wird
+daher auf $2J$ gesetzt.
+Die Parameter des elektrischen Feldes werden im Bezug auf das in \cite{jackl} beschriebene Experiment gewählt.
+Die Amplitude der Elektrischenfeldes liegt somit um den Wert
 \begin{align}
-   \symup{e}=\hbar=\text{m}_\symup{e}=1.
+  E_0=\SI{69,2}{\mega\volt\per\meter}=0,028\, \frac{J}{d\symup{e}}.
 \end{align}
+Eine typische Frequenz des Feldes ist dann
+\begin{align}
+  \omega\approx\SI{2,35}{\peta\hertz}=1,549\frac{J}{\hbar}.
+\end{align}
+Des weiteren wird eine Pulsdauer $\mathcal{T}=\SI{50}{\femto\second}\approx75,96\,\frac{\hbar}{J}$
+für das Lichtfeld eingeführt, indem das System beobachtet wird.
+
+Eigenwerte und Eigenvektoren einer Matrix werden mit der Funktion \textit{eig} aus dem Programm Octave \cite{octave}
+berechnet. Weitere Rechnungen wurden mit Pyhon ...
+
+
+
 \section{Frequenzabbhängigkeit der Quasienergien}
-Zunächst werden die Eigenschaften der Floquet Theorie
-untersucht. Dafür
+Zunächst werden die Eigenschaften der Floquet Theorie,
+teils unabhängig von typischen Größen des Systems, untersucht. Dafür
 werden die Eigenwerte
  $\epsilon_{\alpha n}$ für eine
 Matrix $\mathcal{H}_\mathrm{F}$ mit der
-Größe $N=1$, konstanter lokaler Energie $a=1$ und E-Feldamplitude $E_0=1$
-für Frequenz in einem Bereich von $0-6$  berechnet.
+Größe $N=1$,  konstanter lokaler Energie $a=1\,J$
+und E-Feldamplitude $E_0=1\,\frac{J}{d\symup{e}}$
+für Frequenz in einem Bereich von $0\,\frac{J}{\hbar}-6\,\frac{J}{\hbar}$  berechnet.
 Um die Effekte der Störung $V(t)$ zu verdeutlichen,
-werden ebenfalls Eigenwerte $E_{\alpha n}$ für Matrix $\mathcal{H}_F$ mit $E_0=0$, dies besschreibt den
+werden ebenfalls Eigenwerte $E_{\alpha n}$ für Matrix $\mathcal{H}_F$ mit $E_0=0\frac{J}{d\symup{e}}$, dies besschreibt den
 zeitunabhänigen Fall, berechnet, sodass in Abbildung \ref{fig:epsilon_f}
 die berechneten Eigenwerte verglichen werden können.
-
 \begin{figure}
    \centering
    \includegraphics[width=0.7\textwidth]{Programme/Freqenzen_kontinuierlich/Plots/Plot_fur_a=1.0_E=1.0.pdf}
-   \caption{Eigenwerte $\epsilon_{\alpha n}$ der Matrix $\mathcal{H}_\mathrm{F}$ für $a=1$ und $E_0=1$ und
+   \caption{Eigenwerte $\epsilon_{\alpha n}$ der Matrix $\mathcal{H}_\mathrm{F}$ für $a=1\,J$ und $E_0=1\,\frac{J}{d\symup{e}}$ und
    Eigenwerte $E_{\alpha n}$ des zeitunabhängigen System in Abhängigkeit von der Frequnez $\omega$.}
    \label{fig:epsilon_f}
 \end{figure}
 In der Abbildung \ref{fig:epsilon_f} können, wie in \cite{haenggi} beschrieben, an Stellen der Überschneidung der Eigenwerte  $E_{\alpha n}$
-des zeitunabhängigen Systems die Phänomene des sogenannten "avoided crossing" und
+des zeitunabhängigen Systems die Phänomene des "avoided crossing" und
 "exact crossing" der Quasienergien $\epsilon_{\alpha n}$ beobachtet werden,
 die durch das zeitabhängige elektrische Feld hervorgerufen werden.
-Dies dient hier nur als Bestätigung der Funktionsweise
+??vielleicht erklären??
+Dies dient hier als Bestätigung der Funktionsweise
 des aufgestellten Algorithmus für die Matrix-Methode und wird im Folgendem nicht weiter behandelt.
 
 \section{Brillouin-Zone der Quasienergien}
-In dem Abschitt wird versucht, die Quasienergien, wie in
-\ref{sec:flotheo} beschrieben, in einer Art
- Brillouin-Zone darzustellen.
-Dafür werden Quasienergien bei einer konstanten Frequenz $\omega=1$ und
-lokalen Energie $a=1$ in Abhängigkeit der
+In diesem Abschitt wird die Darstellung der Quasienergien, wie in
+Abschitt \ref{sec:flotheo} beschrieben, in der 1.
+Brillouin-Zone untersucht.
+Dafür werden Quasienergien bei einer konstanten Frequenz $\omega=1\,\frac{J}{\hbar}$ und
+lokalen Energie $a=1\,J$ in Abhängigkeit der
 Amplitude $E_0$, die hier unabhängig
 von realistischen Werten zur besseren Veranschaulichung im
-Bereich von $0$ bis $6$ liegt, berechnet.
+Bereich $0\,\frac{J}{d\symup{e}}<E_0<5\,\frac{J}{d\symup{e}}$ liegt, berechnet.
 Diese sind in der Abbildung \ref{fig:brillouin} gegen $E_0$ aufgetragen.
-Zusätzlich wird die Größe $N$ der Matrix $\mathcal{H}_F$ variiert.
+Zusätzlich wird der Trunkierparameter $N$ der Matrix $\mathcal{H}_F$ variiert.
 
 \begin{figure}
   \centering
@@ -66,58 +86,58 @@ Zusätzlich wird die Größe $N$ der Matrix $\mathcal{H}_F$ variiert.
     \label{fig=N_3}
   \end{subfigure}
   \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=1\textwidth]{Programme/Energien_kontinuierlich/Plots/Plot_fur_a=1.0_w=1.0N=5.0.pdf}
+    \caption{N=5}
+    \label{fig=N_5}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
     \includegraphics[width=1\textwidth]{Programme/Energien_kontinuierlich/Plots/Plot_fur_a=1.0_w=1.0N=6.0.pdf}
     \caption{N=6}
     \label{fig=N_6}
   \end{subfigure}
-  \begin{subfigure}{0.48\textwidth}
-    \includegraphics[width=1\textwidth]{Programme/Energien_kontinuierlich/Plots/Plot_fur_a=1.0_w=1.0N=10.0.pdf}
-    \caption{N=10}
-    \label{fig=N_3}
-  \end{subfigure}
   \caption{Berechnete $\epsilon_{\alpha n}$ für unterschiedliche Größen der Matrix $\mathcal{H}_F$
-  bei einer lokalen Energie $a=1$ und einer Frequenz $\omega=1$ in der 1. und 2. Brillouin Zone}
+  bei einer lokalen Energie $a=1\,J$ und einer Frequenz $\omega=1\frac{J}{\hbar}$ in der 1. und 2. Brillouin Zone}
   \label{fig:brillouin}
 \end{figure}
 
-Deutlich wird, dass ein zu kleines $N$ der Bedingung für eine Darstellung in der Brillouin-Zone nicht genügen.
-Jedoch können für ein ausreichend große $N$ die Quasienergien $\epsilon_\alpha$ in die erste Brillouin-Zone
+Deutlich wird, dass für kleine Trunkierparamter $N$ die Bedingung für eine Darstellung in der 1. Brillouin-Zone nicht erfüllt ist.
+Es wird jedoch beobachtet, dass die Übereinstimmung der 2. Brillouin-Zonen mit der  1. Brillouin-Zone mit
+größeren $N$ zunimmt.
+Somit können die Quasienergien $\epsilon_\alpha$  für ein ausreichend großes $N$ in die erste Brillouin-Zone
 mit $-\frac{\omega}{2}<\epsilon_\alpha<\frac{\omega}{2}$ dargestellt und
 alle anderen Quasienergien $\epsilon_{\alpha n}$ durch die Periodizitätsbedingung \eqref{eqn:epsilon_n} berechnet werden.
-In der ersten Brillouin-Zone der Abbildung \ref{fig:brillouin} existieren genau vier Quasienergien, folglich besitzt das System
+In der ersten Brillouin-Zone, siehe Abbildung \ref{fig:brillouin}, existieren genau vier Quasienergien, folglich besitzt das System
 ebenfalls vier Quasienergien und vier Quasizustände.
 %Aus der  Abbildung \ref{fig:brillouin} kann entnommen werden, System vier Quasienergien besitzt
-Es kann jedoch selbst bei größerem $N$ beobachtet werden, dass bei höheren Brillouin-Zonen?? die Periodizität nicht mehr gegeben ist.
 
 \section{Orthogonalität der Quasizustände}
 Im Folgenden soll die Orthogonalität zwischen den Quasizuständen $\ket{\Phi_\alpha}$ aus der Gleichung \eqref{eqn:ortho} für
-unterschiedliche Größen der Matrix $\mathcal{H}_F$ überprüft werden.?? Die Quasizustände $\ket{\Phi_\alpha}$ berechnen sich jeweils aus
-den zu $\epsilon_\alpha$ zugehörigen Eigenvektoren. Indem die Komponenten der Eigenvektoren als $c_{\alpha,k}^{n}$ verwendet werden,
-ergeben sich aus Gleichung \eqref{eqn:PHI} die Quasizustände des Systems.??
+unterschiedliche Trunkierparameter $N$ für die Matrix $\mathcal{H}_F$ überprüft werden.
 In der Abbildung \ref{fig:ortho} ist das Skalarprodukt zwischen den Quasizuständen in Abhängigkeit von der Größe $N$ der Matrix
-$\mathcal{H}_F$ dargestellt.
-Dies soll für die später verwendete Größen $a=0,5$ , $E_0=0,1$  und $\omega=1$ überprüft werden.
-.
+$\mathcal{H}_F$
+für die Werte    $a=1\, J$ , $E_0=0,028\,\frac{J}{d\symup{e}}$  und $\omega=1\,\frac{J}{\hbar}$ , welche im typischen Bereich liegen,
+dargestellt.
 
 \begin{figure}
     \centering     % vielleicht mit 2x2 subfigure
-    \includegraphics[width=0.7\textwidth]{Programme/Orthogonalitat_der_quasizustande/Plots/Potential=0.5/Energie=0.1/Frequenz=1.0/Plot_fur_phi1_phi_i}
+    \includegraphics[width=0.7\textwidth]{Programme/Orthogonalitat_der_quasizustande/Plots/Potential=1.0/Energie=0.028/Frequenz=1.0/Plot_fur_phi1_phi_i}
     \caption{Das Skalarprodukt $\braket{\Phi_1|\Phi_i}$ folgt auch für die anderen Zustände}
      \label{fig:ortho}
 \end{figure}
 
-Aus der Abbildung \ref{fig:ortho} kann entnommen werden, dass bei zu geringem $N$ die Orthogonalität der Quasizustände
+Aus Abbildung \ref{fig:ortho} wird entnommen, dass bei bei geringem parameter $N$ die Orthogonalität der Quasizustände
 nicht gegeben ist.
-In diesem Fall erweist sich eine Größe von $N=5$ als ausreichend zur Gewährleistung der Orthogonalität.
-Es kann ebenfalls eine (ein Anitproportionle )Abhängigkeit von lokaler Energie $a$ und Frequenz $\omega$ beobachtet werden.
-Für Kleinerwerden der jeweiligen Größe wird ein größeres $N$ benötigt.
-Antiproportional????
-Somit ist es notwendig,
-bei den folgenden Berechnungen die
-Orthogonalität der Quasizustände für
-Werte von $\omega$ und $a$ kleiner als die in Abbildung
-\ref{fig:ortho} gewählten Größen stehts zu überprüfen.
-Andernfalls reicht eine Matrixgröße von $N=5$ zum Erfüllen der Bedingung aus.
+Für die in Abbildung \ref{fig:ortho} verwendeten Größen
+erweist sich eine Größe von $N=3$ als ausreichend zur Gewährleistung der Orthogonalität.
+Es estellt sich weiterhin ein antiproportionler Zusammenhang von lokaler Energie $a$ und Frequenz $\omega$ zu der
+benötigten Größe $N$ der Matrix $\mathcal{H}_F$
+heraus.
+Wegen der antiproportionalität ist es notwendig,
+bei den folgenden Berechnungen für
+Werte von $\omega$ und $a$, die kleiner als die in Abbildung
+\ref{fig:ortho} gewählten Werte sind, die
+Orthogonalität der Quasizustände zu überprüfen.
+Andernfalls reicht eine Matrixgröße von $N=3$ zum Erfüllen der Orthogonalitätsbedingung aus.
 
 
 
@@ -125,11 +145,12 @@ Andernfalls reicht eine Matrixgröße von $N=5$ zum Erfüllen der Bedingung aus.
 % -die Orthogonalitäts bedingung formel .. sollte erfüllt sein
 
 \section{Zeitentwicklung eines Zustandes durch den Floquet Formalismus}
-In diesem Abschnitt wird eine Zeitentwicklung des Ein-Elektron-Systems mit oszillierendem E-Feld durch den Floquet Formalismus durchgeführt.
-Als Startzustand $\ket{\Psi_0}$ wird der Grundzustand $\ket{\phi_1}$ des zeitunabhänigen Systems verwendet, da davon
-ausgegangen werden kann, dass das System zu Beginn im energieärmsten Zustand verweilt.
-Es sollen zunächst nur Frequenzen $\omega$ des E-Feldes
-betrachtet werden, die nicht einer Resonanzfrequenz entsprechen.
+In den Abschitten
+In diesem Abschnitt wird eine Zeitentwicklung des Ein-Elektron-Systems mit oszillierendem E-Feld durch den Floquet Formalismus bestimmt.
+Als Startzustand $\ket{\Psi_0}$ wird der Grundzustand $\ket{\phi_1}$ des zeitunabhänigen Systems verwendet, da
+dass das System zu Beginn im Zustand niedrigster Energie verweilt.
+Es sollen zunächst werden Frequenzen $\omega$ abseits einer Resonanzfrequenz des E-Feldes
+betrachtet.
 In der Abbildung \ref{fig:Resonanz} sind
  die Resonanzfrequenzen \eqref{eqn:Resonanz} in Abhängigkeit
 von den lokalen Energien aufgetragen.
@@ -143,8 +164,8 @@ von den lokalen Energien aufgetragen.
 
 
 Unter dem Ausschluss der Resonanzfrequenzen aus der
- Abbildung \ref{fig:Resonanz}, wird bei einer lokalen Energie
-$a=0,5$ und einer Amplitude $E_0=0,1$ die Frequenz $\omega=1$ gewählt.
+Abbildung \ref{fig:Resonanz}, wird bei einer lokalen Energie
+$a=0,5$ und einer Amplitude $E_0=0,028\,\frac{J}{d\symup{e}}$ die Frequenz $\omega=1,549\,\frac{J}{\hbar}$ gewählt.
 Um die Zeitentwicklung nach Floquet durchführen zu können, muss
 zunächst, wie in Gleichung \eqref{eqn:superposition} beschrieben, der Grundzustand
 als Superposition der Quasizustände ausgedrückt werden.
@@ -152,7 +173,7 @@ Durch Anwenden des Zeitpropagators \eqref{eqn:Propagator} auf den Grundzustand,
  ist es somit möglich den zeitentwickelten Grundzustand
 $\ket{\Psi(t)}$ zu berechnen.
 
-In der Abbildung \ref{fig:zeitentwicklung} ist
+In Abbildung \ref{fig:zeitentwicklung} ist
 die Aufenthaltswahrscheinlichkeit
 $\lvert\braket{e_i|\Psi(t)}\rvert^2$ für
 die vier unterschiedlichen Gitterplätze in Abhängigkeit von der Zeit dargestellt.
@@ -163,7 +184,7 @@ der durch das Programm Octave \cite{octave}bereitgestellt wird, aufgetragen.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Programme/Eigenzustande/Plots/Potential=0.5/Energie=0.1/Besetzungen(t)_mit_Floquet_N=5w=1.0.pdf}
+  \includegraphics[width=0.7\textwidth]{Programme/Eigenzustande/Plots/Potential=1.0/Energie=0.028/Besetzungen(t)_mit_Floquet_N=3w=1.549.pdf}
   \caption{Zeitenwicklung des Grundzustandes}
   \label{fig:zeitentwicklung}
 \end{figure}
@@ -177,43 +198,41 @@ die beiden Position eine geringere lokale Energie $a$ besitzen.
 % -vergleich mit lsode
 % -stimmt überein eignet sich folglich für zeitentwicklung
 
-\section{Strom im System}
-In dem vorigen Abschnitt konnte die Zeitentwicklung der Floquet Theorie betätigt werden.
-Diese wird hier genutzt zur Berechnung des Stromes in dem System.
+\section{Untersuchung des Stromes im Bandisolators}
+In dem vorherigen Abschnitt konnte die Zeitentwicklung der Floquet Theorie betätigt werden.
+Diese zuvor Bestätigte zeitentwicklungwird hier zur Berechnung des Stromes in dem System genutzt.
 Durch
 \begin{align}
-\braket{\mathcal{J}}(t)=\braket{\psi(t)|  \mathcal{J}|\psi(t)}
-\intertext{mit dem Strom(dichte)operator\cite{schwabl}}
-\mathcal{J}= -\frac{\text{i}\symup{e}}{4} C \sum_i^4 c_{i+1}^\dag c_{i}^{\phantom{\dag}}  -c_{i}^\dag c_{i+1}^{\phantom{\dag}}
+\braket{I}(t)=\braket{\psi(t)\lvert I \rvert\psi(t)}
+\intertext{mit dem Stromdichteoperator\cite{schwabl}}
+I= \frac{\symup{i}J}{4}\sum_i^4 c_{i+1}^\dag c_{i}^{\phantom{\dag}}  -c_{i}^\dag c_{i+1}^{\phantom{\dag}}
 \end{align}
 ergibt sich der Stromfluss des Systems.
 Wird $\ket{e_i}$ wieder als Basis gewählt, ergibt sich
 die Matrixdarstellung des Strom(dichte)operators
 \begin{align}
-\mathcal{J}=\frac{\symup{i}\symup{e}}{4}\begin{pmatrix}
-  \phantom{-}0&           -C &\phantom{-}0 & \phantom{-}C \\
-          C   & \phantom{-}0 &         -C  & \phantom{-}0\\
-  \phantom{-}0& \phantom{-}C &\phantom{-}0 &           -C \\
-            -C& \phantom{-}0 &\phantom{-}C & \phantom{-}0
+I=\frac{\symup{i}J}{4}\begin{pmatrix}
+  \phantom{-}0&           -1 &\phantom{-}0 & \phantom{-}1 \\
+  \phantom{-}1& \phantom{-}0 &          -1 & \phantom{-}0\\
+  \phantom{-}0& \phantom{-}1 &\phantom{-}0 &           -1 \\
+            -1& \phantom{-}0 &\phantom{-}1 & \phantom{-}0
 \end{pmatrix}.
 \end{align}
-Die Konstante $C$ wird ebenfalls auf $1$ gesetzt und
-die Ergebnisse in Einheiten von $C$ angegeben.
 Die Abbildung \ref{fig:strom_t} enthält den Stromfluss des Systems in Abhängigkeit von der Zeit.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Programme/Strom/Plots/Potential=0.5/Energie=0.1/Stromerwartungswert(t)_N=5w=1.0.pdf}
+  \includegraphics[width=0.7\textwidth]{Programme/Strom/Plots/Potential=1.0/Energie=0.028/Stromerwartungswert(t)_N=3w=1.549.pdf}
   \caption{Strom im System in Abhängigkeit der Zeit}
  \label{fig:strom_t}
 \end{figure}
 
 
 
-Die Messung  des Stromes $\braket{\mathcal{J}}(t)$ auf so kleinen Zeitskalen ist jedoch nicht möglich, daher
+Die Messung  des Stromes $\braket{I}(t)$ auf so kleinen Zeitskalen ist jedoch nicht möglich, daher
 misst der Beobachter nur einen in der Zeit gemittelten Strom
 \begin{align}
-  \bar{\braket{\mathcal{J}}}= \frac{1}{T}\int_0^T \braket{\Psi(t)|\mathcal{J}|\Psi(t)}.
+  \bar{\braket{I}}= \frac{1}{T}\int_0^T \braket{\Psi(t)|I|\Psi(t)}.
 \end{align}
 Mit Hilfe des Zeitpropagators \eqref{eqn:prop} ist es in dem Floquet Formalismus problemlos möglich, zeitlich
 gemittelte Erwartungswerte von
@@ -233,23 +252,23 @@ nach Ausführung der Integration.
 Zeitspanne zu mitteln. Durch die Formel \eqref{eqn:mittel} kann
 der gemittelte Erwartungswert unkompliziert berechnet werden.??
 Zur Überprüfung der Gleichung \eqref{eqn:mittel} wird
-der gemittelte Stromerwartungswert $\bar{\braket{\mathcal{J}}}$
+der gemittelte Stromerwartungswert $\bar{\braket{I}}$
 für unterschiedliche Frequenzen $\omega$
 in Abhängigkeit von der Amplitude des elektrischen Feldes $E_0$
 zum einen durch die Gleichung \ref{eqn:mittel}
 und zum anderen über die Mittelung über eine
 lange Zeitspanne, hier
 T=??,  ??mehrere Perioden?? des berechneten
-Erwartungswert des Stromes $\braket{\mathcal{J}}(t)$ bestimmt.
+Erwartungswert des Stromes $\braket{I}(t)$ bestimmt.
 Die Abbildung \ref{fig:E_Strom} enthält jeweils die aus
-den zwei verschiedenen Methoden für $a=0,5$
-berechneten gemittelten Ströme $\bar{\braket{\mathcal{J}}}$.
+den zwei verschiedenen Methoden für $a=1$
+berechneten gemittelten Ströme $\bar{\braket{I}}$.
 
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Programme/Strom_mittelwerte/Plots_mittelwerte/Potential=0.5Stromerwartungswert(t)_N=5.pdf}
-  \caption{mittelwert des Stromerwartungswert für die zweite Methode wurde über eine Zeit Spanne von ?? gemittelt }
+  \includegraphics[width=0.7\textwidth]{Programme/Strom_mittelwerte/Plots_mittelwerte/Potential=1.0Stromerwartungswert(t)_N=3.pdf}
+  \caption{mittelwert des Stromerwartungswert für die zweite Methode wurde über die Pulsdauer $\mathcal{T}$ Zeit Spanne von ?? gemittelt }
   \label{fig:E_Strom}
 \end{figure}
 
@@ -258,7 +277,7 @@ Aus der Abbildung \ref{fig:E_strom} kann entnommen werden,
 dass die Gleichung \ref{eqn:mittel} identische
 Ergebnisse wie die zweite Methode liefert.
 Somit ist bestätigt, dass der zeitlichgeittel
-Stromerwartungswert $\bar{\braket{\mathcal{J}}}$
+Stromerwartungswert $\bar{\braket{I}}$
 über die Gleichung \ref{eqn:mittel}
 berechnet werden kann.
 Im Folgenden wird ??(nur) die Methode,
@@ -266,7 +285,7 @@ die die Floquet Theorie bereitstellt,
 um zeitlich gemittelte Stromerwartungswerte zu berechnen,
 verwendet.
 
-\section{Strom Abhängigkeiten}
+\section{Überprüfung der Strom Abhängigkeiten in einem Bandisolators}
 Wie in dem Kapitel \ref{sec:inverfaraday} beschrieben,
 soll der Strom bei dem IFE??(Inverser Faraday Effekt)
 in einem Isolator quadratisch
@@ -275,7 +294,7 @@ sowie linear mit der Frequenz $\omega$ des elektrischen
 Feldes steigen. Diese Abhängikeiten sollen nun für den
  Ein-Elektronen-Fall überprüft werden.
 Für die quadratische Abhängigkeit wird in der Abbildung
-\ref{fig:E_abb} der zeitliche Strommittelwert $\bar{\braket{\mathcal{J}}}$
+\ref{fig:E_abb} der zeitliche Strommittelwert $\bar{\braket{I}}$
  gegen $E_0$ aufgetragen.
 Genutzt werden
 vier Frequenzen, die jeweils zwischen den Resonanzen liegen, um Resonanzeffekte zu vermeiden.
@@ -287,7 +306,7 @@ in Abbildung \ref{fig:E_abb}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Programme/Strom_fit_e/Plots_mittelwerte/Potential=0.5Stromerwartungswert(t)_N=5.pdf}
+  \includegraphics[width=0.7\textwidth]{Programme/Strom_fit_e/Plots_mittelwerte/Potential=1.0Stromerwartungswert(t)_N=3.pdf}
   \caption{Überprüfung der $E_0$ abhängigkeiten.}
   \label{fig:E_abb}
 \end{figure}
@@ -298,7 +317,7 @@ bestätigt werden.
 
 Abschließend gilt es, die Linearität des Strommittelwertes
  zu der Frequenz zu untersuchen.
-Hierfür wird der Strommittelwert $\bar{\braket{\mathcal{J}}}$
+Hierfür wird der Strommittelwert $\bar{\braket{I}}$
 in Abhängigkeit von der Frequenz $\omega$ in einem
 Bereich von $0$ bis $8$ für
 zwei verschiedene elektrische Amplituden $E_0=??,??$
@@ -307,7 +326,7 @@ Erneut wird eine lokale Energie von $a=0,5$???? variieren ???? verwendet.
 
 \begin{figure}
    \centering
-   \includegraphics[width=0.7\textwidth]{Programme/Strom_frequenzabb/Plots_mittelwerte/Potential=0.5Stromerwartungswert(t)_N=5.pdf}
+   \includegraphics[width=0.7\textwidth]{Programme/Strom_frequenzabb/Plots_mittelwerte/Potential=1.0Stromerwartungswert(t)_N=3.pdf}
    \caption{Strom in Abhängigkeit von der Frequenz}
    \label{fig:w_abb}
 \end{figure}
@@ -332,22 +351,22 @@ die Frequenz \omega in der Abbildung \ref{fig:N_5} für $N=5$ aufgetragen.
 \begin{figure}
    \centering
    \begin{subfigure}{0.48\textwidth}
-       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=0.5/Energie=0.1/Anzahl=5/Plot_fur_phi1_phi_i.pdf}
-       \caption{N=5}
-       \label{fig:N_5}
+       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=1.0/Energie=0.028/Anzahl=3/Plot_fur_phi1_phi_i.pdf}
+       \caption{N=3}
+       \label{fig:N_3}
      \end{subfigure}
      \begin{subfigure}{0.48\textwidth}
-       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=0.5/Energie=0.1/Anzahl=10/Plot_fur_phi1_phi_i.pdf}
+       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=1.0/Energie=0.028/Anzahl=10/Plot_fur_phi1_phi_i.pdf}
        \caption{N=50}
        \label{fig:N_10}
      \end{subfigure}
      \begin{subfigure}{0.48\textwidth}
-       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=0.5/Energie=0.1/Anzahl=20/Plot_fur_phi1_phi_i.pdf}
+       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=1.0/Energie=0.028/Anzahl=20/Plot_fur_phi1_phi_i.pdf}
        \caption{N=50}
        \label{fig:N_20}
      \end{subfigure}
      \begin{subfigure}{0.48\textwidth}
-       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=0.5/Energie=0.1/Anzahl=50/Plot_fur_phi1_phi_i.pdf}
+       \includegraphics[width=1\textwidth]{Programme/Orthogonalitat_der_quasizustande_frequenz/Plots/Potential=1.0/Energie=0.028/Anzahl=50/Plot_fur_phi1_phi_i.pdf}
        \caption{N=50}
        \label{fig:N_50}
      \end{subfigure}
@@ -385,7 +404,7 @@ an die berechneten Werte anzupassen. ??Fitten??.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{Programme/Strom_geraden_fit/Plots_mittelwerte/Potential=0.5Stromerwartungswert(t)_N=50.pdf}
+    \includegraphics[width=0.7\textwidth]{Programme/Strom_geraden_fit/Plots_mittelwerte/Potential=1.0Stromerwartungswert(t)_N=50.pdf}
     \caption{Geraden fit}
     \label{fig:geraden_fit}
 \end{figure}
@@ -399,18 +418,6 @@ Aufgrund dessen kann der lineare Zusammenhang in diesem Frequenzbereich bestäti
 % -für kleine frequenz problem mit orthogonalität
 
 \section{Zwei-Elektronen-System}
-Das Modell kann unkompliert auf ein
-Zwei-Elektronen-System, indem
-das Pauliverbot gilt, erweitert werden.
-Die Eigenwerte setzen sich dabei aus
-linear Kombination der Eigenwerte
-des Ein-Elektron-Systems
-zusammen zu
-\begin{align}
-E_{1/6}=\mp\sqrt{a^2+4J^2}\mp a
-E_{2/5}=\mp\sqrt{a^2+4J^2}\mp a
-E_{3/4}=0
-\end{align}.
 Um einen Strommittelwert $\bar{\braket{\symup{J}}}$
 in dem Zwei-Elektronen-System,
 welches sich im Grunzustand befindet, zu berechnen,

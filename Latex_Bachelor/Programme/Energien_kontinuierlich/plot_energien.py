@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
 from tqdm import tqdm
+import os
 
 
 Energien=np.genfromtxt('build/Durchlaufende_Energien.txt')
@@ -13,6 +14,8 @@ Anzahl_N=np.genfromtxt('build/Durchlaufende_N.txt',unpack=True)
 
 
 
+if not os.path.exists('Plots/'):
+    os.makedirs('Plots/')
 
 
 # if [(np.size(Frequenz_1000)==1)and(np.size(Potential)==1)]:
@@ -66,12 +69,12 @@ for index_Potential , value_Potential in enumerate(tqdm(Potential)):
             Matrix_mit_Eigenwerten=Eigenwerte_Matrix(value_Potential,value_Frequenz*10000,value_N)
 #           Matrix_mit_Erwarteteneigenwerten=eig_erwartet_Matrix(Anzahl,x,value_Potential)
             n, m=np.shape(Matrix_mit_Eigenwerten)
-            plt.title('Eigenwerte von a='+str(value_Potential/10000)+' w='+str(value_Frequenz)+' N='+str(value_N))
+#            plt.title('Eigenwerte von a='+str(value_Potential/10000)+' w='+str(value_Frequenz)+' N='+str(value_N))
             for j in tqdm(range(n-1)):
                 plt.plot(Energien/10000,Matrix_mit_Eigenwerten[j,:],'-b',alpha=0.5)#,label='Eigenwert'+ str(j) )
                 #plt.plot(Frequenz,Matrix_mit_Eigenwerten[j,:],'xr',alpha=0.5)#,label='Eigenwert'+ str(j) )
                 #print(Frequenz)
-            plt.plot(Energien/10000,Matrix_mit_Eigenwerten[n-1,:],'-b',alpha=0.5,label=r'$\epsilon_\alpha$ bei $\omega$='+ str(value_Frequenz) )
+            plt.plot(Energien/10000,Matrix_mit_Eigenwerten[n-1,:],'-b',alpha=0.5,label=r'$\epsilon_\alpha$')
             plt.plot(x,x*0+value_Frequenz/2,'--k',alpha=0.5,linewidth=0.5)
             plt.plot(x, x*0-value_Frequenz/2,'--k',alpha=0.5,linewidth=0.5)#,label='Eigenwert'+ str(j) )
             plt.plot(x, x*0+value_Frequenz*3/2,'--k',alpha=0.5,linewidth=0.5)#,label='Eigenwert'+ str(j) )
@@ -80,8 +83,9 @@ for index_Potential , value_Potential in enumerate(tqdm(Potential)):
                [r'$-\frac{3\omega}{2}$', r'$-\frac{\omega}{2}$',0,  r'$\frac{\omega}{2}$', r'$\frac{3\omega}{2}$'])
             plt.ylim(-value_Frequenz*2,value_Frequenz*2)
             plt.legend(loc='upper right')
-            plt.xlabel(r'$E_0$')
-            plt.ylabel(r'$\epsilon_\alpha $')
+            plt.xlabel(r'$E_0/\frac{J}{d\symup{e}}$')
+            plt.ylabel(r'$\epsilon / J$')
+            plt.tight_layout()
             plt.savefig('Plots/Plot_fur'+'_a='+str(Potential[index_Potential]/10000)+'_w='+str(value_Frequenz)+'N='+str(value_N) +'.pdf')
             plt.close()
 

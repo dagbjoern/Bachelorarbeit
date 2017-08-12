@@ -117,6 +117,12 @@ Frequenz_1000=np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 Anzahl_N=np.genfromtxt('build/Durchlaufende_N.txt',unpack=True)
 
 
+
+
+if not os.path.exists('Plots_mittelwerte/'):
+    os.makedirs('Plots_mittelwerte/')
+
+
 str_Potential = Potential.astype(int)
 str_Potential = str_Potential.astype(str)
 
@@ -165,7 +171,11 @@ for a in tqdm(range(np.size(Potential))):
     H_0_Eigenwerte=np.genfromtxt('Parameter/eigenwerte_von_H_0_fur_a='+str_Potential[a] +'.txt')
     if not os.path.exists('Plots/Potential='+ str(Potential[a]/100)):
         os.makedirs('Plots/Potential='+ str(Potential[a]/100))
-    for f in tqdm(range(np.size(Frequenz))):
+    for f in tqdm(range(np.size(Frequenz)-2)):
+        print(f)
+        f=f+1
+        print(f)
+        print('!!!!!!!',Frequenz[f])
         I_bar1=Energien*0+1j*0 #array der länge von E erschaffen
         I_bar2=Energien*0+1j*0
 #        I_bar_lsode=Energien*0 #array der länge von E erschaffen

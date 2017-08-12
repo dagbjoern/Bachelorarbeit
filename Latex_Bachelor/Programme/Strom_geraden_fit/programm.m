@@ -32,18 +32,16 @@ global hbar=1
 
 Sprungterme=1
 
-
-Potential=[0.5,1,2]
-Energien=[0.05,0.1]
+Potential=[1,2]
+Energien=[0.01,0.028]
 Frequenz=linspace(0,1,100)
 Frequenz=round(Frequenz*10000)/10000
-Frequenz*10000
 Anzahl=[50]      #Anzahl der Perioden
 b = 'cool'
 global Gitterkonstante=1
 Phasenverschiebung=0
 %zeitentwicklung
-t_isode=linspace(0,200,600);
+t_isode=linspace(0,76,200);
 
 #Frequenz=linspace(0,4,10000)
 #[t,x]=rk4('test_rkt',[0,1],0.5)
