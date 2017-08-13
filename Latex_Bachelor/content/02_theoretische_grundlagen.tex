@@ -75,6 +75,7 @@ definiert.
 
 
 \section{Inverser Faraday Effekt}
+\label{sec:inverfaraday}
 Der inverse Faraday Effekt beschreibt die Entstehung eines Kreisstromes
 in Materie durch Bestrahlung mit zirkular polarisiertem Licht.
 Die dabei entstehende Magnetisierung in der Materie kann gegebenenfalls
@@ -152,7 +153,7 @@ zu erkennen.
 Um eine Vorraussage zu dem Abhängigkeiten, die
 bei dem IFE in einem Bandisolatoren auftreten,
 zu treffen, wird die Leitfähigkeit
-eines Isolators
+eines Isolators \cite{fließebach}
 \begin{align}
   \sigma=\symup{i}\omega C
 \end{align}
@@ -175,6 +176,7 @@ quadratische mi E-Feld-Amplitude besitzt.
 
 
 \section{Floquet Theorie}
+\label{sec:floquetheo}
 In diesem Abschnitt werden die Grundlagen der
 Floquet Theorie vorgestellt. Diese kann genutzt werden,
 um ein in der Zeit periodisches quantenmechanisches System zu beschreiben.
@@ -249,7 +251,7 @@ berechnen lassen.
 Die Quasizustände unterliegen der Orthogonaliätsbedingung
 \begin{align}
   \braket{\braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}}\equiv \frac{1}{T} \int_0^T\mathrm{d}t
-  \braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}. \label{eqn:orhto}
+  \braket{\Phi_{\alpha' }(t)|\Phi_{\beta'}(t)}=\delta_{\alpha'\beta'}=\delta_{\alpha\beta}\delta_{nm}. \label{eqn:ortho}
 \end{align}
 \\
 Um die zeitliche Entwicklung
@@ -264,15 +266,15 @@ die Superposition der Floquetmoden
 ausgedrückt.
 Durch den Zeitpropagator\footnote{Eine genau Herleitung des Propagators $K$ ist in (REF) zu finden.}
 \begin{align}
-  K(t;0)=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha \right)\ket{\Phi_\alpha(t)}\bra{\Phi_\alpha(0)} \label{eqn:zeitoperator}
+  K(t;0)=\sum_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha t \right)\ket{\Phi_\alpha(t)}\bra{\Phi_\alpha(0)} \label{eqn:Propagator}
 \end{align}
-ist es möglich, den Startzustand \eqref{eqn:super}
+ist es möglich, den Startzustand \eqref{eqn:super}eqn:Propagator
 in der Zeit zu propagieren.
 Anwenden dieses Propagators auf den Startzustnad
 \eqref{eqn:super}
 liefert
 \begin{align}
-  \Psi(t)=K(t;0) \ket{\Psi(0)}=\sum_\alpha c_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha \right)\ket{\Phi_\alpha(t)}. \label{eqn:psi_t}
+  \Psi(t)=K(t;0) \ket{\Psi(0)}=\sum_\alpha c_\alpha \exp\left(-\mathrm{i}\epsilon_\alpha t \right)\ket{\Phi_\alpha(t)}. \label{eqn:psi_t}
 \end{align}
 % !!!!! in die Ergebnisse !!!!! Mit Hilfe dieses Propagators ist es unkomplizit in dem Floquet-Formalismus, zeitlichgemittelte (read) Erwartungswerte von
 % Operatoren $\hat O$ zu berechnen.
@@ -285,7 +287,8 @@ liefert
 %
 % Eine Herleitung dieser Formel ist im Anhang zu finden.??
 
-\section{Numerische Methoden}
+\section{Numerische Methoden/ Floquet Matrix Methode}
+\label{sec:matrix}
 Im Folgenden wird die numerische Methode
 der Floquet Matrix,
 welche die Berechnung der Quasieigenenenergien

@@ -35,8 +35,9 @@ Sprungterme=1
 
 
 Potential=[1,2]
-Energien=linspace(0.001,0.1,100)
-Frequenz=[1,2]
+Energien=linspace(0,0.1,100)
+Frequenz=[1,1.5,2]
+Energien=round(Energien*10000)/10000;
 
 
 Anzahl=[3,3]      #Anzahl der Perioden
@@ -112,7 +113,7 @@ for i=1:length(Potential)
  save(['build/Zeit_lsode.txt'],'t_isode')
 %
 
-Energien=transpose(Energien*10000);
+Energien=round(transpose(Energien*10000));
 Potential=transpose(Potential*100);
 Frequenz=transpose(Frequenz*1000);
 save('build/Durchlaufende_Energien.txt','Energien')

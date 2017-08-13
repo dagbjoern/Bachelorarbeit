@@ -37,8 +37,8 @@ Sprungterme=1
 #Energien=[0.0001,1,5,10]
 #Frequenz=[0.1,0.5,1,5,10]
 Potential=[1,2]
-Energien=[0.028,0.01,0.1]
-Frequenz=[1,1.549,3,5]
+Energien=[0.03,0.01,0.1]
+Frequenz=[1,1.5,2,3]
 
 
 Anzahl=[3,3]      #Anzahl der Perioden

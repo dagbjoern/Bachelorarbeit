@@ -17,7 +17,7 @@ global hbar=1
 Potential=[0.5,1]
 
 #Energien=[0.1 , 0.02 , 0.1 ,0.2 , 0.4 ,0.8]
-Energien=[1,0.028]
+Energien=[1,0.03]
 
 b = 'cool'
 global Gitterkonstante=1

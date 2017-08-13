@@ -34,7 +34,7 @@ Sprungterme=1
 
 Potential=[1,2]
 Energien=[0.028,0.03]
-Frequenz=[1,1.549,3]
+Frequenz=[1,1.5,3]
 
 test=0
 Anzahl=[1,2,3,4,5,6,7,8,9,10]      #Anzahl der Perioden

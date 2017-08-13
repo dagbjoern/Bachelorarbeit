@@ -33,7 +33,7 @@ global hbar=1
 Sprungterme=1
 
 Potential=[1,2]
-Energien=[0.01,0.028]
+Energien=[0.01,0.03]
 Frequenz=linspace(0,1,100)
 Frequenz=round(Frequenz*10000)/10000
 Anzahl=[50]      #Anzahl der Perioden

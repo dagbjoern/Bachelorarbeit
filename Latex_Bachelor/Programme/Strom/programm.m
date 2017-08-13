@@ -32,8 +32,8 @@ global hbar=1
 
 Sprungterme=1
 Potential=[1,2]
-Energien=[0.028,0.01,0.1]
-Frequenz=[1,1.549,3,5]
+Energien=[0.03,0.01,0.1]
+Frequenz=[1,1.5,3,5]
 
 
 Anzahl=[3,3]      #Anzahl der Perioden

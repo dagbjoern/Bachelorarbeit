@@ -4,11 +4,11 @@
 Um den inversen Faraday Effekt mit Hilfe der Floquet Theorie in
 einem Bandisolator genauer zu untersuchen, wird hier ein mikroskopisches zwei dimensionales Modell
 eines Festkörpers mit vier Gitterplätzen herangezogen. Zu Beginn
-wird ein System betrachtet, indem sich ein Elektron aufhält, wobei zwischen dem
+wird ein System betrachtet, indem sich ein spinloses Elektron aufhält, wobei zwischen dem
 zeitunabhängig System, ohne ein elektrisches Feld,
 und dem zeitabhängigen System, mit einem in der Zeit periodischen elektrischen Feldes, unterschieden wird.
-Darauf folgend wird die Floquet Matrix ??nach dem Abschnitt \ref{sec:floquetmatrix}?? für das
-zeitabhängige System aufgestellt. ??Abschließen soll das System für Zwei Elektronen betrachtet werden??
+Darauf folgend wird die Floquet Matrix ??nach dem Abschnitt \ref{sec:matrix}?? für das
+zeitabhängige System aufgestellt. Abschließen soll das System für Zwei spinlose Elektronen betrachtet werden.
 
 
 
@@ -17,10 +17,10 @@ zeitabhängige System aufgestellt. ??Abschließen soll das System für Zwei Elek
 Dieses Gittersystem wird durch das Tight-Binding-Modell in zweiter Quantisierung mit periodischen Randbedingungen\cite{czycholl} beschrieben.
 Aus diesem ergibt sich der folgende Hamiltonian $H_0$ für das zeitunabhängige System % lautet
 \begin{align}
-  H_0=\underbrace{J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\phantom{\dag}}\right)}_{H_{T-B}}
+  H_0=\underbrace{J\sum_{i=1}^4 \left(c_{i+1}^\dag c_i^{\phantom{\dag}} + c_{i}^\dag c_{i+1}^{\phantom{\dag}}\right)}_{H_{TB}}
    +\underbrace{\sum_{i=1}^4\left( a_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}} \right)}_{H_a}
 \end{align}
-wobei der Tight-Binding Hamiltonian $H_{T-B}$, der Sprünge des Elektron
+wobei der Tight-Binding Hamiltonian $H_{TB}$, der Sprünge des Elektron
 zwischen den Gitterplätzen beschreibt, durch den Hamilton $H_a$, der die Eigenschaften
 eines Bandisolators simuliert, erweitert wird.
 Dabei besitzten die Gitterplätz eine lokale ??in dem Vorzeichen ?? alternierende Energie $a$.
@@ -32,19 +32,22 @@ ist eine Skizze des zu untersuchenden Systems dargestellt.
 \begin{figure}
    \centering
    \includegraphics[width=0.5\textwidth]{Programme/Tikz_test/bild_gitter_0.pdf}
-   \caption{Ein simples 2D-Modell eines Bandisolators mit vier Gitterplätzen im Abstand $d$ und der lokalen Energie $a$
-   mit dem Tight-Binding-Paramter $J$, welcher die Sprunge zwischen Gitterplätze}
+   \caption{Skizze des verwendeten 2D-Modell
+    des Bandisolators, mit vier Gitterplätzen im Abstand $d$,
+   welche die alternierendene lokale Energie $a$ besitzen.
+    Elektronen in System können abhängig von dem Tight-Binding-Paramter $J$
+   den Gitterplatz wechselen}
    \label{fig:system}
 \end{figure}
 
 
 Durch die Wahl der Basis
 \begin{align}
- \ket{1}=\vec{e}_{1}&    &\ket{2}=\vec{e}_2& &\ket{3}=\vec{e}_3& &\ket{4}=\vec{e}_4,
+ \ket{1}&=\vec{e}_{1}&    &\ket{2}=\vec{e}_2& &\ket{3}=\vec{e}_3& &\ket{4}=\vec{e}_4,
 \intertext{wird über}
-H_{ij}=\braket{i|H|j}
+H_{ij}&=\braket{i|H|j}
 \intertext{die Matrixdarstellung des Hamiltonian}
-  H_0=\begin{pmatrix}
+  H_0&=\begin{pmatrix}
   -a          & \phantom{-}J &\phantom{-}0& \phantom{-}J \\
   \phantom{-}J& \phantom{-}a &\phantom{-}J& \phantom{-}0\\
   \phantom{-}0& \phantom{-}J & -a         & \phantom{-}J \\
@@ -63,7 +66,9 @@ Die Eigenwerte $E_n$ des Hamiltonian sind in der Abbildung \ref{fig:bandstruktur
 \begin{figure}
    \centering
    \includegraphics[width=0.6\textwidth]{Programme/Tikz_test/bild_niveau.pdf}
-   \caption{Niveauschema für ein Elektron im System.}
+   \caption{Niveauschema für ein Elektron, welches sich in dem System befindent
+und die dadurch resultierenden
+möglichen Resonanzfrequnzen des Systems.}
    \label{fig:bandstruktur}
 \end{figure}
 
@@ -72,7 +77,7 @@ Die Resonanzfrequenzen des Systems im Grundzustand
 \begin{align}
 \omega_{\text{res}_1}=\sqrt{a^2+4J^2}-a,
 & &\omega_{\text{res}_2}=a+\sqrt{a^2+4J^2},
-& &\omega_{\text{res}_3}=2\sqrt{a^2+4J^2}
+& &\omega_{\text{res}_3}=2\sqrt{a^2+4J^2} \label{eqn:Resonanz}
 \end{align}
 werden aus dem Niveauschema \ref{fig:bandstruktur} entnommen. In der Abbildung \ref{fig:bandstruktur} ist ebenfalls die Bandlücke von $2a$
 dargestellt.
@@ -84,7 +89,11 @@ das zirkularpolarisierte Licht simulieren soll, zu sehen in der Abbildung \ref{f
 \begin{figure}
    \centering
    \includegraphics[width=0.5\textwidth]{Programme/Tikz_test/bild_gitter.pdf}
-   \caption{System+E-Feld.}
+   \caption{Skizze des zeitabhängigen 2D-Modell
+wobei zusatzlich zum zeitunabhängigen Modell
+ein mit der Zeit rotierendes elektrisches Feld
+eingezeicht ist.
+  . }
    \label{fig:syst+E}
 \end{figure}
 
@@ -104,10 +113,10 @@ welches die Amplitude $E_0$, die Frequenz $\omega$ besitzt.
 Der Ursprung des Systems wird in den Mittelpunkt des Systems gesetzt.
 Somit lauten die Gitterplatz-Vektoren $\vec{r_i}$ in Abhänigigkeit von der Gitterkonstante $d$:
 \begin{align}
-  r_1=\frac{d}{2}\begin{pmatrix}-1  \\ \phantom{-}1 \end{pmatrix},& &
-  r_2=\frac{d}{2}\begin{pmatrix}-1  \\ -1 \end{pmatrix},& &
-  r_3=\frac{d}{2}\begin{pmatrix}\phantom{-}1  \\ -1 \end{pmatrix},& &
-  r_4=\frac{d}{2}\begin{pmatrix}1  \\ 1 \end{pmatrix}.
+  \vec{r}_1=\frac{d}{2}\begin{pmatrix}-1  \\ \phantom{-}1 \end{pmatrix},& &
+  \vec{r}_2=\frac{d}{2}\begin{pmatrix}-1  \\ -1 \end{pmatrix},& &
+  \vec{r}_3=\frac{d}{2}\begin{pmatrix}\phantom{-}1  \\ -1 \end{pmatrix},& &
+  \vec{r}_4=\frac{d}{2}\begin{pmatrix}1  \\ 1 \end{pmatrix}.
 \end{align}
 Der gesamte Hamiltonian des Systems nimmt somit die Form
 \begin{align}
@@ -121,7 +130,7 @@ an.
 
 \section{Floquet Matrix des zeitabhängigen Systems}
 Für das zeitabhängige System wird wie
-in Kapitel \ref{sec:numerisch} beschrieben, die
+in Kapitel \ref{sec:matrix} beschrieben, die
 numerische Methode der Floquet Matrix angewendet.
 Dafür wird zunächst der Hamiltonian
 \begin{align}
@@ -164,8 +173,12 @@ Blockschreibweise zu einer Diagonalbandmatrix.
 Für exakte $\epsilon_{\alpha}$ und $\ket{\Phi_\alpha}$ muss
 $N\rightarrow\infty $
 , da
-dies numerisch jedoch nicht möglich ist, wird die Matrix $\mathcal{H}_F$ bei einem beliebigen $N$ trunkiert.
-Die Matrix $\mathcal{H}_F$ besitzt beispielsweise für eine Trunkierung bei $N=1$ die Form
+dies numerisch jedoch nicht möglich ist, wird
+die Matrix $\mathcal{H}_F$ bei einem beliebigen $N$ trunkiert
+und somit nur die Fouriermoden bis $N$ in der
+Berechnung der QEE und QEZ
+berücksichtigt.
+Die Matrix $\mathcal{H}_F$ besitzt beispielsweise für eine Trunkierparameter  $N=1$ die Form
 \begin{align}
   \mathcal{H}_F=\begin{pmatrix}
   H^{-1,-1}-\mathbb{1}\hbar\omega &  H^{-1,0} &   0 \\
@@ -178,11 +191,11 @@ Die Matrix $\mathcal{H}_F$ besitzt beispielsweise für eine Trunkierung bei $N=1
 Dem Modell wird ein Elektron hinzugefügt, in Folge dessen unterliegt das System dem Pauliverbot.
 Die Eigenwerte $E_n$ setzen sich dabei aus
 linear Kombination der Eigenwerte
-des Ein-Elektron-Systems \cite{philip}
+des Ein-Elektron-Systems \cite{phillip}
 zusammen zu
 \begin{align}
-E_{1/6}&=\mp\sqrt{a^2+4J^2}\mp a
-&E_{2/5}&=\mp\sqrt{a^2+4J^2}\pm a
+E_{1/4}&=\mp\sqrt{a^2+4J^2}-a
+&E_{2/6}&=\mp\sqrt{a^2+4J^2}+a
 &E_{3/4}&=0
 \end{align}.
 Somit besitzt das System im Grundzustand die Resonanzfrequenzen
