@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
 from tqdm import tqdm
-from scipy.optimize import curve_fit
 import os
 
 def norm(v):
@@ -114,15 +113,21 @@ def phi_funktion(V,t,w):
 
 Energien=np.genfromtxt('build/Durchlaufende_Energien.txt')
 Potential=np.genfromtxt('build/Durchlaufende_Potentiale.txt')
-Frequenz_10000=np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
+Frequenz_1000=np.genfromtxt('build/Durchlaufende_Frequenzen.txt',unpack=True)
 Anzahl_N=np.genfromtxt('build/Durchlaufende_N.txt',unpack=True)
+
+
+
+
+if not os.path.exists('Plots_mittelwerte/'):
+    os.makedirs('Plots_mittelwerte/')
 
 
 str_Potential = Potential.astype(int)
 str_Potential = str_Potential.astype(str)
 
-str_Frequenz_10000 = Frequenz_10000.astype(int)
-str_Frequenz_10000 = str_Frequenz_10000.astype(str)
+str_Frequenz_1000 = Frequenz_1000.astype(int)
+str_Frequenz_1000 = str_Frequenz_1000.astype(str)
 
 str_Energien = Energien.astype(int)
 str_Energien = str_Energien.astype(str)
@@ -131,17 +136,12 @@ str_Anzahl_N = Anzahl_N.astype(int)
 str_Anzahl_N = str_Anzahl_N.astype(str)
 
 Figure_Zahler = 1
-a=np.linspace(0,np.amax(Potential)/10000,10000)
-Frequenz = Frequenz_10000/10000
-
-
-if not os.path.exists('Plots_mittelwerte/'):
-    os.makedirs('Plots_mittelwerte/')
-
+a=np.linspace(0,np.amax(Potential)/100,100)
+Frequenz = Frequenz_1000/1000
 
 plt.figure(Figure_Zahler)
 Figure_Zahler=Figure_Zahler+1
-#plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/10000) )
+#plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+'fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
 plt.plot(a,np.sqrt(a**2+4*1**2)-a , '-r', alpha=0.75, label=r'erste Resonanz')
 plt.plot(a,np.sqrt(a**2+4*1**2)+a , '-r', alpha=0.75, label=r'zweite Resonanz')
 plt.plot(a,2*np.sqrt(a**2+4*1**2) , '-r', alpha=0.75, label=r'dritte Resonanz')
@@ -157,7 +157,7 @@ plt.close()
 
 
 
-#Gitterkonstante, Anzahl, Phasenverschiebung = np.genfromtxt('Parameter/Parameter_fur_a='+str_Potential[0]+'_w='+ str_Frequenz_100000[0]+'_E='+str_Energien[0]+'_N='+str_Anzahl_N[0]+'.txt',unpack=True)
+#Gitterkonstante, Anzahl, Phasenverschiebung = np.genfromtxt('Parameter/Parameter_fur_a='+str_Potential[0]+'_w='+ str_Frequenz_1000[0]+'_E='+str_Energien[0]+'_N='+str_Anzahl_N[0]+'.txt',unpack=True)
 
 print('int',Anzahl_N )
 print('str', str_Anzahl_N)
@@ -166,72 +166,42 @@ t_lsode=np.genfromtxt('build/Zeit_lsode.txt')
 
 I_bar=Energien*0 #array der länge von E erschaffen
 
-
-farbe=np.array(['r','b','g','m'])
-
-
-
 for a in tqdm(range(np.size(Potential))):
     H_0_eigenvektoren=np.genfromtxt('Parameter/eigenvektoren_von_H_0_fur_a='+str_Potential[a]+'.txt')
     H_0_Eigenwerte=np.genfromtxt('Parameter/eigenwerte_von_H_0_fur_a='+str_Potential[a] +'.txt')
-    if not os.path.exists('Plots/Potential='+ str(Potential[a]/10000)):
-        os.makedirs('Plots/Potential='+ str(Potential[a]/10000))
-    for e in tqdm(range(np.size(Energien))):
-        I_bar_1=Frequenz*0+1j*0 #array der länge von E erschaffen
-        I_bar_2=Frequenz*0+1j*0 #array der länge von E erschaffen
-        I_bar_lsode=Frequenz*0+1j*0 #array der länge von E erschaffen
-        #               Numerische Werte Einlesen
-        if not os.path.exists('Plots/Potential='+ str(Potential[a]/10000) + '/Energie='+str(Energien[e]/10000)):
-            os.makedirs('Plots/Potential='+ str(Potential[a]/10000)+ '/Energie='+str(Energien[e]/10000))
-        for f in tqdm(range(np.size(Frequenz))):
-            f=f
-            psi_real_lsode=np.genfromtxt('build/Realpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_10000[f] +'lsode.txt')
-            psi_imag_lsode=np.genfromtxt('build/Imagpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_10000[f] +'lsode.txt')
+    if not os.path.exists('Plots/Potential='+ str(Potential[a]/100)):
+        os.makedirs('Plots/Potential='+ str(Potential[a]/100))
+    for f in tqdm(range(np.size(Frequenz))):
+        I_bar1=Energien*0+1j*0 #array der länge von E erschaffen
+        I_bar2=Energien*0+1j*0
+#        I_bar_lsode=Energien*0 #array der länge von E erschaffen
+        for e in tqdm(range(np.size(Energien))):
+            if not os.path.exists('Plots/Potential='+ str(Potential[a]/100) + '/Energie='+str(Energien[e]/10000)):
+                os.makedirs('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000))
+            #               Numerische Werte Einlesen
+            psi_real_lsode=np.genfromtxt('build/Realpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'lsode.txt')
+            psi_imag_lsode=np.genfromtxt('build/Imagpart_Eigenvektoren_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'lsode.txt')
             psi_imag_lsode=psi_imag_lsode*1j
             psi_t_lsode=psi_real_lsode+psi_imag_lsode
             t=t_lsode
             psi_t_lsode=psi_t_lsode.T
             for l in tqdm(range(np.size(Anzahl_N))):
-                l=1
-                print(Anzahl_N[l])
-                #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str_Potential[a]+'_w='+ str_Frequenz_10000[f]+'_E='+str_Energien[e]+'_N='+str_Anzahl_N[l]+'.txt',unpack=True)
-                epsilon=np.genfromtxt('build/epsilon_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_10000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
-                Eigenzustande_realteil=np.genfromtxt('build/Realpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_10000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
-                Eigenzustande_imagteil=np.genfromtxt('build/Imagpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_10000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
+                #Eigenwerte=np.genfromtxt('build/Eigenwerte_fur_a='+str_Potential[a]+'_w='+ str_Frequenz_1000[f]+'_E='+str_Energien[e]+'_N='+str_Anzahl_N[l]+'.txt',unpack=True)
+                epsilon=np.genfromtxt('build/epsilon_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
+                Eigenzustande_realteil=np.genfromtxt('build/Realpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
+                Eigenzustande_imagteil=np.genfromtxt('build/Imagpart_Eigenzustande_fur_a='+str_Potential[a]+'_E='+str_Energien[e]+'_w=' + str_Frequenz_1000[f] +'_N=' + str_Anzahl_N[l] +'.txt')
                 Eigenzustande_realteil=Eigenzustande_realteil+1j*0
                 Eigenzustande_imagteil=Eigenzustande_imagteil*1j
                 Startzustand=H_0_eigenvektoren[:,0]
+                Startzustand2=H_0_eigenvektoren[:,1]
                 V_phi=Eigenzustande_realteil+Eigenzustande_imagteil
-                phi=phi_funktion(V_phi,0,Frequenz[f])
-                werte_1=np.zeros([1,4])+1j*0
-                werte_2=np.zeros([1,4])+1j*0
-                werte_3=np.zeros([1,4])+1j*0
-                werte_4=np.zeros([1,4])+1j*0
-                for q in range(4):
-                    werte_1[0,q]=skalarprodukt(phi[:,0],phi[:,q])
-                    werte_2[0,q]=skalarprodukt(phi[:,1],phi[:,q])
-                    werte_3[0,q]=skalarprodukt(phi[:,2],phi[:,q])
-                    werte_4[0,q]=skalarprodukt(phi[:,3],phi[:,q])
-                # if(np.sum(werte_1) < 0.99 or np.sum(werte_1) > 1.01 or np.sum(werte_2) < 0.99 or np.sum(werte_2) > 1.01 or np.sum(werte_3) < 0.99 or np.sum(werte_3) > 1.01 or np.sum(werte_4) < 0.99 or np.sum(werte_4) > 1.01):
-                #     print('nicht orthogonal genug')
-                #     print( 'für:\n n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + '\n E=' +str(Energien[e]/10000) + '\n a=' +str(Potential[a]/100)   )
-                #     print('Werte_1:',werte_1)
-                #     print('Werte_1sum:',np.sum(werte_1))
-                #     print('Werte_2:',werte_2)
-                #     print('Werte_2sum:',np.sum(werte_2))
-                #     print('Werte_3:',werte_3)
-                #     print('Werte_3sum:',np.sum(werte_3))
-                #     print('Werte_4:',werte_4)
-                #     print('Werte_4sum:',np.sum(werte_4))
-                #     quit()
-                 #print('Strommittelwert für Potential='+ str(Potential[a]/10000)+'\nEnergie='+str(Energien[e]/10000)+'\nw = ' + str(Frequenz[f])  ,'Strommittel=',Stromittelwert_Foquet(Startzustand, 1, V_phi))
-                I_bar_1[f]=Stromittelwert_Foquet(H_0_eigenvektoren[:,0], 1, V_phi)
-                I_bar_2[f]=Stromittelwert_Foquet(H_0_eigenvektoren[:,1], 1, V_phi)
+                #print('Strommittelwert für Potential='+ str(Potential[a]/100)+'\nEnergie='+str(Energien[e]/10000)+'\nw = ' + str(Frequenz[f])  ,'Strommittel=',Stromittelwert_Foquet(Startzustand, 1, V_phi))
+                I_bar1[e]=Stromittelwert_Foquet(Startzustand, 1, V_phi)
+                I_bar2[e]=Stromittelwert_Foquet(Startzustand2, 1, V_phi)
 
-#                print(I_bar[f])
-#                y_lsode=Erwartungswert(Strom(1),psi_t_lsode,t_lsode)
+                y_lsode=Erwartungswert(Strom(1),psi_t_lsode,t_lsode)
                 #print('numerischer Wert:', np.sum(y_lsode)/np.size(t_lsode))
-#                I_bar_lsode[f]=np.sum(y_lsode)/np.size(t_lsode)
+                #I_bar_lsode[e]=np.sum(y_lsode)/np.size(t_lsode)
                 #Periodendauer = 2 * np.pi / Frequenz[f]
                 #phi=phi_funktion(V_phi,0,Frequenz[f])
 #                test1=phi_funktion(V_phi,0,Frequenz[f])
@@ -244,7 +214,6 @@ for a in tqdm(range(np.size(Potential))):
                 plt.figure(Figure_Zahler)
                 # y=Erwartungswert(Strom(1),psi_t,t)
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-                #plt.title('Erwartungswert des Stromes für den Startzustand ' + str(np.round(Startzustand,3))+'\n fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/10000) )
                 #plt.plot(t,y, '-r', alpha=0.5, label=r'Strom')
                 #plt.plot(t,y_lsod, '-r', alpha=0.5, label=r'Strom')
                 # plt.plot(t, Erwartungswert(Strom(2),psi_t), '-y', alpha=0.5, label=r'c=2')
@@ -257,27 +226,18 @@ for a in tqdm(range(np.size(Potential))):
                 #plt.ylabel(r'Strom $I/c $')
                 #plt.xlim(np.amin(t),np.amax(t))
                 #plt.legend(loc='best')
-                #plt.savefig('Plots/Potential='+ str(Potential[a]/10000)+ '/Energie='+str(Energien[e]/10000) +'/Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ 'w = ' + str(Frequenz[f]) + '.pdf')
+                #plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ 'w = ' + str(Frequenz[f]) + '.pdf')
                 #plt.close()
             plt.figure(Figure_Zahler)
-#            farbe=np.linspace(0,1,10000)
-        plt.plot(Frequenz,I_bar_1+I_bar_2, '-'+farbe[e] ,alpha=0.75,label=r'Strommittelwert E='+str(Energien[e]/10000))
-#        plt.plot(Frequenz,I_bar_1, '-'+farbe[e] ,alpha=0.75,label=r'Strommittelwert E_1='+str(Energien[e]/10000))
-#        plt.plot(Frequenz,I_bar_2, '-k',alpha=0.75,label=r'Strommittelwert E_2='+str(Energien[e]/10000))
-    #    plt.title('Erwartungswert des Stromes für den Startzustand ' + str(np.round(Startzustand,3))+'\n fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/10000) )
+        plt.title('Erwartungswert des Stromes für 2 elektronen im Grundzustand' +'\n fur n=' + str(Anzahl_N[l]) + ' a=' +str(Potential[a]/100 ))
+        I_bar_ges=(I_bar1+I_bar2)
+        plt.plot(Energien/10000,I_bar_ges,  alpha=0.75, label=r'Strommittelwert w='+str(Frequenz[f]) )
         #plt.plot(Energien/10000,I_bar_lsode,  alpha=0.25, label=r'Strommittelwert lsode w='+str(Frequenz[f]))
-        plt.xlabel(r'$\omega/\frac{J}{\hbar}$ ')
-        plt.ylabel(r'$\overline{\langle I \rangle}/ \frac{J\symup{e}}{\hbar}$')
-    hilfe=np.linspace(np.amin(I_bar_1+I_bar_2),np.amax(I_bar_1+I_bar_2),20)
-
-#    plt.xlim(1,6)
-#    plt.ylim(-0.000001,0.000001)
-    plt.plot(hilfe*0+2*Potential[a]/10000,hilfe,'k--')
-    plt.plot(hilfe*0+np.sqrt((Potential[a]/10000)**2+4*1**2)+Potential[a]/10000,hilfe,'k--')
-    plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2),hilfe,'k--')
-    plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2)+2*Potential[a]/10000,hilfe,'k--',label=r'$\omega_{\mathrm{res}_i}')
+    plt.xlabel(r'$E_0/ \frac{J}{d\symup{e}}$')
+    plt.ylabel(r'$\bar{\langle I \rangle} / \frac{J\symup{e}}{\hbar} $')
     plt.legend(loc='best')
-    plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/10000)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
+    plt.tight_layout()
+    plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/100)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 
 #         #print(Eigenwerte)
@@ -303,7 +263,7 @@ for a in tqdm(range(np.size(Potential))):
 #     # plt.plot(t,zeitentwicklung(Startzustand,V_phi,epsilon,Frequenz,t)[0],'-g',label=r'4')
 #     #
 #     plt.legend(loc='best')
-#     plt.savefig('Plots/zeitentwicklung phi_1 N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/100000)+'.pdf')
+#     plt.savefig('Plots/zeitentwicklung phi_1 N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/1000)+'.pdf')
 #
 #
 #
@@ -311,14 +271,14 @@ for a in tqdm(range(np.size(Potential))):
 #
 # #    print(betragsquadrad(psi_1,psi_1,phi,epsilon,t))
 #     print(Startzustand)
-#     t=np.linspace(0,10000,100000)
+#     t=np.linspace(0,100,1000)
 #     psi_t=zeitentwicklung(Startzustand,V_phi,epsilon,Frequenz,t)
 #
 #     plt.figure(Figure_Zahler )
 #     Figure_Zahler=1+Figure_Zahler
 #
 #     #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-#     plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+ '\n w=' + str(Frequenz) + 'E='+str(Energien/10000) + 'a='+str(Potential/10000)  )
+#     plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+ '\n w=' + str(Frequenz) + 'E='+str(Energien/100) + 'a='+str(Potential/100)  )
 #     plt.plot(t,betragsquadrad(phi[:,0],psi_t),'-r',alpha=0.5,label=r'zustand 1')
 #     plt.plot(t,betragsquadrad(phi[:,1],psi_t),'-y',alpha=0.5,label=r'zustand 2')
 #     plt.plot(t,betragsquadrad(phi[:,2],psi_t),'-g',alpha=0.5,label=r'zustand 3')
@@ -326,12 +286,12 @@ for a in tqdm(range(np.size(Potential))):
 #     for n in range(4):
 #         plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5)
 #     plt.legend(loc='best')
-#     plt.savefig('Plots/zeitentwicklung_der_Besetzungen_N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/100000)+'.pdf')
+#     plt.savefig('Plots/zeitentwicklung_der_Besetzungen_N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/1000)+'.pdf')
 #
 #
 #     plt.figure(Figure_Zahler )
 #     Figure_Zahler=1+Figure_Zahler
-#     plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+ '\n w=' + str(Frequenz) + 'E='+str(Energien/10000) + 'a='+str(Potential/10000)  )
+#     plt.title('zeitentwicklung für den Startzustand ' + str(np.round(Startzustand,3))+ '\n w=' + str(Frequenz) + 'E='+str(Energien/100) + 'a='+str(Potential/100)  )
 #     plt.plot(t,betragsquadrad(H_0_eigenvektoren[:, 0], psi_t),'-r',alpha=0.5,label=r'eig_vek zu Eigenwert'+str(np.round(H_0_Eigenwerte[0],3)))
 #     plt.plot(t,betragsquadrad(H_0_eigenvektoren[:, 1], psi_t),'-y',alpha=0.5,label=r'eig_vek zu Eigenwert'+str(np.round(H_0_Eigenwerte[1],3)))
 #     plt.plot(t,betragsquadrad(H_0_eigenvektoren[:, 2], psi_t),'-g',alpha=0.5,label=r'eig_vek zu Eigenwert'+str(np.round(H_0_Eigenwerte[2],3)))
@@ -339,7 +299,7 @@ for a in tqdm(range(np.size(Potential))):
 #     for n in range(4):
 #         plt.plot(T * 0 + Periodendauer * n, T, '--k')
 #     plt.legend(loc='best')
-#     plt.savefig('Plots/zeitentwicklung_der_Eigenzustande_N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/100000)+'.pdf')
+#     plt.savefig('Plots/zeitentwicklung_der_Eigenzustande_N='+str(int(Anzahl_N[l]))+ 'a='+str(Potential/1000)+'.pdf')
 
 ##################################################
 
@@ -349,7 +309,7 @@ for a in tqdm(range(np.size(Potential))):
 #
 #print(np.dot(phi[:,0],phi[:,1]))
 
-#   if [(np.size(Frequenz_100000)==1)and(np.size(Potential)==1)]:
+#   if [(np.size(Frequenz_1000)==1)and(np.size(Potential)==1)]:
 #   r i in range(np.size(phi[0,:])):
 #     test(phi,i+1)
 
@@ -366,7 +326,7 @@ for a in tqdm(range(np.size(Potential))):
 #     Eigenwerte_H_0=np.genfromtxt('Parameter/eigenwerte_von_H_0_fur_a='+str(int(Potential)) +'a.txt')
 #     m=np.size(Eigenwerte_H_0)*(1+Anzahl*2)
 #     Matrix=np.zeros((m,np.size(Frequenz)))
-#     Frequenz=Frequenz*Potential/10000
+#     Frequenz=Frequenz*Potential/100
 #     for i in range(np.size(Frequenz)):
 #         Erwartete_Eigenwerte=Eigenwerte_H_0
 #         for j in range(1,int(Anzahl+1)):
@@ -378,17 +338,17 @@ for a in tqdm(range(np.size(Potential))):
 #
 # def Eigenwerte_Matrix(Potential,Frequenz):
 #     Matrix =np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potential))+'_w='+str(int(Frequenz))+'.txt')
-# #        Matrix=np.zeros((np.size(Grosse),np.size(Frequenz_100000)))
+# #        Matrix=np.zeros((np.size(Grosse),np.size(Frequenz_1000)))
 #     return Matrix
 
 # Eigenwerte_H_0=np.array([-2,0,0,2])
 # Figure_Zahler=1
 #
 # #Figure_Zahler=Figure_Zahler+1
-# plt.title('Eigenwerte von a='+str(Potential/10000)+' E='+str(Frequenz) )
+# plt.title('Eigenwerte von a='+str(Potential/100)+' E='+str(Frequenz) )
 # plt.figure(Figure_Zahler)
 # for index_N , value_N in enumerate(Anzahl_N):
-#         Eigenwerte = np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potential))+'_w='+str(int(Frequenz_100000))+'_E='+str(int(Energien))+'_N='+str(int(value_N))+'.txt')
+#         Eigenwerte = np.genfromtxt('build/Eigenwerte_fur_a='+str(int(Potential))+'_w='+str(int(Frequenz_1000))+'_E='+str(int(Energien))+'_N='+str(int(value_N))+'.txt')
 #         plt.plot(value_N+Eigenwerte*0,Eigenwerte,'xb',alpha=0.5)
 #         print('N=',value_N,)
 #         for index_e , value_e in enumerate(Eigenwerte):
@@ -402,14 +362,14 @@ for a in tqdm(range(np.size(Potential))):
 # plt.legend(loc='best')
 # plt.xlabel('N')
 # plt.ylabel(r'$\epsilon_\alpha $')
-# plt.savefig('Plots/Plot_fur'+'_a='+str(Potential/10000)+'_w='+str(Frequenz) +'_E='+str(int(Energien))+'.pdf')
+# plt.savefig('Plots/Plot_fur'+'_a='+str(Potential/100)+'_w='+str(Frequenz) +'_E='+str(int(Energien))+'.pdf')
 # plt.close()
 #
         # for j in range(n):
         #     r=j%2
         #     b=(j+1)%2
         #
-        #     plt.plot(Energien/10000,Matrix_mit_Eigenwerten[j,:],'-b',color=(r,0,b),alpha=0.5)#,label='Eigenwert'+ str(j) )
+        #     plt.plot(Energien/100,Matrix_mit_Eigenwerten[j,:],'-b',color=(r,0,b),alpha=0.5)#,label='Eigenwert'+ str(j) )
             #plt.plot(Frequenz,Matrix_mit_Eigenwerten[j,:],'xr',alpha=0.5)#,label='Eigenwert'+ str(j) )
 
 
@@ -419,10 +379,10 @@ for a in tqdm(range(np.size(Potential))):
         #     for i in range(n-1):
         #         plt.plot(Frequenz,Eigenwerte[i],'xb')
         #         plt.plot(Frequenz,Erwartete_Eigenwerte[i],'+r')
-        #     plt.plot(Frequenz,Eigenwerte[n-1],'xb',label=r'E='+str(value_Energie/10000))
+        #     plt.plot(Frequenz,Eigenwerte[n-1],'xb',label=r'E='+str(value_Energie/100))
         #     plt.plot(Frequenz,Erwartete_Eigenwerte[n-1],'+r',label=r'Erwartete_Eigenwerte')
-        #     print('Potential',value_Potential/10000)
-        #     print('value_Energie',value_Energie/10000)
+        #     print('Potential',value_Potential/100)
+        #     print('value_Energie',value_Energie/100)
         #     print('Frequenz=', Frequenz)
         #     print('Erwartete_Eigenwerte',np.sort(Erwartete_Eigenwerte))
         #     print('Berechnete Eigenwerte',Eigenwerte)

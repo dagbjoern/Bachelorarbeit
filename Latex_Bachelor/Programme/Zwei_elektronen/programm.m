@@ -3,6 +3,9 @@
 addpath('C:\Users\daghe\Desktop\Uni\Bachelorarbeit\Matlab_funktionen')
 
 
+mkdir Parameter
+mkdir build
+
 function En(x)
   global E;
   E = x;
@@ -35,7 +38,7 @@ Potential=[1,2]
 Energien=linspace(0,0.1,100)
 Energien=round(Energien*10000)/10000
 
-Frequenz=[1,2,3.5,5]
+Frequenz=[1,1.5,2]
 
 
 Anzahl=[3,3]      #Anzahl der Perioden

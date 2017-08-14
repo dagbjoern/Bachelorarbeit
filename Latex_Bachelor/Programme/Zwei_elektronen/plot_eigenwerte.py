@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import uncertainties.unumpy as unp
 from tqdm import tqdm
 import os
+from scipy.optimize import curve_fit
 
 def norm(v):
     n=v/np.sqrt(np.dot(v,v))
@@ -109,6 +110,12 @@ def phi_funktion(V,t,w):
                     phi[s,q] = phi[s,q] + V[r*4+s,q]*np.exp(1j*n[r]*w*t)
     return phi
 
+def quadrat(x,a):
+    return a*x**2
+
+def quadrat_hoch_2(x,a,c):
+    return a*x**2+c*x**4
+
 
 
 Energien=np.genfromtxt('build/Durchlaufende_Energien.txt')
@@ -138,6 +145,9 @@ str_Anzahl_N = str_Anzahl_N.astype(str)
 Figure_Zahler = 1
 a=np.linspace(0,np.amax(Potential)/100,100)
 Frequenz = Frequenz_1000/1000
+
+farbe=np.array(['r','b','g','m'])
+
 
 plt.figure(Figure_Zahler)
 Figure_Zahler=Figure_Zahler+1
@@ -171,11 +181,7 @@ for a in tqdm(range(np.size(Potential))):
     H_0_Eigenwerte=np.genfromtxt('Parameter/eigenwerte_von_H_0_fur_a='+str_Potential[a] +'.txt')
     if not os.path.exists('Plots/Potential='+ str(Potential[a]/100)):
         os.makedirs('Plots/Potential='+ str(Potential[a]/100))
-    for f in tqdm(range(np.size(Frequenz)-2)):
-        print(f)
-        f=f+1
-        print(f)
-        print('!!!!!!!',Frequenz[f])
+    for f in tqdm(range(np.size(Frequenz))):
         I_bar1=Energien*0+1j*0 #array der länge von E erschaffen
         I_bar2=Energien*0+1j*0
 #        I_bar_lsode=Energien*0 #array der länge von E erschaffen
@@ -233,13 +239,18 @@ for a in tqdm(range(np.size(Potential))):
                 #plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ 'w = ' + str(Frequenz[f]) + '.pdf')
                 #plt.close()
             plt.figure(Figure_Zahler)
-        plt.title('Erwartungswert des Stromes für 2 elektronen im Grundzustand' +'\n fur n=' + str(Anzahl_N[l]) + ' a=' +str(Potential[a]/100 ))
+#        plt.title('Erwartungswert des Stromes für 2 elektronen im Grundzustand' +'\n fur n=' + str(Anzahl_N[l]) + ' a=' +str(Potential[a]/100 ))
         I_bar_ges=(I_bar1+I_bar2)
-        plt.plot(Energien/10000,I_bar_ges,  alpha=0.75, label=r'Strommittelwert w='+str(Frequenz[f]) )
+        params , cov = curve_fit(quadrat,Energien/10000,np.real(I_bar_ges))
+        params_2 , cov_2 = curve_fit(quadrat_hoch_2,Energien/10000,np.real(I_bar_ges))
+        plt.plot(Energien/10000,I_bar_ges,'-'+farbe[f],  alpha=0.25, label=r'$\omega=$'+str(Frequenz[f]) )
+        plt.plot(Energien/10000,quadrat(Energien/10000,*params),':'+farbe[f],label=r'$\omega=$'+str(Frequenz[f]) + ' Fit')
+        #plt.plot(Energien/10000,quadrat_hoch_2(Energien/10000,*params_2),':'+farbe[f],label=r'$\omega=$'+str(Frequenz[f]) + ' Fit_2')
         #plt.plot(Energien/10000,I_bar_lsode,  alpha=0.25, label=r'Strommittelwert lsode w='+str(Frequenz[f]))
-        plt.xlabel(r'Energie $t/ j^{-1}$')
-        plt.ylabel(r'Strom $I/c $')
-        plt.legend(loc='best')
+    plt.xlabel(r'$E_0/ \frac{J}{d\symup{e}}$')
+    plt.ylabel(r'$\bar{\langle I \rangle} / \frac{J\symup{e}}{\hbar} $')
+    plt.legend(loc='best')
+    plt.tight_layout()
     plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/100)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 

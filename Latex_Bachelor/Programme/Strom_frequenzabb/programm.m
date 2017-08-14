@@ -34,7 +34,7 @@ Sprungterme=1
 
 
 Potential=[1,2]
-Energien=[0.01,0.03]
+Energien=[0.01,0.03,0.05]
 Frequenz=linspace(0,6,300)
 Frequenz=round(Frequenz*10000)/10000
 Frequenz*10000

@@ -264,13 +264,13 @@ for a in tqdm(range(np.size(Potential))):
     hilfe=np.linspace(np.amin(I_bar)-0.003,np.amax(I_bar)+0.003,10)
 
         #plt.xlim(0,6)
-    plt.plot(hilfe*0+np.sqrt((Potential[a]/10000)**2+4*1**2)-Potential[a]/10000,hilfe,'k--',linewidth=0.5,alpha=0.5)
-    plt.plot(hilfe*0+np.sqrt((Potential[a]/10000)**2+4*1**2)+Potential[a]/10000,hilfe,'k--',linewidth=0.5,alpha=0.5)
-    plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2),hilfe,'k--',linewidth=0.5,alpha=0.5,label=r'$\omega_{\mathrm{res}_i}')
+    plt.plot(hilfe*0+np.sqrt((Potential[a]/10000)**2+4*1**2)-Potential[a]/10000,hilfe,'k--',alpha=0.5)
+    plt.plot(hilfe*0+np.sqrt((Potential[a]/10000)**2+4*1**2)+Potential[a]/10000,hilfe,'k--',alpha=0.5)
+    plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2),hilfe,'k--',alpha=0.5,label=r'$\omega_{\mathrm{res}_i}')
     plt.legend(loc='best')
     plt.xlabel(r'$\omega/\frac{J}{\hbar}$ ')
     plt.ylabel(r'$\bar{\langle I \rangle}/ \frac{J\symup{e}}{\hbar}$')
-    plt.ylim(-0.001,0.001)
+    plt.ylim(-0.002,0.002)
     plt.tight_layout()
     plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/10000)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
