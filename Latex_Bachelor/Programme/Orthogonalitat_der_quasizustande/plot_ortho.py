@@ -84,9 +84,9 @@ for a in tqdm(range(int(np.size(Potential)))):
             plt.figure(Figure_Zahler)
             Figure_Zahler=1+Figure_Zahler
             #plt.title('Orthogonalität fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/100) )
-            plt.plot(Anzahl_N, werte_1[0,:].real,'x-y',alpha=0.5,label=r'$\langle\Phi_1|\Phi_1\rangle$' )
+            plt.plot(Anzahl_N, werte_1[0,:].real,'x-g',alpha=0.5,label=r'$\langle\Phi_1|\Phi_1\rangle$' )
             plt.plot(Anzahl_N, werte_1[1,:].real,'x-r',alpha=0.5,label=r'$\langle\Phi_1|\Phi_2\rangle$' )
-            plt.plot(Anzahl_N, werte_1[2,:].real,'x-g',alpha=0.5,label=r'$\langle\Phi_1|\Phi_3\rangle$' )
+            plt.plot(Anzahl_N, werte_1[2,:].real,'x-y',alpha=0.5,label=r'$\langle\Phi_1|\Phi_3\rangle$' )
             plt.plot(Anzahl_N, werte_1[3,:].real,'x-b',alpha=0.5,label=r'$\langle\Phi_1|\Phi_4\rangle$' )
             plt.ylim(-1.5,1.5)
             plt.xlim(1,7)

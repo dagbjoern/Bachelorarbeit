@@ -214,7 +214,6 @@ for a in tqdm(range(np.size(Potential))):
                 Figure_Zahler=1+Figure_Zahler
                 y=Erwartungswert(Strom(1),psi_t,t)
                 #betragsquadrad(messwerte,Startzustand,V_phi,epsilon,frequenz,t):
-                plt.plot(t,y, '-r', alpha=0.5, label=r'$\langle\Psi\lvert I\rvert \Psi\rangle$')
 #                plt.plot(t,y_lsod, '-r', alpha=0.5, label=r'Strom')
                 # plt.plot(t, Erwartungswert(Strom(2),psi_t), '-y', alpha=0.5, label=r'c=2')
                 # plt.plot(t, Erwartungswert(Strom(3),psi_t), '-b', alpha=0.5, label=r'c=3')
@@ -222,11 +221,12 @@ for a in tqdm(range(np.size(Potential))):
                 T = np.linspace(np.amin(y)-0.01,np.amax(y)+0.01 , 2)
                 for n in range(int(np.amax(t)/Periodendauer+1)):
                     plt.plot(T * 0 + Periodendauer * n, T, '--k', linewidth=0.25)
+                plt.plot(t,y, '-r', alpha=0.5, label=r'$\langle\Psi\lvert I\rvert \Psi\rangle$')
                 plt.plot(T*0+76,T,'-k',linewidth=2)
                 plt.xlabel(r'$t/ \frac{\hbar}{J}$')
                 plt.ylabel(r'$\langle I\rangle(t) /\frac{J\symup{e}}{\hbar}  $')
                 plt.xlim(np.amin(t),np.amax(t))
-                plt.ylim(-0.0001,0.0005)
+                plt.ylim(-0.0002,0.0006)
                 plt.legend(loc='best')
                 plt.tight_layout()
                 plt.savefig('Plots/Potential='+ str(Potential[a]/100)+ '/Energie='+str(Energien[e]/10000) +'/Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ 'w=' + str(Frequenz[f]) + '.pdf')

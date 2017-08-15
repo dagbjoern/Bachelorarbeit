@@ -1,76 +1,165 @@
 \chapter{Zusammenfassung und Ausblick}
 \label{sec:zusamm}
-Der Fokus dieser Arbeit lag auf der Überprüfung
-der Annahme, dass sich der
-IFE in einem Bandisolator durch
-die Floquet Theorie beschreiben lässt.
-Dafür wurde eine 2D Modell des Bandisolators,
-wecher sich in einem rotierenden elektrischen
-Feld befinded, betrachtet
-und  der Hamiltonian des Systems aufgestellt.
-Die Periodizität des Hamiltonian ermöglichte die Anwendung der Floquet Theorie.
-Dabei lieferte die numerische Methode
+Der Schwerpunkt dieser Arbeit liegt in der Floquet Theorie, welche genutzt wird, um den IFE
+in einem Bandisolator zu untersuchen.
+Dafür wird ein 2D-Modell des Bandisolators,
+welcher sich in einem rotierenden elektrischen
+Feld befindet, betrachtet
+und der Hamiltonian des Systems aufgestellt.
+Die Periodizität des Hamiltonians
+ermöglicht die Anwendung der Floquet Theorie.
+Dabei liefert die numerische Methode
 der Floquet Matrix eine Möglichkeit zur Bestimmung der QEE und QEZ
 des Systems.
-Zu Beginn des Kapitel \ref{sec:ergebnisse} wurden
-foglende Proportionalitäten
-\begin{align}
-  E_0&=\propto N,&  &\frac{1}{\omega}\propto N,& &\frac{1}{a}\propto N
-\end{align}
+
+Zu Beginn des Kapitels \ref{sec:ergebnisse} werden
+folgende Proportionalitäten
+  $E_0=\propto N, \frac{1}{\omega}\propto N$ und $\frac{1}{a}\propto N$
 zwischen dem zu wählenden Trunkierparameter $N$ der Floquet Matrix $\mathcal{H}_F$,
 und den Größen des Systems gefunden,
-um die Bedingungen, welche im Kapitel \ref{sec:floquetheo}
-an die QEE und QEZ gestellt sind, zu erfüllen.
+um die Bedingungen, welche die in Kapitel \ref{sec:floquetheo}
+an die QEE und QEZ gestellt werden,zu einen die Periodizität der QEE und die orthogonalität der QEZ, zu erfüllen.
 % ((Zum einen wurden eine Proportionalität $E_0=\propto N$
 % zwischen der Amplitude des elektrischen Feldes und dem Parameter $N$ festgestellt
 % und zum anderen die Antipropotianlitäten
 % $\frac{1}{\omega}\propto N$ und  $\frac{1}{a}\propto N$
 % von der Frequenz $\omega$ und der lokalen Energie $a$ zu dem Parameter $N$
 % festgestellt.))
-Bei korrekte Wahl des Trunkierparameter $N$
-wurde in dem Abschnitt \ref{sec:zeit} gezeigt, dass die Beschreibung der
+Bei korrekter Wahl des Trunkierparameters $N$
+zeigt sich in dem Abschnitt \ref{sec:zeit}, dass die Beschreibung der
 Entwicklung
-eines Zustandes in der Zeit durch den Floquet Formalismus möglich ist.
-Des Weiteren wurde der Strom in dem System untersucht,
+eines Zustandes in der Zeit durch den
+Floquet Formalismus möglich ist.
+
+Des Weiteren wird der Stromerwartungswert in dem System untersucht,
 wobei nur
 der zeitlich gemittelte Stromerwartungswert $\bar{\braket{I}}$
 für den IFE von Bedeutung ist.
-Es wurde eine Methode vorgestellt und bestätigt,
-welche es ermöglich in der Floquet Theorie
-im zeitlichen Limes gemittelte Stromerwartungswerte
-zu berechnen.
-In dem Abschnitt \ref{sec:abbhangig} wurde der gemittelte Stromerwartungswert
+Es wird eine Methode, die
+ es speziell in der Floquet Theorie ermöglicht
+im zeitlichen Limes gemittelte Größen wie hier den Stromerwartungswert
+zu berechnen, vorgestellt und anhand des Systems verifiziert.
+
+In dem Abschnitt \ref{sec:abbhangig} wird der zeitlich gemittelte Stromerwartungswert
 des Ein-Elektron-Systems auf
 die in Kapitel \ref{sec:inverfaraday} beschriebenen
-Abhängigkeiten untersucht und es
-wurden die Proportionalitäten
-$\bar{\braket{I}}\propto\omega$  und
+Abhängigkeiten bei dem IFE in Isolatoren
+$\bar{\braket{I}}\propto\omega$ und
 $\bar{\braket{I}}\propto E_0$
-bestätigt.
-Abschließend wurde das Zwei-Elektronen-System
-ebenfalls auf diese Abhängigkeiten untersucht.
-Jedoch konnten diese nicht für das
-System betätigt werden.
-Für das Zwei-Elektronen System konnten
-ebenfalls gezeigt werden,
-dass für die zuvor verwendeten
-Größen des ein-elektron-system
-ein so geringer
- stromfluss in dem zwei-elektronen-system
-existiert welcher als null interpretiert werden kann.
-selbst bei möglichen resonanzfrequnzen wurden
-bei keine Resonanzeffekte beobachtet.
-als mögliche Ursache kommt das pauliverbot infrage.
-somit existieren entweder Fehler in dem
-aufgestellten Modell
-oder in der Theorie für den IFE.
-es wurden nur spinlose Elektronen betrachtet
-mögliche veränderung bei
-betachtung von elektronen mit Spin
-=> hubbard Modell
-Möglcihe fehler in der theorie das IFE
-da versucht wurde von dem IFE in metallen
-aussagen zu dem IFE in isolatoren
-zu machen.
-=> gesonderte theorie von IFE in isolatoren
-Nötig für volständige Berschreibung
+untersucht.
+Die Abhängigkeiten werden für Frequenzen $\omega$ unterhalb der Resonanzfrequenzen des Systems und
+für den betrachteten Bereich der elektrischen Amplitude $E_0$ bestätigt.
+Abschließend wird das Zwei-Elektronen-System auf diese Abhängigkeiten untersucht.
+Jedoch werden diese nicht für das
+System bestätigt.
+
+Für das Zwei-Elektronen-System stellt sich heraus,
+dass für die zuvor untersuchten
+Größen des Ein-Elektron-Systems
+kein zeitlich gemittelter
+Stromerwartungswert gegeben ist.
+Selbst bei möglichen Resonanzfrequenzen werden
+keine Resonanzeffekte beobachtet.
+Desweitern wird bei dem  Zwei-Elektronen-System
+für Frequnzen und elektrische Feldamplituden obwohl  diese die Bedingungen an die QEE und QEZ erfüllen, eine nicht erklärbare Abweichung
+des Stomerwartungswertes festgestellt.
+%!!!!!!!!!!!!!!!!!!!!!!
+
+Die beobachteten Unstimmigkeiten zwischen der Theorie und den Ergebnissen
+ sind mögliche Anzeichen dafür, dass
+entweder die
+Ableitung der Theorie für den IFE in Isolatoren
+über den IFE in Metallen aus dem Abschnitt \ref{sec:inverfaraday}
+unzureichend ist, um zutreffende Aussagen zu dem IFE in Isolatoren zu machen, oder
+das aufgestellte Modell des Bandisolators in Kapitel \ref{sec:model} nicht ausreicht,
+um IFE in einem Bandisolator zu untersuchen.
+Mögliche Lösungsansätze sind zum einen die Vergrößerung des Modells und die Berücksichtigung von
+Elektronen mit Spin und somit auch der Spinwechselwirkungen unter diesen, wodurch eine
+genauere Beschreibung eines Isolators erreicht wird.
+Zum anderen ist eine Theorie erforderlich, die quantenmechanische Effekte bei der
+Herleitung des IFE nicht vernachlässigt, um mögliche Fehlerquellen zu minimieren.
+Ebenfalls wäre eine experimentelle Untersuchung des IFE in einem Bandisolator hilfreich,
+um die Ergebnisse zu verifizieren oder zu widerlegen.
+
+% , da möglicherweise quantenmechanische Effekte in
+% Isolatoren nicht vernachlässigbar sind.
+% !!!!!!Es könnte weiterhin, da in dem Modell nur
+% spinlose Elektronen betrachtet wurden,
+% ein Modell für einen
+% Isolator, welches Spinwechselwirkungen berücksichtigt beispielsweise das Hubbard-Modell \cite{czycholl},
+% zur bessern Beschreibung herangezogen werden.!!!!!
+%
+%
+% \chapter{Zusammenfassung und Ausblick}
+% \label{sec:zusamm}
+% Der Schwerpunkt/Fokus dieser Arbeit liegt auf der Floquet Theorie welche genutzt wird, um den IFE
+% in einem Bandisolator zu untersuchen.
+% Dafür wurde eine 2D-Modell des Bandisolators,
+% wecher sich in einem rotierenden elektrischen
+% Feld befindet, betrachtet
+% und der Hamiltonian des Systems aufgestellt.
+% Die Periodizität des Hamiltonians
+% ermöglichte die Anwendung der Floquet Theorie.
+% Dabei lieferte die numerische Methode
+% der Floquet Matrix eine Möglichkeit zur Bestimmung der QEE und QEZ
+% des Systems.
+% Zu Beginn des Kapitel \ref{sec:ergebnisse} wurden
+% foglende Proportionalitäten
+% \begin{align}
+%   E_0&=\propto N,&  &\frac{1}{\omega}\propto N,& &\frac{1}{a}\propto N
+% \end{align}
+% zwischen dem zu wählenden Trunkierparameter $N$ der Floquet Matrix $\mathcal{H}_F$,
+% und den Größen des Systems gefunden,
+% um die Bedingungen, welche im Kapitel \ref{sec:floquetheo}
+% an die QEE und QEZ gestellt werden, zu erfüllen.
+% % ((Zum einen wurden eine Proportionalität $E_0=\propto N$
+% % zwischen der Amplitude des elektrischen Feldes und dem Parameter $N$ festgestellt
+% % und zum anderen die Antipropotianlitäten
+% % $\frac{1}{\omega}\propto N$ und  $\frac{1}{a}\propto N$
+% % von der Frequenz $\omega$ und der lokalen Energie $a$ zu dem Parameter $N$
+% % festgestellt.))
+% Bei korrekter Wahl des Trunkierparameters $N$
+% wurde in dem Abschnitt \ref{sec:zeit} gezeigt, dass die Beschreibung der
+% Entwicklung
+% eines Zustandes in der Zeit durch den
+% Floquet Formalismus möglich ist.
+% Des Weiteren wurde der Strom in dem System untersucht,
+% wobei nur
+% der zeitlich gemittelte Stromerwartungswert $\bar{\braket{I}}$
+% für den IFE von Bedeutung ist.
+% Es wurde eine Methode vorgestellt und bestätigt,
+% welche es ermöglicht in der Floquet Theorie
+% im zeitlichen Limes gemittelte Stromerwartungswerte
+% zu berechnen.
+% In dem Abschnitt \ref{sec:abbhangig} wurde der gemittelte Stromerwartungswert
+% des Ein-Elektron-Systems auf
+% die in Kapitel \ref{sec:inverfaraday} beschriebenen
+% Abhängigkeiten untersucht und es
+% wurden die Proportionalitäten
+% $\bar{\braket{I}}\propto\omega$  und
+% $\bar{\braket{I}}\propto E_0$
+% bestätigt.
+% Abschließend wurde das Zwei-Elektronen-System
+% ebenfalls auf diese Abhängigkeiten untersucht.
+% Jedoch konnten diese nicht für das
+% System bestätigt werden.
+% Für das Zwei-Elektronen-System stellte sich heraus,
+% dass für die zuvor untersuchten
+% Größen des Ein-Elektron-Systems
+% kein zeitlich gemittelter
+% Stromerwartungswert gegeben ist.
+% Selbst bei möglichen Resonanzfrequenzen wurden
+% keine Resonanzeffekte beobachtet.
+% Als mögliche Ursache kommt das Pauli-Prinzip infrage.
+% Als Folge dessen
+% existieren entweder Fehler in dem
+% aufgestellten Modell des Isolators in Kapitel \ref{sec:model}
+% oder die Ableitung der Theorie für den IFE in Isolatoren
+% über den IFE in Metallen aus dem Abschnitt \ref{sec:inverfaraday}
+% ist nicht möglich, da möglicherweise quantenmechanische Effekte in
+% Isolatoren nicht vernachlässigbar sind.
+% !!!!!!Es könnte weiterhin, da in dem Modell nur
+% spinlose Elektronen betrachtet wurden,
+% ein Modell für einen
+% Isolator, welches Spinwechselwirkungen berücksichtigt beispielsweise das Hubbard-Modell \cite{czycholl},
+% zur bessern Beschreibung herangezogen werden.!!!!!

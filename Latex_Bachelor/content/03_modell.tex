@@ -14,6 +14,21 @@ Darauffolgend wird die Floquet Matrix nach dem Abschnitt
 \ref{sec:matrix} für das
 zeitabhängige System aufgestellt. Abschließend wird das
 System für zwei spinlose Elektronen betrachtet.
+Ein System welches drei spinlose Elektronen enthält,
+wird nicht zusätzlich betrachtet, da
+es möglich ist, dies als ein System, welches nur ein
+Teilchen mit positiver Ladung enthält, zu beschreiben, welches die selben
+Ergebnisse wie das Ein-Elektron-System liefert.\cite{phillip}
+
+% Wird dem Modell wieder ein Elektron
+% hinzugefügt und es somit auf ein
+% Drei-Elektronen-System erweitert, ist es
+% möglich, das Modell als ein System
+% zu betrachten, welches nur ein
+% Teilchen mit positiver Ladung enthält.
+% Diese Betrachtung liefert dasselbe Ergebnis
+% wie das Ein-Elektron-System und
+% ist somit trivial. \cite{phillip}
 
 
 \section{Zeitunabhängiges System}
@@ -30,27 +45,27 @@ wobei der Tight-Binding Hamiltonian $H_{TB}$, der die Sprünge des Elektrons
 zwischen den Gitterplätzen beschreibt, mit dem Hamiltonian $H_a$, der die Eigenschaften
 eines Bandisolators simuliert, erweitert wird.
 Dabei besitzen die Gitterplätze eine lokale alternierende Energie $a$.
-Die Gitterplätze sind im Abstand der Gitterkonstanten $d$ quadratisch angeordnet.
-In der Abbildung \ref{fig:system}
-ist eine Skizze des zu untersuchenden Systems dargestellt.
+% Die Gitterplätze sind im Abstand der Gitterkonstanten $d$ quadratisch angeordnet.
+% In der Abbildung \ref{fig:system}
+% ist eine Skizze des zu untersuchenden Systems dargestellt.
 \begin{figure}
    \centering
    \includegraphics[width=0.4\textwidth]{Programme/Tikz_test/bild_gitter_0.pdf}
    \caption{Skizze des verwendeten 2D-Modells
     des Bandisolators mit vier Gitterplätzen im Abstand $d$,
    welche die alternierende lokale Energie $a$ besitzen.
-    Elektronen im System können abhängig von dem Tight-Binding-Paramter $J$
+    Elektronen im System können abhängig von dem Tight-Binding-Parameter $J$
    den Gitterplatz wechseln.}
    \label{fig:system}
 \end{figure}
 Durch die Wahl der Basis
 \begin{align}
-\ket{1}=\vec{e}_{1}&  \ket{2}=\vec{e}_2&   &\ket{3}=\vec{e}_3& &\ket{4}=\vec{e}_4,&
-\intertext{mit den Einheitsvektoren $\vec{e}_i$ wird über}
-H_{ij}&=\braket{i|H|j}
+\ket{1}=\vec{e}_{1}&  &\ket{2}=\vec{e}_2&   &\ket{3}=\vec{e}_3& &\ket{4}=\vec{e}_4,&
 \end{align}
-eine Matrixdarstellung des Hamiltonians
+mit den Einheitsvektoren $\vec{e}_i$ wird über
 \begin{align}
+H_{ij}&=\braket{i|H|j}
+\intertext{eine Matrixdarstellung des Hamiltonians}
   H_0&=\begin{pmatrix}
   -a          & \phantom{-}J &\phantom{-}0& \phantom{-}J \\
   \phantom{-}J& \phantom{-}a &\phantom{-}J& \phantom{-}0\\
@@ -59,21 +74,22 @@ eine Matrixdarstellung des Hamiltonians
 \end{pmatrix}
 \end{align}
 bestimmt.
-Mit Hilfe der stationären Schrödingergleichung \ref{eqn:stat}
+Mit Hilfe der stationären Schrödingergleichung \eqref{eqn:stationSG}
 ergeben sich die Eigenwerte
 \begin{align}
   E_{1/4}&=\mp\sqrt{a^2+4J^2}&  &E_{2/3}=\mp a
 \end{align}
-und die Eigenvektoren $\ket{\phi}_n$  des Hamiltonians.
-Die Eigenwerte $E_n$ des Hamiltonians
+und die Eigenvektoren $\ket{\phi}_n$ des zeitunabhängigen Systems.
+Die Eigenwerte $E_n$ des Systems
 sind in der Abbildung \ref{fig:bandstruktur}
 in einem Niveauschema dargestellt.
 \begin{figure}
    \centering
    \includegraphics[width=0.4\textwidth]{Programme/Tikz_test/bild_niveau.pdf}
-   \caption{Niveauschema für ein Elektron, welches sich in dem System befindet
+   \caption{Niveauschema für ein Elektron,
+   welches sich in dem System befindet
 und die dadurch resultierende Bandlücke $2a$ und
-mögliche Resonanzfrequenzen des Systems.}
+mögliche Resonanzfrequenzen $\omega_{\text{res}_i}$ des Systems.}
    \label{fig:bandstruktur}
 \end{figure}
 
@@ -90,16 +106,16 @@ entnommen. In der Abbildung
 dargestellt.
 
 \section{Zeitabhängiges System}
-Als nächstes wird das System durch ein rotierendes E-Feld erweitert, welches
+Als Nächstes wird das System durch ein rotierendes E-Feld erweitert, welches
 das zirkular polarisierte Licht simulieren soll,
 zu sehen in der Abbildung \ref{fig:syst+E}.
 
 \begin{figure}
    \centering
    \includegraphics[width=0.4\textwidth]{Programme/Tikz_test/bild_gitter.pdf}
-   \caption{Skizze des zeitabhängigen 2D-Modells
+   \caption{Skizze des zeitabhängigen 2D-Modells,
 bei dem zusätzlich zum zeitunabhängigen Modell
-ein mit der Zeit rotierendes elektrisches Feld
+ein in Zeit mit der Frequenz $\omega$ rotierendes elektrisches Feld
 eingezeichnet ist.}
  \label{fig:syst+E}
 \end{figure}
@@ -109,7 +125,8 @@ Der Hamiltonian wird dafür um den Term
 \begin{align}
   H_\text{E-Feld}=\sum_{i=1}^4\left(\epsilon_i^{\phantom{\dag}} c_i^\dag c_i^{\phantom{\dag}}\right)& &\text{mit}& &\epsilon&=-\vec{E}(t) \vec{r_i}
 \end{align}
-erweitert. Dabei beschreibt $H_\text{E-Feld}$ die Welchelwirkung zwischen dem elektrischen Feld
+erweitert.
+ Dabei beschreibt $H_\text{E-Feld}$ die Wechselwirkung zwischen dem elektrischen Feld
 \begin{align}
   \vec E(t)=E_0\begin{pmatrix}
 \cos\left(\omega t\right)\\
@@ -121,7 +138,7 @@ die Frequenz $\omega$ besitzt.
 Der Ursprung des Systems wird
 in den Mittelpunkt des Systems gesetzt.
 Somit lauten die Gitterplatz-Vektoren
-$\vec{r_i}$ in Abhänigigkeit von der
+$\vec{r_i}$ in Abhängigkeit von der
 Gitterkonstante $d$:
 \begin{align}
   \vec{r}_1=\frac{d}{2}\begin{pmatrix}-1  \\ \phantom{-}1 \end{pmatrix},& &
@@ -140,7 +157,7 @@ an.
 
 
 \section{Floquet Matrix des zeitabhängigen Systems}
-Für das zeitabhängige System wird wie
+Für das zeitabhängige System wird, wie
 in Kapitel \ref{sec:matrix} beschrieben, die
 numerische Methode der Floquet Matrix angewendet.
 Dafür wird zunächst der Hamiltonian
@@ -185,25 +202,29 @@ $N\rightarrow\infty$ gehen,
 da dies numerisch jedoch nicht möglich ist, wird
 die Matrix $\mathcal{H}_F$ bei
 einem beliebigen $N$ trunkiert.
-Dadurch werden nur die Fouriermoden bis $N$ in der
+Dadurch werden nur die Fourier Moden bis $N$ in der
 Berechnung der QEE und QEZ
-berücksichtigt.
-Die Matrix $\mathcal{H}_F$ besitzt beispielsweise
-für einen Trunkierparameter $N=1$ die Form
-\begin{align}
-  \mathcal{H}_F=\begin{pmatrix}
-  H^{-1,-1}-\hbar\omega\mathbb{1} &  H^{-1,0} &   0 \\
-  H^{0,-1}               &  H^{0,0}  &H^{0,1}                  \\
-      0                  &  H^{1,0}  & H^{1,1}+\hbar\omega\mathbb{1}
-\end{pmatrix}.
-\end{align}
+berücksichtigt. In dem Abschnitt \ref{sec:H_f} ist die
+Matrix $\mathcal{H}_F$  beispielsweise
+für einen Trunkierparameter $N=2$ dargestellt. 
+% Die Matrix $\mathcal{H}_F$ besitzt beispielsweise
+% für einen Trunkierparameter $N=1$ die Form
+% \begin{align}
+%   \mathcal{H}_F=\begin{pmatrix}
+%   H^{-1,-1}-\hbar\omega\mathbb{1} &  H^{-1,0} &   0 \\
+%   H^{0,-1}               &  H^{0,0}  &H^{0,1}                  \\
+%       0                  &  H^{1,0}  & H^{1,1}+\hbar\omega\mathbb{1}
+% \end{pmatrix}.
+% \end{align}
+
 
 \section{Zwei-Elektronen-System}
 Dem Modell wird ein Elektron
 hinzugefügt, in Folge dessen
-unterliegt das System dem Pauliverbot.
-Die Eigenwerte $E_n$ setzen sich dabei aus
-linear Kombinationen der Eigenwerte
+unterliegt das System dem Pauli-Prinzip.
+Die Eigenwerte $E_n$ des Zwei-Elektronen-Systems
+setzen sich dabei aus einer
+Linearkombination der Eigenwerte
 des Ein-Elektron-Systems
 zusammen \cite{phillip} zu
 \begin{align}
@@ -218,12 +239,12 @@ Somit besitzt das System im Grundzustand die möglichen Resonanzfrequenzen
 \omega_{\text{res}_4}&=2\sqrt{a^2+4J^2}
 &\omega_{\text{res}_5}&=2\sqrt{a^2+4J^2}+2a.
 \end{align}
-Wird dem Modell wieder ein Elektron
-hinzugefügt und es somit auf ein
-Drei-Elektronen-System erweitert, ist es
-möglich, das Modell als ein System
-zu betrachten, welches nur ein
-Teilchen mit positiver Ladung enthält.
-Diese Betrachtung liefert dasselbe Ergebnis
-wie das Ein-Elektron-System und
-ist somit trivial. \cite{phillip}
+% Wird dem Modell wieder ein Elektron
+% hinzugefügt und es somit auf ein
+% Drei-Elektronen-System erweitert, ist es
+% möglich, das Modell als ein System
+% zu betrachten, welches nur ein
+% Teilchen mit positiver Ladung enthält.
+% Diese Betrachtung liefert dasselbe Ergebnis
+% wie das Ein-Elektron-System und
+% ist somit trivial. \cite{phillip}

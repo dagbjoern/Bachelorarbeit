@@ -258,7 +258,7 @@ for a in tqdm(range(np.size(Potential))):
                 #plt.close()
             plt.figure(Figure_Zahler)
 #            farbe=np.linspace(0,1,10000)
-        plt.plot(Frequenz,I_bar, '-'+farbe[e] ,alpha=0.5,label=r'$E_0=$'+str(Energien[e]/10000))
+        plt.plot(Frequenz,I_bar, '-'+farbe[e] ,alpha=0.5,label=r'$E_0=$'+str(Energien[e]/10000)+r'$\,J/d\symup{e}$')
 #        plt.title('Erwartungswert des Stromes für den Startzustand ' + str(np.round(Startzustand,3))+'\n fur n=' + str(Anzahl_N[l]) + '\n w=' + str(Frequenz[f]) + ' E=' +str(Energien[e]/10000) + ' a=' +str(Potential[a]/10000) )
         #plt.plot(Energien/10000,I_bar_lsode,  alpha=0.25, label=r'Strommittelwert lsode w='+str(Frequenz[f]))
     hilfe=np.linspace(np.amin(I_bar)-0.003,np.amax(I_bar)+0.003,10)
