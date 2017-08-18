@@ -193,7 +193,7 @@ for a in tqdm(range(np.size(Potential))):
                 for n in range(int(np.amax(t)/Periodendauer)+1):
                     plt.plot(T * 0 + Periodendauer * n, T, '--k',linewidth=0.5,alpha=0.25)
                 plt.plot(T*0+76,T,'-k',linewidth=2)
-                plt.xlabel(r'Zeit $t  /  \frac{\hbar}{J}$')
+                plt.xlabel(r'$t  /  \frac{\hbar}{J}$')
                 plt.ylabel(r'$P(t)$')
                 plt.xlim(np.amin(t),np.amax(t))
                 plt.ylim(0.1,0.5)

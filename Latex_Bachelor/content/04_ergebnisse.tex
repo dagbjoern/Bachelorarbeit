@@ -31,16 +31,16 @@ Die Parameter des elektrischen Feldes werden
 im Bezug auf das in \cite{jackl} beschriebene Experiment gewählt.
 Die Amplitude des elektrischen Feldes liegt somit um den Wert \cite{phillip}
 \begin{align}
-  E_0\approx\SI{69,2}{\mega\volt\per\meter}\approx\num{0,03}\, \frac{J}{d\symup{e}}.
+  E_0\approx\SI{69,2}{\mega\volt\per\meter}\approx\num{0,03}\, \tfrac{J}{d\symup{e}}.
 \end{align}
 Die Frequenz des Lichtfeldes mit
 einer typischen Wellenlänge $\lambda\approx\SI{800}{\nano\meter}$ ist
 \begin{align}
-  \omega\approx\SI{2,35}{\peta\hertz}\approx\num{1,5}\,\frac{J}{\hbar}.
+  \omega\approx\SI{2,35}{\peta\hertz}\approx\num{1,5}\,\tfrac{J}{\hbar}.
 \end{align}
 Des Weiteren wird eine Pulsdauer
 \begin{align}
- \Gamma=\SI{50}{\femto\second}\approx76\,\frac{\hbar}{J}
+ \Gamma=\SI{50}{\femto\second}\approx76\,\tfrac{\hbar}{J}
 \end{align}
 für das Lichtfeld eingeführt, in der das System beobachtet wird.
 Eigenwerte und Eigenvektoren einer Matrix werden im Folgenden mit der Funktion
@@ -217,8 +217,9 @@ Trunkierparameter von $N=3$ ausreicht, um die QEE und QEZ
 korrekt zu berechnen.
 %!!!!!!!!!!!!
 Zur Bestimmung von $\ket{\Psi(t)}$ durch die Floquet Theorie
-wird der Grundzustand durch die Gleichung \eqref{eqn:super} als als Superposition der QEZ ausgedrückt
-und der Zeitpropagators \eqref{eqn:Propagator} auf diese Superposition angewendet.
+wird der Grundzustand durch die Gleichung \eqref{eqn:super} als Superposition
+der QEZ ausgedrückt
+und der Zeitpropagator \eqref{eqn:Propagator} auf diese Superposition angewendet.
 % Um die Zeitentwicklung nach der Floquet Theorie
 % durchzuführen, wird
 % zunächst durch die Gleichung \eqref{eqn:super} der Grundzustand
@@ -327,7 +328,7 @@ in Abhängigkeit von der Amplitude
 des elektrischen Feldes
 $E_0\in\left[\num{0},\num{0,1}\right]\,\frac{J}{d\symup{e}}$ auf
 zwei verschiedene Methoden berechnet.
-Zum einen wird die Gleichung \ref{eqn:mittel}, welche die Floquet Theorie
+Zum einen wird die Gleichung \eqref{eqn:mittel}, welche die Floquet Theorie
 bereitstellt, verwendet $\bar{\braket{I}}_F$ und zum anderen wird der berechnete Stromerwartungswert
 über eine
 Zeitspanne $T$, hier die Pulslänge $\Gamma$ des Lichtfeldes,
@@ -342,9 +343,8 @@ berechneten zeitlich gemittelten Ströme $\bar{\braket{I}}$.
   \caption{Zeitlicher Mittelwert des
    Stromerwartungswertes $\bar{\braket{I}}$,
     welcher durch zwei Methoden
-  für $a=1\,J$ und
-  unterschiedliche Frequenzen
-  $\omega\in\{\num{1,0},\num{1,5},\num{2}\}\,\frac{J}{\hbar}$
+  für $a=1\,J$ und  unterschiedliche Frequenzen
+  ${\omega\in\{\num{1,0},\num{1,5},\num{2}\}\,\frac{J}{\hbar}}$
   in Abhängigkeit von der Amplitude
   des elektrischen Feldes $E_0$ berechnet wird. }
   \label{fig:E_Strom}
@@ -484,7 +484,7 @@ folgt, dass geringere
 Frequenzen einen hohen Trunkierparameter $N$
 benötigen. Als Folge dessen
 wird die Matrix $\mathcal{H}_F$ ebenfalls
-größer, was sich negativ auf die Berechnungsdauer
+größer, was sich negativ auf die numerische Berechnungsdauer
 der QEE auswirkt. Demzufolge ist die Floquet Matrix Methode
 für geringe Frequenzen nicht günstig.
 Demzufolge ist es notwendig, bei Untersuchung des linearen Bereiches eine
@@ -589,21 +589,23 @@ deutlich geringer ist als der des Ein-Elektron-Systems.
 Selbst bei den möglichen Resonanzfrequenzen $\omega_{\text{res}_i}$
 des Systems weist $\bar{\braket{I}}$ keine Resonanzerscheinungen auf.
 %!!!!!!!!!!!!!!!!
-Wie in der zuvor betrachteten Abbildung \ref{fig:w_abb} werden bei niedrigen Frequenzen
-bei denen die QEZ nicht mehr orthogonal untereinander sind numerische Fehler beobachtet.
+Wie in der Abbildung \ref{fig:w_abb} zuvor werden bei niedrigen Frequenzen,
+bei denen die QEZ nicht mehr orthogonal untereinander sind,
+numerische Fehler beobachtet.
 Jedoch treten diese Fehler nicht wie durch die Abbildung \ref{fig:N_3}
-für einen Trunkierparameter von $N=3$ vorrausgesagt für Frequenzen $\omega<\num{0.6}\,\frac{J}{\hbar}$
+für einen Trunkierparameter von $N=3$ vorausgesagt
+für Frequenzen $\omega<\num{0.6}\,\frac{J}{\hbar}$,
 sondern bereits bei Frequenzen von $\omega\leq\num{1}\,\frac{J}{\hbar}$ auf.
-Diese Beobachtung erkärt auch die stärkere Steigung von
+Diese Beobachtung erklärt auch die stärkere Steigung von
 $\omega=\num{1}\,\frac{J}{\hbar}$ in der Abbildung \ref{fig:2e} im Vergleich zu den anderen
 Frequenzen. Wohin gegen die Beobachtung selber nicht mit den zuvor gewonnen Erkenntnissen
 zu der Konvergenz der Lösung in der Floquet Theorie vereinbar ist.
 % Wobei nicht klar ist weshalb wo jedoch die orthogonalitätsbedingung
-Allerdings Zeigte sich bei genauer Betrachtung und höherem Parameter $N$,
+Allerdings zeigt sich bei genauer Betrachtung und durch Verwenden eines höherem Parameter $N$,
 dass $\bar{\braket{I}}$ für die untersuchten Werte von $\omega$ und $E_0$
 in einer Größenordnung von $10^{-15}\,\frac{J\symup{e}}{\hbar}$
-starke Schwankungen um Null besitzt,
-was als numerisch $0\,\frac{J\symup{e}}{\hbar}$ interpretiert wird.
+starke Schwankungen um Null besitzt.
+Dieses wird als numerisch $0\,\frac{J\symup{e}}{\hbar}$ interpretiert.
 Eine mögliche Ursache für das
 Fehlen von $\bar{\braket{I}}$ ist das im
 Zwei-Elektronen-System wirkende Pauli-Prinzip, welches die Bewegungsfreiheit im System
