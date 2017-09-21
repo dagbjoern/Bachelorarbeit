@@ -277,6 +277,7 @@ for a in tqdm(range(np.size(Potential))):
     plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2),hilfe,'k--',alpha=0.5)
     plt.plot(hilfe*0+2*np.sqrt((Potential[a]/10000)**2+4*1**2)+2*Potential[a]/10000,hilfe,'k--',alpha=0.5,label=r'$\omega_{\mathrm{res}_i}')
     plt.legend(loc='best')
+    plt.tight_layout()
     plt.savefig('Plots_mittelwerte/Potential='+ str(Potential[a]/10000)+'Stromerwartungswert(t)_N='+str(int(Anzahl_N[l]))+ '.pdf')
     Figure_Zahler=1+Figure_Zahler
 

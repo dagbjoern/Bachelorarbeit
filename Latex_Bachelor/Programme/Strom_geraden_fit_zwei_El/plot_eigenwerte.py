@@ -151,6 +151,7 @@ plt.xlabel(r'Potential a')
 plt.ylabel(r'Frequenz w')
 #plt.xlim(np.amin(t),np.amax(t))
 plt.legend(loc='best')
+plt.tight_layout()
 plt.savefig('Plots_mittelwerte/Resonanzen.pdf')
 plt.close()
 
